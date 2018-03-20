@@ -1,0 +1,25 @@
+<% unless @jobfair.seminars.empty? %>
+  <h3>Seminars</h3>
+  <div id="jobfair-seminars">
+    <table width="100%" class="blotter">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Duration</th>
+          <th>Time</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @jobfair.seminars.each do |seminar| %>
+          <tr>
+            <td><%=seminar.description -%></td>
+            <td><%=seminar.duration -%></td>
+            <td><%=seminar.time -%></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+<% end %>

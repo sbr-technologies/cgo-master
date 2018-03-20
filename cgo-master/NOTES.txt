@@ -1,0 +1,25 @@
+Employers
+
+Employer organizations have several recruiters. At creation time, they should be assigned a "default" recruiter which
+will be also the "Employer Administrator". The employer administrator will have menu items to perform administrative
+activities on its Employer record, like: 
+
+	Adding / Deleting Recruiters. 
+	Buying online services like: job post or resume search privileges
+	Check the result of job import actions. 
+
+An CGO administrator will also have the chance to perform this activities on behalf of the "Employer Administrator". 
+
+
+Recruiters
+
+A recruiter works in the context of an Employer, and the actions he/she can perform are restricted by the authorization
+level of the employer that owns the account. Recruiters will be able to post jobs, and will receive notifications of 
+applications received on their jobs. A recruiter should also be able to search for applicants and comunicate with them. 
+
+
+Applicants
+
+An applicant is a job seeker, that can attend a CGO sponsored Job Fair. They have a profile that includes contact information
+and a Resume. Recruiters should be able to find applicants and will only get their contact information if the recruiter's employer
+account is not in "TRIAL MODE", that is; if the employer is a paying subscriber of CGO online. 

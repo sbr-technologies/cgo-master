@@ -1,0 +1,17 @@
+<style>
+  div.employer {
+    display: table-row;
+    width: 600px;
+  }
+
+  div.employer div { 
+    float: left; 
+    display: table-cell; 
+  }
+
+</style>
+
+<% div_for employer do %>
+  <div width="10%"><%= employer.id -%> </div>
+  <div width="40%"><%= employer.name -%></div>
+<% end %>

@@ -1,0 +1,21 @@
+<table class="list">
+  <th>
+    <td>ID</td>
+    <td>Name</td>
+    <td>Status</td>
+    <td>#Recruiters</td>
+    <td>Search?</td>
+    <td>Post?</td>
+    <td>Administrator</td>
+  </th>
+  <% for employer in @employers %>
+    <tr id="employer_<%=employer.id%>" >
+      <td><%=employer.id -%></td>
+      <td><%=employer.status -%></td>
+      <td><%=employer.recruiters.size -%></td>
+      <td><%=employer.resume_search_allowed? -%></td>
+      <td><%=employer.job_post_allowed?  -%></td>
+      <td><%=employer.administrator.name -%></td>
+    </tr>
+  <% end %>
+</table>

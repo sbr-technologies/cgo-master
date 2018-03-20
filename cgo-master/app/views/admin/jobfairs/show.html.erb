@@ -1,0 +1,112 @@
+<% content_for :page_title do %>
+  Job Fair: <%= "#{@jobfair.location}" -%>
+  <h3 style="margin-top: 0px"><%= "#{@jobfair.date.to_s(:short_with_year)}" -%></h3>
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "View All", admin_jobfairs_path -%>&nbsp;|&nbsp;
+  <%= link_to "Edit", edit_admin_jobfair_path(@jobfair.id) -%>&nbsp;|&nbsp;
+  <%= link_to "Delete", admin_jobfair_path(@jobfair.id), :method => :delete %>&nbsp;|&nbsp;
+  <%= link_to "New", new_admin_jobfair_path -%>
+<% end %>
+
+
+
+
+<table class="show-model">
+  <tr><td class="label">Date:</td><td><%= "#{@jobfair.date.to_s(:short_with_year)} (#{@jobfair.start_time} - #{@jobfair.end_time})" -%></td></tr>
+  <tr><td class="label">Category:</td><td><%= @jobfair.category.titleize %></td></tr>
+  <tr><td class="label">Sponsor:</td><td><%= Jobfair::SPONSORS[@jobfair.sponsor.to_sym] %></td></tr>
+  <tr><td class="label">Fees:</td><td><%= number_to_currency(@jobfair.fees) %></td></tr>
+  <tr><td class="label">Location:</td><td><%= @jobfair.location  -%></td></tr>
+  <tr><td class="label">City:</td><td><%= @jobfair.city -%></td></tr>
+  <tr><td class="label">Employer External URL:</td><td><%= @jobfair.external_registration_url || "Local Registration" -%></td></tr>
+  <tr><td class="label">Applicant External URL:</td><td><%= @jobfair.applicant_external_registration_url || "Local Registration" -%></td></tr>
+  <tr><td class="label">Recommended Hotel:</td><td><%= @jobfair.recommended_hotel %></td></tr>
+  <tr><td class="label">Recommended Hotel URL:</td><td><%= @jobfair.recommended_hotel_url %></td></tr>
+  <tr><td class="label">Sec. Clearance Required?:</td><td><%= @jobfair.security_clearance_required? ? "Yes" : "No" %></td></tr>
+  <tr><td class="label">Record Last Updated:</td><td><%= distance_of_time_in_words(@jobfair.updated_at, Time.now, false) -%> ago</td></tr>
+</table>
+    
+<% if @jobfair.seminars.size > 0 %>
+  <table class="list">
+    <tr>
+      <th width="15%">Time</th>
+      <th width="65%">Description</th>
+      <th width="20%">Duration</th>
+    </tr>
+	
+    <% @jobfair.seminars.each  do |seminar, index| %>
+      <tr>
+	<td><%= seminar.time -%></td>
+	<td><%= seminar.description -%></td>
+	<td><%= seminar.duration -%></td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>
+
+
+
+<% content_for :right do %>
+
+ <% if not @jobfair.employer_registrations.empty? %>
+   <h3 style="margin:0; padding:0; margin-left: 5px; margin-bottom:10px;">Current Employer Registrations</h3>
+   <ul id="employer_registrations" style="margin-left: 1em">
+      <% @jobfair.employer_registrations.each do |registration| %>
+        <li id="employer_<%=registration.attendant.id%>" style="margin-bottom: 10px">
+          <div style="font-weight: bold">
+              <%= link_to registration.attendant.name, admin_registration_path(registration.id) -%> 
+              <%= button_to "Remove", admin_registration_path(registration.id), :method => :delete, :remote => true, :class => 'delete-handler' %> 
+              <%= image_tag "dots.gif", :style => "display:none", :class => "indicator" %>
+          </div> 
+          <div style="font-size: 0.9em"><%=registration.attendant.employer.name -%></div> 
+        </li>
+	   <% end %>
+   </ul>
+ <% else %>
+   <h3 style="margin:0; padding:0; margin-left: 5px">No Employer Registrations</h3>
+ <% end %>
+
+
+ <script>
+   $(document).observe("dom:loaded", function() {
+    $$('#employer_registrations .button_to').each(function(handler) {
+
+      // Confirm
+      handler.observe('click', function(event) {
+        var answer = confirm("Are You Sure?");
+        if(answer) {
+          return true; 
+        } else {
+          event.stop();
+        }
+      });
+
+      // Show Delete Indicator
+      handler.observe('ajax:before', function(event) {
+        var el = event.element();
+        el.up(1).select('.indicator')[0].show();
+      });
+    });
+  });
+ </script>
+
+ <style>
+   .button_to {
+     display: inline-block; 
+     margin-left: 0.5em;
+   }
+   .button_to input {
+     border: 1px solid #4c4c4c; 
+     background: whitesmoke; 
+     width: 4.5em; 
+     font-size: 0.90em;
+     cursor: pointer; 
+   }
+   .button_to input:hover {
+     border-color: red;
+     background: white; 
+   }
+ </style>
+<% end %>

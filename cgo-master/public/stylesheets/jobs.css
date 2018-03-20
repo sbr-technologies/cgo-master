@@ -1,0 +1,73 @@
+#jobs {
+  margin-right: 3px;
+}
+
+#jobs .job { 
+  margin-top: 10px; 
+  border: 1px solid #CCC; 
+  padding: 15px;
+}
+
+#jobs .job .post-date {
+  color: #9c9c9c;
+  font-size: 0.8em;
+  font-style: italic;
+  margin-bottom: 1.5em;
+}
+
+#jobs .job .employer {
+  color: #9C9C9C;
+  font-weight: bold; 
+}
+
+#jobs .job .title {
+  margin-bottom: 0;
+}
+
+#jobs .job .title a, #jobs .job a:visited {
+  color: #204264;
+  text-decoration: none;
+}
+
+#jobs .job a:hover {
+  text-decoration: underline;
+}
+
+#jobs .job .body {
+  color: #4c4c4c;
+  line-height: 1.5em;
+}
+
+#jobs .job .actionStatus {
+  background: yellow; 
+  color: red; 
+  font-weight: bold;
+  padding: 2px 6px; 
+  border: 1px solid orange;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 4px;
+  -moz-border-bottom-left-radius: 8px;
+  -moz-border-top-right-radius: 4px;
+}
+
+#jobs .avatars {
+  overflow:auto;
+  width: 100%;
+}
+
+#jobs .avatar {
+  float: left;
+  text-align: center; 
+  width: 120px
+}
+
+#jobs .avatar img {
+  padding: 3px;
+  border: 1px solid #CCC;
+}
+
+#jobs .avatar .name {
+  color: #4c4c4c;
+  margin-top: 3px;
+  font-size: 1.1em;
+} 

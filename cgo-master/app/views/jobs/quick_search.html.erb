@@ -1,0 +1,32 @@
+<% if not @jobs.nil? %>
+
+  <% if not @jobs.docs.empty? %>
+
+    <div style="cursor:pointer;" onclick="$('quick-search-results').hide();">
+      <h3 style="margin-top: 3px;float:left;clear:none; margin-bottom: 3px;"><%= "Showing 3 results out of #{@jobs.total} in our database" -%></h3>
+      <%= image_tag "/images/icns/custom/16x16/close.gif", :style=>"float:right; clear:none; margin-right: 5px;"-%>
+    </div>
+    <ul style="float:none; clear:both; padding-top: 5px; margin-right: 8px; border-top: 1px solid #CCC;">
+
+      <% (@jobs.docs.size > 3 ? 3 : @jobs.docs.size).times do |i| %>
+
+	       <li style="padding-bottom: 5px; padding-left: 10px;"><%= truncate("<b>#{@jobs.docs[i].company_name}:</b> #{@jobs.docs[i].title} (#{@jobs.docs[i].location.city_state})", 80) -%></li>
+      <% end %>
+    </ul>
+    <div style="text-align: right; margin-top: 5px; margin-right: 5px;" ><%= link_to "Want to see more? Register or Login", applicants_path, :class=>"action_link"%></div>
+  
+  <% else %>
+  
+    <div style="cursor:pointer;" onclick="Effect.Fade('quick-search-results', {duration: 0.75});">
+      <%= image_tag "/images/icns/aesthetica/16x16/warning.png", :style=>"margin-right: 5px; vertical-align: bottom;"%>
+      No matches, please try a different keyword(s)
+    </div>
+  
+  <% end %>
+
+<% else %>
+  <div style="cursor:pointer;" onclick="Effect.Fade('quick-search-results', {duration: 0.75});">
+    <%= image_tag "/images/icns/aesthetica/16x16/warning.png", :style=>"margin-right: 5px; vertical-align: bottom;"%>
+    You must enter a search keyword in the space above (i.e. 'engineer')
+  </div>
+<% end %>

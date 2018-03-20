@@ -1,0 +1,71 @@
+<fieldset style="margin-bottom:10px;">
+	<legend>Company Information</legend>
+    <%= hidden_field_tag "recruiter[employer_id]", nil, :id => "employer_id" -%>
+
+    <%= form.text_field :name, :id =>"employer_name", :style => "width:18em", :label => "Company Name" %>
+
+        <div class="inline" style="margin-top:20px">
+
+        <%= link_to "<span>continue</span>".html_safe, employers_path(:format => :js), :remote => true, :id => "continue_button", :class => "button",
+                                                                      :with => "'query=' + $('employer_name').value",
+                                                                      :update => "suggestions",
+                                                                      :loading => "$('indicator').show();",
+                                                                      :complete => "$('indicator').hide(); $('suggestions').show()" %>
+          
+
+          <script language="javascript">
+            $(document).observe('dom:loaded', function() {
+              $('continue_button').on('ajax:before', function(r, xhr) {
+
+                var url = xhr.readAttribute('href'); 
+                if(url.indexOf('?query=') != -1) {
+                  url = url.substring(0, url.indexOf('?query='));
+                }
+                url =  url + "?query=" + $F('employer_name')
+
+                xhr.setAttribute('href', url);
+                $('indicator').show(); 
+              });
+
+              $('continue_button').on('ajax:complete', function(response) {
+                $('indicator').hide(); 
+              });
+            });
+          </script>
+
+          <%= image_tag("dots.gif", :id => "indicator", :style => "float:left; margin-left: 8px;margin-top: 10px; display:none; ") -%>
+      </div>
+
+	  <div id="suggestions" style="display:none;"></div>
+
+</fieldset>
+
+<fieldset id="company_information" style="display:none;margin-top:0px; padding-top:0px;" class="no-border">
+  <legend></legend>
+
+  <%= form.text_field :ticker_symbol, :label => "(NYSE, NASDAQ, etc) Ticker Symbol" %>
+
+  <%= form.check_box :is_federal_employer, :label => "Federal Contractor?" %>
+  <div style="margin-top: 0; margin-bottom: 5px; font-size: 82%; font-style:italic; color:#4c4c4c; padding:0px; float:left; clear:both; ">
+      Check 'Federal Contractor' if you are a goverment contractor required to comply with OFCCP regulations
+  </div>
+
+  <%= form.text_field :track_image_url -%>
+  <%= form.check_box :is_replace_all_on_import, :label => "Replace all jobs on import?" %>
+  <%= form.text_field :website %>
+  <%= form.text_field :twitter_handler, :label => "Twitter Handle (optional)" %>
+  <%= form.text_area :profile, :rows => 8, :cols => 75 %>
+
+</fieldset>
+
+<script type="text/javascript">
+  Event.addBehavior({
+    '#employer_name:focus': function() {
+      $('suggestions').hide();
+      $('company_information').hide();
+      $('button-bar').hide();
+      $('continue_button').show();
+    }
+  });
+
+</script>

@@ -1,0 +1,51 @@
+<% content_for :page_title do %>
+	Register for a Free Account
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'bootstrap.min' %>
+<% end %>
+
+<style>
+  form .required {
+    font-weight: bold;
+  }
+
+  form .required:after {
+    color: #e32; 
+    content: " *"; 
+    display: inline;
+  }
+</style>
+
+<% unless @applicant.errors.empty? && @address.errors.empty? %>
+
+  <div class="flash error"><b>Please correct the errors indicated and try again</b></div>
+
+  <div id="errorExplanation" class="errorExplanation">
+    <% if @applicant.errors %>
+      <ul>
+        <% @applicant.errors.each do |error| %>
+          <% unless error[0] == :addresses %>
+            <li><%= "#{error[0].to_s.humanize} #{error[1]}" %></li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <% if @address.errors %>
+      <ul>
+        <% @address.errors.each do |error| %>
+          <li><%= "#{error[0].to_s.humanize} #{error[1]}" %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+
+<% end %>
+
+<br/>
+
+<%= form_for @applicant, :html => { :class => "form-horizontal"} do |f| %>
+  <%= render :partial => 'applicant/form', :locals => {:f => f} %>
+<% end %>

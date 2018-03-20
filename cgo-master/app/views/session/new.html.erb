@@ -1,0 +1,44 @@
+<%= content_for :title_tag do %>
+	Job Seeker Login to Access Military to Civilian Career Opportunities Nationwide
+<% end %>
+<%= content_for :meta_keywords do %>
+	military transition assistance, veteran employment, civilian jobs, job search, retiring, separating, transition guide, government jobs, career advice, military spouse employment, military resume
+<% end %>
+
+<%= content_for :meta_description do %>
+	Login to search and find career opportunities appropriate for military veterans in career transition. Upload your resume and apply online.
+<% end %>
+
+<div id="login_box">
+
+    <table style="width: 800px">
+      <tr><td>
+        <div class="title">Welcome to corporategray.com: </div>
+      </td>
+      <td>
+      </td>
+      <td>
+            <div class="title">Need an Account? Sign Up:</div>
+      </td>
+      <tr>
+        <td style="background: whitesmoke; border-radius: 3px; padding: 0 20px 0 20px">
+          <%= form_tag sessions_path do -%>
+            <%= render :partial =>"new.html.erb" %>
+          <% end %>
+        </td>
+
+        <td style="text-align: center; font-weight: bold;">&nbsp;&nbsp;</td>
+
+        <td width="45%" style="font-family: Helvetica, 'sans-serif'; vertical-align: top; padding: 30px 30px 0 30px; background: whitesmoke; border-radius: 3px;">
+           <%= link_to "Create an Applicant Account", new_applicant_path, :class => "flat-button flat-button-red", :style => "display: block; text-align: center; color: white; font-size: 1em" %>
+           <br/>
+           <%= link_to "Create an Employer Account", new_employer_path, :class => "flat-button flat-button-blue", :style => "display: block; text-align: center; color: white; font-size: 1em;" %>
+        </td>
+      </tr>
+    </table>
+
+
+</div>
+
+<%= raw give_focus_to :username %>
+

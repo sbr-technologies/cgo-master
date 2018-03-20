@@ -1,0 +1,104 @@
+<div id="hd" style="position: relative">
+
+  <div id="login_or_sign_up" style="position:absolute; top: 6px; right: 20px; ">
+    <ul style="list-style: none; font-size: 1.1em;">
+      <% if logged_in? %>
+        <li class="military-blue" style="margin-right: 5px;"><%=link_to "Logout", logout_path, :method => :delete  %></li>
+        <% if current_user.has_role?(:applicant) %>
+          <li class="red" style="margin-right: 5px;"><%= link_to "My Account", edit_applicant_path(current_user.id) %></li>
+        <% end  %>
+      <% else %>
+        <li class="military-blue" style="margin-right: 5px;"><%=link_to "Login or Sign Up", login_path %></li>
+        <% if /employers/i !~ request.env['REQUEST_URI'] %> <li class="red" style="margin-right: 5px;"><%=link_to "For Employers", employers_path %></li><% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <div id="social_links" style="position: absolute; top: 45px; right:20px; width:auto;">
+    <div><%= link_to "eNewsletter", "/CGnewsletter.html" %></div>
+    <div style="text-align: center;margin-top: 0.7em;">
+      <%= link_to image_tag("authbuttons/linkedin_32.png"), "http://www.linkedin.com/company/corporate-gray", :target => "_blank" %>
+      <%= link_to image_tag("authbuttons/facebook_32.png"), "http://www.facebook.com/pages/Corporate-Gray/139457856107354?sk=wall", :target => "_blank" %>
+      <%= link_to image_tag("authbuttons/twitter_32.png"), "http://twitter.com/corporategray", :target => "_blank" %>
+    </div>
+  </div>
+
+  <div id="logo" style="float:left;">
+    <% if @current_subdomain == "rea" %>
+      <%= link_to image_tag("logos/rea_logo.jpg", :style=>"padding:0; margin:0;"), welcome_path -%>
+      <style>tr#logo_tr { background: #010C2A; }</style>
+    <% elsif @current_subdomain == "roa" %>
+      <%= link_to image_tag("logos/roa_logo.jpg", :style=>"padding:0; margin:0;"), welcome_path -%>
+      <style>tr#logo_tr { background: #010C2A; }</style>
+    <% elsif @current_subdomain == "militaryleaders" %>
+      <%= link_to image_tag("logos/militaryleaders_logo.jpg", :style=>"padding:0; margin:0;"), welcome_path -%>
+      <style>tr#logo_tr { background: #FFFFFF; }</style>
+    <% elsif @current_subdomain == "springfieldva" %>
+      <%= link_to image_tag("logos/springfield_logo.jpg", :style=>"padding:0; margin:0;"), welcome_path -%>
+      <style>tr#logo_tr { background: #FFFFFF; }</style>
+    <% else %>
+      <%= link_to image_tag("logos/logo.gif", :style=>"padding:0; margin:0;"), current_user && (current_user.has_role?(:recruiter) || current_user.has_role?(:employer_admin)) ?  employers_path : welcome_path -%>
+      <style>tr#logo_tr { background: #FFFFFF; }</style>
+    <% end %>
+  </div>
+  
+  <div id="quote" style="float:left;">
+    Connecting employers with military veterans nationwide!
+  </div>
+
+  <div id="menu_wrapper" style="clear:both;">
+    <%= render :partial => "layouts/menu" %>
+  </div>
+
+</div>
+
+<style>
+  #quote {
+    padding-top: 43px;
+    padding-left: 50px;
+    font-size: 1.3em;
+    color: #4c4c4c; 
+    font-style: italic;
+    font-weight: bold;
+  }
+  #
+  #login_or_sign_up {
+    text-align: center; 
+    font-weight: 100;
+  }
+
+  #login_or_sign_up a {
+    letter-spacing: 1px;
+    text-decoration: none; 
+    color: #fdf6e3; 
+  }
+
+  #login_or_sign_up li {
+    color: #eee8d5;
+    display: inline; 
+    padding: 6px 10px; 
+    border-bottom-left-radius:5px; 
+    border-bottom-right-radius:5px;
+  }
+  
+  #login_or_sign_up .military-blue {
+    background: RGB(25,16,93); //#657b83;
+  }
+
+  #login_or_sign_up .gray {
+    background: #657b83;
+  }
+
+  #login_or_sign_up .blue {
+    background: #268bd2; 
+  }
+
+  #login_or_sign_up .red {
+    background: #d30102; 
+  }
+
+  #login_or_sign_up .green {
+    background: #859900;
+    color: #eee8d5;
+  }
+</style>

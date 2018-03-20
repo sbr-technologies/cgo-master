@@ -1,0 +1,19 @@
+page.replace_html :message, ""
+
+unless @resumes.nil?
+    if !@resumes.total.nil? && @resumes.total > 0
+      # page.replace_html :result_counter, "Showing #{@resumes.total} candidate#{@resumes.total > 1 ? 's':''} matching your query"
+      page.insert_html :bottom, :resumes, :partial => @resumes.docs
+			   page << 'ContainerBehavior.instances[0].update()'
+			
+    else # if !@resumes.total.nil?
+
+      page.insert_html :bottom, :resumes, "<td colspan='4'>No Resumes Found</td>"
+    end
+
+    page << '$("loading").hide();'
+end
+
+unless @error_msg.nil?
+		page.replace_html :message, @error_msg
+end

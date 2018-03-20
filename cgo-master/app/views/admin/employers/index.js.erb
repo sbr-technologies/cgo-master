@@ -1,0 +1,7 @@
+<% if @employers.nil? || @employers.empty? %>
+  $('employers').update("<%= escape_javascript(render :partial => 'shared/no_results.html.erb', :locals => {:model_name => 'employer'}) %>");
+<% else %>
+  $('employers').update("<%= escape_javascript(render :partial => 'employers.html.erb') %>");
+<% end %>
+$('indicator').hide();
+

@@ -1,0 +1,8 @@
+Job <%= @delayed_job.id -%> Failed on <%= @delayed_job.failed_at -%> after <%= @delayed_job.attempts -%> attempts.
+
+Error:
+<%= @delayed_job.last_error -%>
+
+Handler:
+<%= @delayed_job.handler %>
+

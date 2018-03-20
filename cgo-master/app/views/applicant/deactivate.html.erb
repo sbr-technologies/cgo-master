@@ -1,0 +1,73 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'bootstrap.min'  %>
+
+  <style>
+    #login_box {
+      width: 450px; 
+      margin:auto; 
+      border: 4px solid #0144A9; 
+      border-radius: 9px;
+      background: #FAFAFA;
+      padding: 1em;
+    }
+
+    #login_box .title {
+      font-size: 2em;
+    }
+
+    #login_box .login_table {
+      width: 100%;
+    }
+  </style>
+
+  <script>
+    $(document).on("dom:loaded", function() {
+      $('submit_button').on('click', function(e) {
+        var response = confirm("Are you sure you want to deactivate your account? This operation can't be undone");
+        if(response != true) {
+          e.preventDefault();
+          return false; 
+        }
+        return true;
+      });
+    });
+  </script>
+
+<% end %>
+
+<div id="login_box">
+    <div class="title">Deactivate Account</div>
+    <p style="font-family: Arial; color:#999;">To deactivate your account, pleace provide your email and password</p>
+    <%= form_tag process_deactivation_applicants_path do -%>
+
+      <table class="login_table">
+        <tr>
+          <td colspan="2" class="label"><label for="login">Username</label></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= text_field_tag :username, params[:username], :style => "width: 97%" %></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="label"><label for="password">Password</label></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= password_field_tag :password, params[:password], :style => "width: 97%" %></td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top: 6px;">
+              <%= link_to "Forgot your password? Click Here", password_reminder_sessions_path, :id => "password_reminder", :style => "font-style: italic" %>
+            </td>
+        </tr>
+
+        <tr>
+          <td colspan="2" style="text-align:right; padding-top: 25px; padding-bottom: 40px;">
+            <%= submit_tag "Deactivate", :id => "submit_button", :confirm => "", :class => "xbutton blue large", :style => "display: normal" %>
+          </td>
+        </tr>
+      </table>
+
+
+    <% end %>
+</div>
+
+<%= raw give_focus_to :username %>

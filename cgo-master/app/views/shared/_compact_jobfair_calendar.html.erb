@@ -1,0 +1,75 @@
+<% jobfairs = Jobfair.all_upcoming %>
+
+<div class="feature-title">Upcoming Job Fairs <%= "#{Time.now.year} - #{Time.now.year + 1}" %></div>
+<div id="compact_jobfair_calendar">
+<% if jobfairs %>
+
+  <ul>
+  <% jobfairs.each do |jobfair| %>
+    <li>
+      <div style="width: 85px"><%= link_to jobfair.date.to_s(:human), jobfair_path(jobfair.id) -%></div>
+      <div style="margin-left: 5px;"><%=jobfair.city%></div>
+      <div class="right">
+      <% if current_user %>
+        <% if !current_user.registered?(jobfair) %>
+          <% if current_user.is_a?(Recruiter)  %>
+            <%= link_to "register", jobfair.external_registration_url.to_s.strip.blank? ? new_jobfair_registration_path(jobfair.id) : jobfair.external_registration_url, :class=> jobfair.external_registration_url.to_s.strip.blank? ? "action_link" : "external" %>
+          <% else %>
+            <% if jobfair.category == 'military_officer' && (!Constants::TYPE_OF_APPLICANT.select {|x| ['O', 'W'].include?(x[:label][0,1])}.collect {|y| y[:id]}.include?(current_user.type_of_applicant))  %>
+              Officers Only 
+            <% else %>
+              <%= link_to "register", jobfair.applicant_external_registration_url.to_s.strip.blank? ? new_jobfair_registration_path(jobfair.id) : jobfair.applicant_external_registration_url, :class => jobfair.applicant_external_registration_url.to_s.strip.blank? ? "action_link" : "external" -%>
+            <% end %>
+          <% end %>
+        <% else %>
+          <span style="color:green; font-style:italic">registered</span>
+        <% end %>
+      <% else %>
+        <span style="color:green; font-style:italic"><%= link_to "please login", new_session_path -%></span>
+      <% end %>
+
+      </div>
+    </li>
+  <% end %>
+  </ul>
+
+<% end %>
+</div>
+
+
+<style>
+
+  #compact_jobfair_calendar {
+    height: 180px;
+    overflow: scroll;
+    min-height: 180px;
+    border-bottom: 1px solid #AAA;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+  }
+  
+  #compact_jobfair_calendar ul {
+    clear: both; 
+  }
+
+  #compact_jobfair_calendar li {
+    padding: 4px;
+    line-height: 1.2em;
+    height: 1.1em;
+    display: block;
+    float: none;
+    clear: both;
+    list-style: none;
+  }
+
+  #compact_jobfair_calendar div {
+    float: left; 
+  }
+
+  #compact_jobfair_calendar div.right {
+    float: right;
+  }
+
+</style>
+
+

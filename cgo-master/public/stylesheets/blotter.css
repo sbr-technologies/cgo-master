@@ -1,0 +1,113 @@
+div.autosize {
+     display: table; 
+     width: 50%;
+     white-space: nowrap;
+}
+
+div.autosize > div {
+     display: table-cell; 
+}
+
+div.centered {
+     margin-left: auto; 
+     margin-right: auto;
+}
+
+.itemDetail {
+     font-size: 11px; 
+}
+
+.itemDetail > td {
+     border-bottom: 2px solid #4c4c4c;
+}
+
+table.resDetails {
+     width: 99%; 
+}
+
+table.resDetails td {
+     padding: 0; 
+     padding-bottom: 0.25em;
+     border: 0px;
+     vertical-align: top;
+}
+
+table.resDetails td.label {
+     font-weight: bold; 
+}
+
+div.resumeActions {
+     margin-top: 2em; 
+     margin-bottom: 0.5em;
+     font-size: 10px; 
+     height: 16px;
+}
+
+div.resumeActions div.actionButton {
+     float: left; 
+     clear: none;
+}
+
+div.actionButton {
+     overflow: visible;
+     margin: 0px;
+     margin-right: 10px;  
+     padding: 0px;
+     background: #64992C;
+     border-color: #64992C;
+     border-width: 1px 0px; 
+     border-style: solid; 
+
+     cursor: pointer;
+}
+
+    div.actionButton > div {
+     background: #64992C; 
+     margin: 0px -1px;
+     border-color: #64992C;
+     border-style: solid; 
+     border-width: 0px 1px;
+     padding: 1px 0px;
+}
+
+div.actionButton > div >  a {
+     color: #F9FFEF; 
+     padding: 0 5px;
+     display: block;
+}
+
+div.actionButton > div > a:visited {
+     color: #F9FFEF; 
+}
+
+div.actionButton > div > a:hover  {
+     color: #FFE0A1; 
+}
+
+div.actionButton > div > span {
+     color: #DEDEDE;
+     font-style: italic;
+     padding: 0 5px; 
+     display:block; 
+}
+
+tr.itemDetail div.actionBox {
+     padding: 10px 5px;
+     margin-right: 5px;
+     margin-top: 5px;
+     margin-bottom: 5px;
+     background: #FBFDF8;
+     border: 1px solid #F1F7E7;
+}
+
+tr.itemDetail div.actionBox span {
+     vertical-align: top; 
+     color: #4C4C4C;
+     font-weight: bold; 
+     margin-right: 5px;
+}
+
+
+#resumes .even, #jobs .even {
+    background: #EEF6FF; 
+}

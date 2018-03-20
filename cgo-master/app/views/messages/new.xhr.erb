@@ -1,0 +1,6 @@
+<div id="message-<%=@job_id%>" class="message" style="width:380px; height:220px; ">
+  <div class="close-handle" onclick="javascript: Control.Modal.close()">X</div>
+  <div class="bd">
+    <%= render :partial => "/messages/send_message_form.html.erb" , :locals => { :recipient => @recipient.id } -%>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+<% content_for :page_title do %>
+	<%= current_user.employer.name -%>&nbsp; Recruiters
+<% end %>
+
+
+<% content_for :page_header_links do %>
+	<%= link_to "Add Recruiter", new_employer_recruiter_path(current_user.id) %>&nbsp;|&nbsp;
+	<%= link_to "My Profile", edit_employer_recruiter_path(:employer_id => current_user.employer.id, :id => current_user.id)%>&nbsp;|&nbsp;
+	<%= link_to "Company Profile", edit_employer_path(:id => current_user.employer.id)%>&nbsp;|&nbsp;
+    <%= link_to "OFCCP", employer_ofccp_index_path(current_user.employer.id) if(current_user.has_role?(:employer_admin)) %>
+<% end %>
+
+<% if current_user.recruiter_stats.count > 0 %>
+  <br/>
+  <table class="list" style="width:100%; margin-top: 10px;">
+    <tr style="background: whitesmoke">
+      <th>Month</th>
+      <th>Year</th>
+      <th>Login Count</th>
+      <th>Resume Searches</th>
+      <th>Resume Views</th>
+    </tr>
+    <% current_user.recruiter_stats.order("created_at DESC").limit(12).each do |stat| %>
+      <tr>
+        <td><%= stat.created_at.month -%></td>
+        <td><%= stat.created_at.year -%></td>
+        <td><%= stat.login_count -%></td>
+        <td><%= stat.resume_searches -%></td>
+        <td><%= stat.resume_views -%></td>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+<% end %>
+
+<% if @recruiters.nil? || @recruiters.size == 0 %>
+
+	<div class="round-corners dark-highlight" style="margin-right: 8px; margin-top: 20px;">
+    <p style="padding: 10px">
+						There are no additional recruiters in this account.
+						Click 'Add Recruiter' to create a recruiter account;
+						click 'My Profile' to edit your account information;
+						or click "Company Info" to edit your company's information</p>
+  </div>
+  
+<% else %>
+
+  <% @recruiters.each do |user| %>
+    <div style="float:none; clear:both; height: 240px; margin-top: 15px; border-bottom: 1px dotted #CCC; padding: 5px;">
+    <span style="float:right;">
+      <% if current_user.id != user.id %>
+	<%= check_box :user, :status, 
+	  :onclick => "new Ajax.Request('/employers/#{current_user.employer.id}/recruiters/#{user.id}/current_status', {parameters: {s:this.checked ? 'active':'inactive'}, asynchronous:true, evalScripts:true, method: 'get'})", 
+	  :style => "width: 0.8em; margin-right: 4px;",
+	  :checked => (true if user.is_active?)
+      %>
+	<span style="color: #BD0000;">Active</span>
+      <% end %>
+    </span>
+    <%= image_tag "no_avatar.gif", :style=>"float:left; margin-right: 10px; border: 1px solid #4C4C4C; padding: 2px;", :alt => user.name -%>
+    <h2 style="margin-top:0px"><%= "#{user.title.capitalize} " if user.title -%><%= user.first_name -%>&nbsp;<%= user.initial -%>&nbsp;<%= user.last_name -%></h2>
+    <h3>Username: <%= user.username %></h3>
+    <h3><%= user.humanized_roles if user.roles -%></h3>
+	
+    <div style="float: left; clear: both;margin-top: 10px; width:90%;">
+      Password: <%= user.password %><br/>
+      Last Login: <%= (distance_of_time_in_words_to_now(user.last_login_at) rescue "never") %>&nbsp;<%= "ago." if user.last_login_at -%>&nbsp;(Count: <%= user.login_count %>)<br/>
+      Email: <a href="mailto:<%= user.email -%>"><%= user.email -%></a><br/>
+      <div class="index_card_action_bar">
+        <%= link_to "Edit ", edit_employer_recruiter_path(:employer_id => current_user.employer.id, :id => user.id), :class => "action_link" %>|
+        <%= link_to " Delete ", employer_recruiter_path(:employer_id => current_user.employer.id, :id => user.id), :method => :delete, :class => "action_link" %>|
+        <%= link_to "View ", employer_recruiter_path(:employer_id => current_user.employer.id, :id => user.id), :class => "action_link" %>
+      </div>
+      <% if user.recruiter_stats.count > 0 %>
+        <div>
+          <table class="list" style="width:100%; margin-top: 10px;">
+            <tr style="background: whitesmoke">
+              <th>Month</th>
+              <th>Year</th>
+              <th>Login Count</th>
+              <th>Resume Searches</th>
+              <th>Resume Views</th>
+            </tr>
+            <% user.recruiter_stats.order("created_at DESC").limit(12).each do |stat| %>
+              <tr>
+                <td><%= stat.created_at.month -%></td>
+                <td><%= stat.created_at.year -%></td>
+                <td><%= stat.login_count -%></td>
+                <td><%= stat.resume_searches -%></td>
+                <td><%= stat.resume_views -%></td>
+              </tr>
+            <% end %>
+          </table>
+        </div>
+      <% else %>
+      <div style="margin-top: 10px">
+      Number Resume Searches: <%= user.count_resume_searches || "No Data" -%><br/>
+      Last Resume Search: <%= user.last_resume_search_date || "No Data" -%><br/>
+      Number Resume Views: <%= user.count_resume_views || "No Data" -%>
+      </div>
+      <% end %>
+	  
+    </div>
+    </div>
+  <% end %>
+
+<% end  %>
+
+<% content_for :right do %>
+  <h2 style="margin-top:0">Profile Statistics</h2>
+  <div style="font-size: 1.2em; line-height: 1.8em">
+    <ul>
+      <li>This Month's Profile Views: <%= current_user.employer.get_current_date_stat_record.profile_views %></li>
+      <li>Last Month's Profile Views: <%= current_user.employer.get_stat_record(1.month.ago).profile_views %></li>
+      <li>Lifetime Profile Views: <%= current_user.employer.lifetime_profile_views %></li>
+      <hr/>
+      <li>This Month's Job Views: <%= current_user.employer.get_current_date_stat_record.job_views %></li>
+      <li>Last Month's Job Views: <%= current_user.employer.get_stat_record(1.month.ago).job_views %></li>
+      <li>Lifetime Job Views: <%= current_user.employer.lifetime_job_views %></li>
+    </ul>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+	Edit User: <%= @user.name %>
+<% end %>
+
+<% content_for :page_header_links do %>
+		<%= link_to "View All", admin_users_path %>
+<% end %>
+
+<%= error_messages_for @applicant, @address %>
+
+<%= error_handling_form_for [:admin, @user], :html => {:id =>"userform"} do |f| %>
+	<%= render :partial => "form", :object => f -%>
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('userform').submit();"><span>save</span></a>
+    <div>or <%= link_to "Cancel", admin_users_path, :class=>"cancel"%></div>
+  </div>
+<% end %>
+

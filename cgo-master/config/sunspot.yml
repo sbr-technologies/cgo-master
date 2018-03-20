@@ -1,0 +1,20 @@
+production:
+  solr:
+    #hostname: 10.202.250.169
+    hostname: 10.151.26.249
+    port: 8080
+    log_level: DEBUG
+  auto_commit_after_request: false
+
+development:
+  solr:
+    hostname: localhost
+    port: 8983
+    log_level: INFO
+  auto_commit_after_request: false
+
+test:
+  solr:
+    hostname: localhost
+    port: 8981
+    log_level: WARNING

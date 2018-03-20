@@ -1,0 +1,27 @@
+<% content_for :page_title do %>
+Promote Your Franchise with Corporate Gray
+<% end %>
+
+<div class="instructional-text" style="margin-left: 10px; margin-right: 10px;">
+  <p>Franchising is a proven business model built on the principle of following well-defined 
+  rules and procedures in order to achieve success. Military service members are disciplined, 
+  hard-working, and well-accustomed to following the rules that make for franchise success.</p>
+  <br/>
+  <p>Corporate Gray can help you connect with those transitioning service members interested in 
+  being their own boss. Meet these prospective franchisees in print, in person, and online.</p>
+  <br/>
+  <p>In Print:  Advertise your franchise opportunities to everyone leaving active duty.</p>
+  <br/>
+  <p>In Person:  Meet face-to-face at the Corporate Gray Job Fairs.</p>
+  <br/>
+  <p>Online:  Be a featured employer on the Franchise Page of Corporate Gray Online.</p>
+  <br/>
+</div>
+
+<%= render :partial => "/shared/cgo_book_sponsor" %>
+
+<% content_for :right do %>
+  <%= link_to "Create An Employer Account", new_employer_path, :class => "flat-button flat-button-red", :style => "display:block; text-align: center;" %>
+<% end %>
+
+

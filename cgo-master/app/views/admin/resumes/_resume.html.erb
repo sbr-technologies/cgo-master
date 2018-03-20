@@ -1,0 +1,111 @@
+<% unless resume.nil? || resume.applicant.nil? || resume.applicant.address.nil? %>
+<% state = (resume.applicant.addresses[:primary].state rescue "") %>
+<% city = (resume.applicant.addresses[:primary].city rescue "") %>
+
+<tr id='<%="resume_#{resume.id}" -%>' class="item <%=cycle('even', 'odd')-%>" >
+
+  <td><%= resume.posted_date.to_s(:mmddyyyy) -%></td>
+
+  <td>
+    <%=link_to_function image_tag("right_triangle.png", :alt => "Click to toggle details") + " " + resume.applicant.name, "toggleDetails('#{resume.id}')", :class => "handle", :id => "resume_handler_#{resume.id}", :href => "#resume_handler_#{resume.id}" -%>
+    <%=image_tag('/images/arrows.gif', :style => 'vertical-align: bottom; margin-right: 3px; margin-left: 6px; display: none;', :class => "indicator" ) -%>
+    <span class="actionStatus" style="margin-left: 5px; font-style: italic; color: green; display:none"></span>
+  </td>
+
+  <td><%= "#{city.titleize}, #{state.upcase}" -%></td>
+  <td><%= resume.applicant.availability_date.nil? ? "Now" : resume.applicant.availability_date.to_s(:mmddyyyy) -%></td>
+
+  <td style="text-align: center;">
+    <% img_src = "/images/icns/crystal/16x16/mimetypes/txt.png" if resume.has_body?("txt") %>
+    <% img_src = "/images/icns/aesthetica/16x16/pdf.png" if resume.has_body?("pdf") %>
+    <% img_src = "/images/icns/aesthetica/16x16/word.png" if resume.has_body?("doc") || resume.has_body?("docx") %>
+    <%=link_to(image_tag(img_src, :alt => "download"), download_admin_resume_path(resume.id)) unless img_src.to_s.blank?-%>
+  </td>
+</tr>
+
+<tr id='<%="res_details_#{resume.id}"-%>' class="itemDetail" style="display:none" >
+  
+  <td colspan="5" style="background: #DDEDFD">
+  <div style="width:58%; background:#CEE6FD; float:left; padding: 5px; ">
+      <div>
+        <table class="resDetails">
+          <tr><td class="label">Rank:</td><td><%= to_label(resume.applicant.type_of_applicant, Constants::TYPE_OF_APPLICANT) -%></td></tr>
+          <tr><td class="label">Security Clearance:</td><td><%= to_label(resume.applicant.security_clearance, Constants::SECURITY_CLEARANCE) -%></td></tr>
+          <tr><td class="label">Occupational Pref:</td><td><%= to_label(resume.applicant.occupational_preference, Constants::OCCUPATIONAL_PREFERENCE) -%></td></tr>
+          <tr><td class="label">Education Level:</td><td><%= to_label(resume.applicant.education_level, Constants::EDUCATION_LEVEL) -%></td></tr>
+          <tr><td class="label">Branch Of Service:</td><td><%= to_label(resume.applicant.branch_of_service, Constants::BRANCH_OF_SERVICE) -%></td></tr>
+          <tr><td class="label">Availability Date:</td><td><%= resume.applicant.availability_date.nil? ? "Now" : relative_date(resume.applicant.availability_date) -%></td></tr>
+          <tr><td class="label">Willing To Relocate:</td><td><%= to_yes_no(resume.applicant.willing_to_relocate).capitalize -%></td></tr>
+        </table>
+      </div>
+
+      <%
+        # ------------------------------ Action Buttons -----------------------------
+      %>
+      <div class="resumeActions">
+
+        <div class="actionButton"><div><%= link_to_function "Email Resume", "Effect.Fade($('message_for_#{resume.id}'), {duration:0.75}); Effect.toggle($('forward_resume_#{resume.id}'), 'appear', {duration:0.25})" -%></div></div>
+
+      </div>
+
+      <% 
+        # NOT USED !! (CANT DELETE)    Message Form ----------------------------------
+      %>
+      <div id="message_for_<%=resume.id-%>" class="actionBox" style="display:none">
+      </div>
+
+      <%
+        # ---------------------------- Forward Resume Form ----------------------------
+      %>
+      <div id="forward_resume_<%=resume.id-%>" class="actionBox" style="display:none" >
+        <span>Email(s):</span>
+        <%= form_for :forward, :url => forward_admin_resume_path(resume.id),  :remote => true do |f| %>
+          <%= f.text_field :recipients %>
+          <div class="actionButton" style="float:right; clear:none;">
+            <div>
+              <button type="submit">Send</button>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <script>
+        $$("#forward_resume_<%=resume.id-%>")[0].on('ajax:complete', function() {
+          forwardResumeComplete(<%=resume.id-%>)
+        });
+      </script>
+
+    </div>
+
+    <%
+      # ------------------------  Address Block --------------------------- 
+    %>
+    <div style=" padding-top: 5%; float:left; clear:none; width:40%; background:#DDEDFD;">
+
+        <div class="autosize centered" >
+          <div>
+            <% unless resume.visibility == "confidential" || resume.visibility == "private" %>
+              <b style="margin-bottom: 1em">Contact Information:</b>
+              <div><%= resume.applicant.address.street_address1 -%></div>
+              <div><%= "#{resume.applicant.address.city}, #{resume.applicant.address.state} #{resume.applicant.address.zip}" -%></div>
+              <div><%= "Phone: #{resume.applicant.address.phone}" -%></div>
+              <div>Email: <%= link_to "#{resume.applicant.email}", "mailto:#{resume.applicant.email}" -%></div>
+            <% else %>
+              <div style="color:#BD0000; font-weight:bold;">
+                  <div>This applicant's contact details</div>
+                  <div>are <%=resume.visibility.downcase-%></div>
+              </div>
+              <br/>
+              <div>To contact this applicant; please</div>
+              <div>use the button:</div>
+              <div style="text-align:center; color:#64992C; font-weight: bold; margin-top: 0.5em;">'Message to Applicant'</div>
+            <% end %>
+          </div>
+        </div>
+      
+    </div>
+
+
+  </td>
+</tr>
+<% end %>

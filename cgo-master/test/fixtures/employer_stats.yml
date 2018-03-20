@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  employer_id: 1
+  profile_views: 1
+  job_views: 1
+  banner_clicks: 1
+
+two:
+  employer_id: 1
+  profile_views: 1
+  job_views: 1
+  banner_clicks: 1

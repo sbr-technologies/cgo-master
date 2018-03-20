@@ -1,0 +1,7 @@
+<ul style="cursor:pointer">
+  <% @employers.each do |employer| %>
+    <li id='<%="emp-#{employer.id}"%>'><%="(#{employer.id}) #{employer.name}" -%></li>
+  <% end %>
+</ul>
+
+

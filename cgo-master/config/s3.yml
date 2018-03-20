@@ -1,0 +1,9 @@
+staging:
+  aws_access_key: 1PRZECEGXPG0SD7P39G2
+  aws_secret_access_key: S7ZaML53bw7wghnws1DMIvQhEojI1PvnDe6Ux0G3
+  bucket_base_name: staging-backup
+
+production:
+  aws_access_key: 1PRZECEGXPG0SD7P39G2
+  aws_secret_access_key: S7ZaML53bw7wghnws1DMIvQhEojI1PvnDe6Ux0G3
+  bucket_base_name: production-backup

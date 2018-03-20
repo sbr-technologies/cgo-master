@@ -1,0 +1,158 @@
+<% content_for :page_title do %>
+Corporate Gray's Military Recruitment Services
+<% end %>
+
+
+<%= content_for :title_tag do %>
+	Corporate Gray Military Recruitment Services
+<% end %>
+
+<%= content_for :meta_keywords do %>
+	military recruiting, military hiring, military job fairs, military to civilian career transition books, search resumes, post civilian jobs, advertise, email marketing, military veterans, interview veterans, hire veterans, sponsor military newsletter
+<% end %>
+
+<%= content_for :meta_description do %>
+	The Military Recruitment Services offered by Corporate Gray enable companies to connect with military veterans seeking civilian employment.
+<% end %>
+
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "employer_blocks" %>
+
+  <style>
+      div#resources h3 {
+        margin-top: 0;
+        color: #BD0000;
+        font-size: 1.5em;
+        border-bottom: 2px solid #2c2c2c;
+      }
+
+      div#resources li {
+        margin-top: 10px;
+      }
+
+      div#resources a, div#resources a:visited {
+        color: blue;
+      }
+
+  </style>
+
+ <% end %>
+
+
+<% if @current_subdomain == "springfieldva" %>
+
+ <p>The Greater Springfield Chamber of Commerce offers its small businesses (companies with fewer than 200 employees) the opportunity to connect with transitioning and former military personnel who are seeking civilian employment.  If your company has openings appropriate for a well-trained, highly motivated, and diverse set of job seekers, many with a Department of Defense security clearance, this is it!</p>
+ <br/>
+ <p>To get started, create a free employer account.  Your account will be active by the next business day and you will be notified accordingly.  You can then freely post your jobs on this military-niche employment website.  There is no charge, even if you make hires as a result!  And if you would like to use the resume search service, you can purchase it at a 15% discount as a benefit of being a member of the Greater Springfield Chamber.  If you have questions, please contact Carl Savino; phone: (703) 690-6381, email: <a href="mailto:carl@corporategray.com">Carl@CorporateGray.com</a>.</p>
+ <br/>
+
+ <% end %>
+ 
+<div class="service-offering">
+  <h2>Job Fairs</h2>
+  <div class="info">Meet face-to-face with hundreds of the best military candidates available and make as many hires as would like!</div>
+  <div class="more-info"><%= link_to "See the job fair schedule", job_fairs_employers_path %></div>
+</div>
+
+<div class="service-offering">
+  <h2>Resume Search and Job Postings</h2>
+  <div class="info">Search our database of military-experienced candidates. Receive unlimited resume 
+    search and job posting service for all of your recruiters. </div>
+  <div class="more-info"><%= link_to "Try a FREE resume search now!", guest_search_resumes_path %></div>
+</div>
+
+<% unless @current_subdomain == "springfieldva" %>
+
+
+<div class="service-offering">
+  <h2>Books, Job Fairs, and Online Military Recruitment</h2>
+  <div class="info">
+    Advertise in the next annual edition of our military-to-civilian career transition book, attend  Corporate Gray Job Fairs, and use Corporate Gray Online to recruit military veterans nationwide.
+  </div>
+
+  <div class="more-info">For more info, <%= link_to "see the media kit", "http://www.corporategray.com/cgo/cgmediakit.pdf" %></div>
+</div>
+
+<div class="service-offering">
+  <h2>Targeted E-Mail</h2>
+  <div class="info">Simplify your recruiting efforts by enabling us to send your job opportunities to just those 
+    candidates whose profiles match your needs.</div>
+  <div class="more-info">If interested, email <%= link_to "Sales@CorporateGray.com", "mailto:sales@CorporateGray.com?subject=Targeted Email Inquiry" %></div>
+</div>
+
+<div style="float:left; margin-left: 5px; width: 308px;">
+<%= render :partial => "/shared/cgo_book_sponsor" %>
+</div>
+
+
+<div style="float: left; margin-left: 5px;">
+  <div style="font-weight: bold; margin-bottom: 10px">Corporate Gray Military Recruiting Services</div>
+  <iframe width="300" src="//www.youtube.com/embed/7w8h4DdigjU" frameborder="0" allowfullscreen></iframe>
+</div>
+
+
+
+<% end %>
+
+
+<% content_for :right do %>
+
+  <% if current_user.nil? %>
+    <div style="background: #FFF; padding: 10px;"> 
+      <div style="font-size: 18px; padding: 1em; font-weight: bold;">See how many resumes <br/> meet your criteria:</div>
+      <%= link_to "Try Resume Search", guest_search_resumes_path, :class => "flat-button flat-button-red", :style => "display: block; text-align: center;" %>
+    </div>
+
+    <br/>
+
+    <div style="background: #FFF; padding: 10px;"> 
+      <div style="font-size: 18px; padding: 1em; font-weight: bold; color: black;">
+        Don't Have an Employer Account?
+      </div>
+      <%= link_to "Click to Create an Account", new_employer_path, :class => "flat-button flat-button-blue", :style => "display: block; text-align: center" %>
+    </div>
+    <br/>
+
+  <% end %>
+
+
+  <div style="font-weight: bold">Testimonials</div>
+  <br/>
+  <div class="testimonial">
+    <i>"I'm addicted to your database. I've found several very strong candidates."</i>
+    <div style="text-align: right; margin-top: 0.5em;">
+      -- Employer
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <i>"You guys do a great job with the fairs and I'm proud that my company is a Corporate Gray Book Sponsor"</i>
+    <div style="text-align: right; margin-top: 0.5em;">
+      -- Defense Contractor
+    </div>
+  </div>
+
+  <div class="testimonial">
+    <i>Eaton has found Corporate Gray’s recruiting services to be an effective resource for finding top military talent.  
+      We’ve hired military veterans through our print ad in their Transition Guide, at job fairs (both in-person and virtual), 
+      and through their e-newsletter.  The services provided by Carl and his team are the best—they go above and beyond to 
+      ensure you get the most from their resources.  I highly recommend to other firms sourcing military-experienced candidates!</i>
+    <div style="text-align: right; margin-top: 0.5em;">
+      --- George Bernloehr, Senior Military Talent Acquisition Consultant
+    </div>
+  </div>
+
+
+ <div id="resources" style="margin-top: 40px">
+  <h3>Employer Resources</h3>
+    <ul style="width:95%">
+      <li><a href="/static/employer/why_hire_military.html.erb">Why Hire Military</a><div>Top 10 Reasons to Hire Military Personnel</div></li>
+      <li><a href="/static/employer/military_demographics.html.erb">Military Demographics</a><div>Statistics concerning military servicemen leaving active duty</div></li>
+      <li><a href="http://online.onetcenter.org/crosswalk" target="_blank">Skills Translator</a><div>Enter a code or title from the CIP, MOC, RAPIDS, DOT, or SOC to find matching O*NET-SOC occupations.</div></li>
+    </ul>
+ </div>
+
+
+
+<% end %>

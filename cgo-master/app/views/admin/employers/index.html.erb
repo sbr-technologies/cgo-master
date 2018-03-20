@@ -1,0 +1,51 @@
+<% content_for :page_title do %>
+  All Employers
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "New", new_admin_employer_path -%> | 
+  <%= link_to "Download to Excel", admin_employers_path(:format => :xls), :class=>"download_link" %>
+<% end %>
+
+    
+<div id="employers">
+  <% if not @employers.nil? %>
+    <%= will_paginate @employers %>
+    <%=render :partial => "employers" -%>
+  <% else %>
+    Unexpected error, please contact support. 
+  <% end %>
+</div>
+
+
+<% content_for :right do %>
+
+  <%= form_for :q, :url => admin_employers_path, :remote => true, :html => {:id => "search_form", :method => :get} do |f| %>
+    <div id="filters">
+      <div>
+        <label>
+          <div>Company Name</div>
+          <%= f.text_field :company_name, :id => "company_name", :style => "padding: 5px; font-weight: bold; font-size: 14px; width: 275px;" %>
+        </label>
+        <label>
+          <div>Recruiter Name (last, first)</div>
+          <%= f.text_field :recruiter_name,  :id => "recruiter_name", :style => "padding: 5px; font-weight: bold; font-size: 14px; width: 275px;"%>
+        </label>
+      </div>
+    </div>
+
+    <div class="button-bar" style="background: #FFF; padding: 8px 5px; border:1px solid #CCC; width: 275px; margin-left: 7px;">
+      <button type="submit" style="padding: 5px 10px; font-weight: bold; margin-left: 7px; color: #009D00;">Search</button>
+      <span id="indicator" style="display: none; padding-top: 11px; padding-left: 3px;"><%= image_tag "/images/dots.gif" -%></span>
+    </div>
+  <% end %>
+
+  <script>
+    document.observe("dom:loaded", function() {
+      $$('#search_form')[0].on("ajax:before", function() {
+        $('indicator').show(); 
+      });
+    });
+  </script>
+
+<% end %>

@@ -1,0 +1,110 @@
+#signUp {
+  padding-bottom: 10px;
+  margin-top: 30px; 
+  font-size: 1.6em;
+  color: #FFF; 
+}
+
+#signUp p {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+#signUpLink {
+  margin-top: 5px; 
+  border: 4px solid #546A72;
+  background: #657B83;
+  color: #EEE8D5;
+  padding: 5px;
+}
+
+#signUpLink a {
+  color: #FFF; 
+  font-weight: bold;
+  text-decoration: none;
+}
+
+#searh_form { 
+  position: absolute; 
+  top:20px; 
+  right: 10px; 
+  opacity: 0.90; 
+  width: 290px;
+}
+
+#banner {
+  position: relative; 
+}
+
+#image_container {
+  position:absolute; 
+  left: 290px;
+  margin-top: 0px;
+  margin-right: 0px;
+  margin-bottom: 0px;
+  margin-left: 10px;						
+}
+
+#image_container img {
+  width: 420px;
+}
+
+.fade-box {
+    position: absolute;
+    text-align:center;
+}
+
+#banner_actions {
+  position: absolute; 
+  top: 0;
+  right: 0; 
+  width: 234px;
+  height: 260px;
+  padding: 10px;
+  background: #EFEFEF;
+}
+
+#banner_actions .banner-button {
+  background: white; 
+  padding: 10px;
+}
+
+#banner_actions div {
+  margin-bottom: 5px;
+}
+
+#banner_actions .button {
+  text-align: center; 
+  padding: 10px 5px;
+}
+
+#banner_actions .inverse-blue {
+  background: RGB(25,16,93); 
+}
+
+#banner_actions .inverse-red {
+  background: #BD0000; 
+}
+
+#banner_actions a {
+  color: white; 
+  text-decoration: none; 
+  letter-spacing: 1px;
+}
+
+.actions {
+  height: 120px;
+}
+
+.actions li {
+  float: left;
+  margin-left: 10px;
+  color: black;
+}
+
+.actions li div {
+  background: whitesmoke; 
+  width: 100px; 
+  height: 100px;
+}
+

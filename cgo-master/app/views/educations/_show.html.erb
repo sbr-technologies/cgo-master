@@ -1,0 +1,12 @@
+<table width="95%" style="margin-left: 1em;">
+  <tr>
+    <td width="20%" style="vertical-align: top"><span class="education-start-date"><%=education.start_date.to_s.blank? ? 'From' : education.start_date %></span> - <span class="education-end-date"><%=education.end_date.to_s.blank? ? 'To' : education.end_date %></span></td>
+    <td>
+      <div class="education-school-name" style="font-size: 1.3em"><%= (education.school_name.titleize rescue "") %></div>
+      <div style="margin-top:0;font-style:italic;" >
+        <span class="education-field-of-study"><%= education.field_of_study || "Field Of Study" %></span>, <span class="education-degree"><%= education.degree || "Degree" %></span>
+      </div>
+      <div class="education-notes" style="margin-top:1em;"><%=education.notes%></div>
+    </td>
+  </tr>
+</table>

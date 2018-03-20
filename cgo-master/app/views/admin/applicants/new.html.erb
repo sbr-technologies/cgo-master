@@ -1,0 +1,15 @@
+<% content_for :page_title do %>
+  New Applicant Registration
+<% end %>
+
+<%= error_messages_for @applicant, @address %>
+
+<%= error_handling_form_for @applicant, :url => admin_applicants_path, :html => {:id => "applicantform" } do |f| %>
+  <%= render :partial => "applicant/form.html.erb", :locals => {:f => f} -%>
+			
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('applicantform').submit(); return false;"><span>save</span></a>
+    <div>or <%= link_to "Cancel", admin_applicants_path, :class=>"cancel"%></div>
+  </div>
+
+<% end %>

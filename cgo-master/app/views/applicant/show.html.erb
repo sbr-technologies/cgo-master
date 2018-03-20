@@ -1,0 +1,70 @@
+<% content_for :page_title do %>
+  <%= @applicant.name %>
+<% end %>
+
+<% if !@resume.blank? && (File.exists?(@resume.attached_resume.path) rescue false) %>
+
+    <div id="pForward" class='modal' style="width: 260px">
+      <div class="close-handle" onclick="forward_modal.close()">X</div>
+      <div style="font-weight: bold; margin-bottom:5px;color:black; cursor:default;">Recipient's Email (separated by comma)</div>
+      <div style="margin-top: 8px; margin-left: 5px;">
+        <%= form_for :forward, :url => forward_resume_path(@resume.id), :remote => true, :html => {:id => 'forward_form'} do |f| %>
+          <%= f.text_field :recipients %>
+
+          <div class="button-bar" style="margin-top: 18px">
+            <%= image_submit_tag "/images/buttons/bt_send_green.gif", :style=>"width:auto; border:none; outline: none;" -%>
+          </div>
+        <% end %>
+        <script>
+            document.observe("dom:loaded", function() {
+            $("forward_form").on('ajax:complete', function() {
+              forward_modal.close();
+            });
+          });
+        </script>
+      </div>
+    </div>
+
+    <div id="message" style="margin: 4px;"></div>
+
+    <% content_for :head do %>
+
+        <script language="javascript">
+
+            // Initialize resumePanel (used to display Resume details)
+            var forward_modal, message_modal;
+            document.observe("dom:loaded", function() {
+              message_modal = new Control.Modal('pMessage');
+              forward_modal = new Control.Modal('pForward');
+            });
+
+        </script>
+
+    <% end %>
+
+    <%= render :partial => "resumes/show" -%>
+
+<% else %>
+
+    <h2 style="font-size: 110%; margin-bottom: 10px;">Contact Information:</h2>
+    <div class="contact-info">
+      <div><%= @applicant.address.street_address1 -%></div>
+      <div><%= @applicant.address.street_address2 -%></div>
+      <div><%= "#{@applicant.address.city}, #{@applicant.address.state} #{@applicant.address.zip}" -%></div>
+      <div><%= @applicant.address.phone -%></div>
+      <div><%= link_to @applicant.email, "mailto:#{@applicant.email}" -%></div>
+      <div>LinkedIn URL: <%= @applicant.linkedin_handler ? link_to("http://" + @applicant.linkedin_handler.gsub("http://", ""), "http://" + @applicant.linkedin_handler.gsub("http://", ""), :class => :external) : "Not Available" %></div>
+    </div>
+	
+    <h2 style="font-size: 110%; margin-bottom: 10px;">Employment Information:</h2>
+    <table class="show-model">
+      <tr><td class="label">Rank:</td><td><%= to_label(@applicant.type_of_applicant, Constants::TYPE_OF_APPLICANT) -%></td></tr>
+      <tr><td class="label">Security Clearance:</td><td><%= to_label(@applicant.security_clearance, Constants::SECURITY_CLEARANCE) -%></td></tr>
+      <tr><td class="label">Occupational Preference:</td><td><%= to_label(@applicant.occupational_preference, Constants::OCCUPATIONAL_PREFERENCE) -%></td></tr>
+      <tr><td class="label">Education Level:</td><td><%= to_label(@applicant.education_level, Constants::EDUCATION_LEVEL) -%></td></tr>
+      <tr><td class="label">Branch Of Service:</td><td><%= to_label(@applicant.branch_of_service, Constants::BRANCH_OF_SERVICE) -%></td></tr>
+      <tr><td class="label">Availability Date:</td><td><%= @applicant.availability_date.nil? ? "Now" : relative_date(@applicant.availability_date) -%></td></tr>
+      <tr><td class="label">Willing To Relocate:</td><td><%= to_yes_no(@applicant.willing_to_relocate).capitalize -%></td></tr>
+    </table>
+<% end %>
+

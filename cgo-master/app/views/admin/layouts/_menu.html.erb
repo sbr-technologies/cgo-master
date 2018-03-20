@@ -1,0 +1,18 @@
+<div id="menu">
+<ul>
+  <li><%= link_to_tagged_current "Dashboard", "/admin", :highlights_on => [{:controller => "admins"}] %></li>
+  <li><%= link_to_tagged_current "Job Fairs", admin_jobfairs_path, :highlights_on => [{:controller => "jobfairs"}] %></li>
+  <li><%= link_to_tagged_current "Registrations", admin_registrations_path, :highlights_on => [{:controller => "registrations"}] %></li>
+  <li><%= link_to_tagged_current "Applicants", admin_applicants_path, :highlights_on => [{:controller => "applicants"}] %></li>
+  <li><%= link_to_tagged_current "Resumes", search_admin_resumes_path, :highlights_on => [{:controller => "resumes"}] %></li>
+  <li><%= link_to_tagged_current "Employers", admin_employers_path, :highlights_on =>[ {:controller=>"employers"}] %></li>
+  <li><%= link_to_tagged_current "Recruiters", edit_employer_admin_recruiters_path, :highlights_on =>[ {:controller=>"recruiter"}] %></li>
+  <li><%= link_to_tagged_current "Ofccp", admin_ofccp_index_path, :highlights_on =>[ {:controller=>"ofccp"}] %></li>
+  <li><%= link_to_tagged_current "Users", admin_users_path %></li>
+  <li><%= link_to "GAuth", url_for(:controller => :welcome, :action => :request_authsub_authorization) %></li>
+</ul>
+<ul class="right">
+  <li><%= link_to("Logout", logout_path, :method => :delete) if current_user != :false -%></li>
+</ul>
+</div>
+

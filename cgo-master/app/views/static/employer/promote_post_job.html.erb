@@ -1,0 +1,49 @@
+<% content_for :page_title do %>
+3 Ways to Post Your Jobs
+<% end %>
+
+<div style="margin-left: 10px; margin-right: 10px;">
+
+  <ol style="text-indent: 0; margin-left: 10px">
+    <li>Individually post your jobs from your Corporate Gray account (included in online rate).</li>
+    <li>Push your jobs to the Corporate Gray server in our xml format ($300/month).</li>
+    <li>Have your jobs scraped from your website and imported weekly to Corporate Gray Online with no work on your end (minimum 3 month contract required, $500/month).</li>
+  </ol>
+
+
+  <h3>Corporate Gray Online Rates</h3>
+  <%= render :partial => "employer/online_rates.html.erb" -%>
+
+</div>
+
+<div style="margin-left: 10px">
+  <%= render :partial => "/shared/cgo_book_sponsor" %>
+</div>
+
+<% content_for :right do %>
+  <% if !current_user %>
+  <div style="margin-top: 20px; background: #FFF; padding: 1em;">
+    <div style="font-size: 1.1em; font-weight: bold;">Don't have an Employer Account?</div>
+    <br/>
+    <%= link_to "Sign Up", new_employer_path, :class => "flat-button flat-button-red", :style => "display:block; text-align: center;" %>
+  </div>
+
+  <div style="margin-top: 20px; background: #FFF; padding: 1em;">
+    <div style="font-size: 1.1em; font-weight: bold;">Login to your account to post jobs</div>
+    <br/>
+    <%= link_to "Login", new_session_path, :class => "flat-button flat-button-blue", :style => "display:block; text-align: center;" %>
+  </div>
+  <% else %>
+    <% if (current_user.has_role?("recruiter") || current_user.has_role?("employer_admin")) && !current_user.employer.job_post_allowed? %>
+      <div style="background: #FFF; padding: 1em;">
+        <div style="font-size: 1.1em; font-weight: bold;">You don't have Job Posting service</div>
+        <br/>
+        <%= link_to "Contact Sales", "mailto:sales@corporategray.com", :class => "flat-button flat-button-blue", :style => "display:block; text-align: center;" %>
+      </div>
+    <% end %>
+
+  <% end %>
+<% end %>
+
+
+

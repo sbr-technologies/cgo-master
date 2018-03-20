@@ -1,0 +1,47 @@
+<div style="background:#FFF; padding: 1em; padding-left: 3em; padding-right: 3em;">
+		<div style="float:right; margin-right: 15px">
+      <span style="margin-right: 10px;"><%= link_to "Additional Information", "javascript:Effect.toggle($('employment-content'), 'blind', {duration:0.25});" -%></span>
+      <% if current_user.is_a?(Recruiter) %>
+        <span style="margin-right: 10px;"><%= link_to "Download Resume", download_resume_path(@resume.id), :id=>"download-link"-%></span>
+        <span style="margin-right: 10px;"><%= link_to "Message to Applicant", "javascript:messagePanel.show();", :id=>"message-link"-%></span>
+        <span style="margin-right: 10px;"><%= link_to "Send Resume by Email", "javascript:forwardPanel.show();", :id=>"forward-link" -%></span>
+      <% end %>
+						<span><%= link_to "Print", print_resume_path(@resume.id), :id => "print-link", :popup => ["Print_Resume", "height=650", "width=800", "scrollbars=1"] -%></span>
+		</div>
+
+  <br/>
+
+  <% unless @resume.visibility == "public" %>
+				<div id="send-message-container" style="color: #BD0000; font-size: 90%; width: 98%; margin-top: 1em;">
+      This applicant has chosen to keep his contact information 'confidential'. To contact this job seeker, use the <b><%= link_to "Message to Applicant", "javascript:messagePanel.show();", :id=>"message-link"-%></b> link above. 
+				</div>
+  <% end %>
+
+  <div id="employment-content" style="display:none; margin-top: 1em;">
+    <h2 style="margin:0; padding:0;"><%= @resume.applicant.name -%></h2>
+    <br/>
+    <div style="background:#EEE; border: 1px solid #DDD; padding: 1em">
+      <table class="show-model">
+        <tr><td class="label">Posted Date:</td><td><%= @resume.posted_date.to_s(:mmddyyyy) -%></td></tr>
+        <tr><td class="label">Rank:</td><td><%= to_label(@resume.applicant.type_of_applicant, Constants::TYPE_OF_APPLICANT) -%></td></tr>
+        <tr><td class="label">Security Clearance:</td><td><%= to_label(@resume.applicant.security_clearance, Constants::SECURITY_CLEARANCE) -%></td></tr>
+        <tr><td class="label">Occupational Preference:</td><td><%= to_label(@resume.applicant.occupational_preference, Constants::OCCUPATIONAL_PREFERENCE) -%></td></tr>
+        <tr><td class="label">Education Level:</td><td><%= to_label(@resume.applicant.education_level, Constants::EDUCATION_LEVEL) -%></td></tr>
+        <tr><td class="label">Branch Of Service:</td><td><%= to_label(@resume.applicant.branch_of_service, Constants::BRANCH_OF_SERVICE) -%></td></tr>
+        <tr><td class="label">Availability Date:</td><td><%= @resume.applicant.availability_date.nil? ? "Now" : relative_date(@resume.applicant.availability_date) -%></td></tr>
+        <tr><td class="label">Willing To Relocate:</td><td><%= to_yes_no(@resume.applicant.willing_to_relocate).capitalize -%></td></tr>
+      </table>
+    </div>
+  </div>
+
+  <% if @resume.visibility == "public" && !@resume.applicant.address.nil? %>
+				<div class="contact-info" style="text-align: center; margin-top: 2em; margin-bottom: 1em;">
+        <div><b><%= @resume.applicant.name -%></b></div>
+        <div><%= "#{@resume.applicant.address.street_address1}, #{@resume.applicant.address.city}, #{@resume.applicant.address.state} #{@resume.applicant.address.zip}" -%></div>
+        <div><%= "p: #{@resume.applicant.address.phone} / email: #{@resume.applicant.address.email}" -%></div>
+				</div>
+	 <% end %>
+
+  <iframe id="resume-iframe" name="resume-iframe" style="width: 755px; height: 485px; border: 1px solid #ccc; margin-top: 1em; padding: 1em;" src='<%="/resumes/#{@resume.attached_resume.url(:html)}"-%>'></iframe>
+</div>
+

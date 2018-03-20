@@ -1,0 +1,15 @@
+<% content_for :page_title do %>
+  New User
+<% end %>
+
+<%= error_messages_for @user %>
+
+<%= error_handling_form_for [:admin, @user], :html=>{:id => "userform" } do |f| %>
+
+  <%= render :partial => "form", :object => f -%>
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('userform').submit(); return false;"><span>save</span></a>
+    <div>or <%= link_to "Cancel", jobs_path, :class=>"cancel"%></div>
+  </div>
+
+<% end %>

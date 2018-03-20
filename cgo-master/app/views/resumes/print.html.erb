@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<head>
+		<title><%= @resume.applicant.name -%>'s Resume</title>
+		<style media="screen, print" type="text/css">
+				body {
+					font-family: Arial;
+				}
+				.label {
+						font-weight: bold;
+				}
+
+				#print-link, #forward-link, #send-message-container {
+							display: none;
+				}
+
+		</style>
+</head>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+		<body onload="javascript:window.print()">
+    <h1 style="margin-bottom: 5px"><%= "#{@resume.applicant.first_name} #{@resume.applicant.last_name}" -%></h1>
+
+    <% if @resume.visibility == "public" && !@resume.applicant.address.nil? %>
+      <div class="contact-info">
+          <div><%= @resume.applicant.address.street_address1 -%></div>
+          <div><%= @resume.applicant.address.street_address2 -%></div>
+          <div><%= "#{@resume.applicant.address.city}, #{@resume.applicant.address.state} #{@resume.applicant.address.zip}" -%></div>
+          <div><%= @resume.applicant.address.phone -%></div>
+          <div><%= @resume.applicant.address.email -%></div>
+      </div>
+	   <% end %>
+
+    <div style="margin-top: 1em; margin-bottom: 1em;">
+      <table class="show-model">
+        <tr><td class="label">Posted Date:</td><td><%= @resume.posted_date.to_s(:mmddyyyy) -%></td></tr>
+        <tr><td class="label">Rank:</td><td><%= to_label(@resume.applicant.type_of_applicant, Constants::TYPE_OF_APPLICANT) -%></td></tr>
+        <tr><td class="label">Security Clearance:</td><td><%= to_label(@resume.applicant.security_clearance, Constants::SECURITY_CLEARANCE) -%></td></tr>
+        <tr><td class="label">Occupational Preference:</td><td><%= to_label(@resume.applicant.occupational_preference, Constants::OCCUPATIONAL_PREFERENCE) -%></td></tr>
+        <tr><td class="label">Education Level:</td><td><%= to_label(@resume.applicant.education_level, Constants::EDUCATION_LEVEL) -%></td></tr>
+        <tr><td class="label">Branch Of Service:</td><td><%= to_label(@resume.applicant.branch_of_service, Constants::BRANCH_OF_SERVICE) -%></td></tr>
+        <tr><td class="label">Availability Date:</td><td><%= @resume.applicant.availability_date.nil? ? "Now" : relative_date(@resume.applicant.availability_date) -%></td></tr>
+        <tr><td class="label">Willing To Relocate:</td><td><%= to_yes_no(@resume.applicant.willing_to_relocate).capitalize -%></td></tr>
+      </table>
+    </div>
+
+    <div style="border: 1px solid #CCC; padding: 5px;">
+				  <%= raw @resume.formatted_text(:web) -%>
+    </div>
+		</body>
+</html>

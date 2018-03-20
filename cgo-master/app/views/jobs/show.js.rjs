@@ -1,0 +1,5 @@
+page << "jobPanel.setHeader('View Job Details');"
+page << "jobPanel.setBody('#{escape_javascript(render(:partial => 'show', :locals => {:display_title => true}))}');"
+
+page << "jobPanel.render();"
+page << "jobPanel.show();"

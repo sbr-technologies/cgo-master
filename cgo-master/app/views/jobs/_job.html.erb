@@ -1,0 +1,32 @@
+<li class="job" >
+
+  <div id='job_<%= job.id -%>' data-company='<%=job.employer.ticker_symbol || job.company_name %>'>
+
+    <div class="indicator" style="display:none; float:right"><%= image_tag "arrows.gif" %></div>
+    <div class="actionStatus" style="display:none; float:right"></div>
+
+    <div class="employer"><%=job.company_name || job.employer.name%>&nbsp;|&nbsp;<%="#{job.location.city}, #{job.location.state}"%></div>
+    <h1 class="title"><%=link_to job.title, current_user ? job_path(job) : public_profile_job_path(job.code.gsub("/", "#2F#")) %></h1>
+    <div class="post-date">Posted: <%=(job.updated_at || job.created_at).to_date.to_s(:human) %></div>
+
+    <p class="body"><%=truncate(job.body, :length => 240) %>&nbsp;<%= link_to "more", current_user ? job_path(job) : public_profile_job_path(job.code.gsub("/", "#2F#"))%></p>
+
+    <div style="margin-top: 20px; text-align: right; padding-right: 10px;">
+
+      <%= link_to "View", current_user ? job_path(job) : public_profile_job_path(job.code.gsub("/", "#2F#")), :class => "xbutton grey" %>
+
+      <% if current_user %>
+        <% if not current_user.inbox_entries.contains?(job, "Job")%>
+          <%= link_to "Save for Later", add_to_inbox_job_path(job.id), :remote => true, :class => "xbutton grey inbox-handler" %>
+        <% else %>
+          <span class="xbutton grey disabled">Already in your Inbox</span>
+        <% end %>
+        <%= link_to "Contact Employer", new_message_path(:recipient => job.recruiter.id, :job_id => job.id), :class => "send-message-handler xbutton grey" %>
+      <% else %>
+        &nbsp;<%= link_to "Login to apply or contact this employer", new_session_path , :class => "xbutton darkRed"%>
+      <% end %>
+    </div>
+  </div>
+
+</li>
+

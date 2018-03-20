@@ -1,0 +1,19 @@
+<div style="margin-top: 10px; background: #8CC4DD; padding: 8px;">
+  <h3 style="margin-top:0px">
+    We found possible matches for your organization,
+    if none of these options correspond to your company and you would like to
+    maintain the value entered above please choose "none":
+  </h3>
+  <ul style="padding-top: 10px">
+    <% @employers.each do |employer| %>
+      <li style="padding-top: 4px; padding-bottom: 4px; font-size: 115%;">
+        <%= radio_button "employer-select", "name", employer.id, :class=>"radio-employer-select", :style=>"margin-right: 8px;" %>
+        <%= employer.name %>
+      </li>
+    <% end %>
+    <li style="font-size:115%; padding-top: 4px; padding-bottom: 4px;">
+      <%= radio_button "employer-select", "name", 0, :class=>"radio-employer-none", :style=>"margin-right: 8px;" %>
+      None of the above (Keep name as entered)
+    </li>
+  </ul>
+</div>

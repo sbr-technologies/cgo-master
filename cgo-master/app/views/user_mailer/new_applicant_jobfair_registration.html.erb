@@ -1,0 +1,12 @@
+Dear <%="#{@registration.attendant.first_name} #{@registration.attendant.last_name}" -%>,
+
+You have registered for: <%=@registration.jobfair.name-%> Job Fair. 
+
+Please click here to print out your registration form and bring it with you to the event:
+ 
+    <%= registration_url(@registration.id, :host => "www.corporategray.com") -%> 
+
+
+Thank You, 
+
+The Corporate Gray Online Team

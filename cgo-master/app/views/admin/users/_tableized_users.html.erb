@@ -1,0 +1,38 @@
+<%  # variables: 
+#	cols: number of colums to render, defaults to "2"
+%>
+
+<% cols ||= 2 %>
+
+<% if !@users.nil? %>
+  <table style="width: 99%">
+    <% @users.each_index do |idx| %>
+      <% user = @users[idx] %>
+
+      <%= raw "<tr id='tr_#{idx}'>" if (idx % 2) == 0 %>
+        <td style="width:49%; border-bottom: 1px solid #CCC; border-right: 1px solid #ccc; padding: 10px; <%='border-left: 1px solid #CCC;' if idx % 2 == 0 -%><%='border-top: 1px solid #CCC;' if idx < 2 -%>">
+          <%= image_tag "no_avatar.gif", :style=>"float:left; margin-right: 10px; border: 1px solid #4C4C4C; padding: 2px;", :alt => user.name -%>
+          <h2 style="margin-top:0px;"><%= truncate(user.name, :length => 20) -%></h2>
+          <h3 style="margin-top:0px;"><%= user.username%>&nbsp;(<%= user.status %>)</h3>
+          <h3 style="margin-top:0px;"><%= user.humanized_roles if user.roles %></h3>
+
+          <div style="float: left; clear: both; margin-top: 10px;">
+            Password: <%= user.password %><br/>
+            Last Login: <%= (distance_of_time_in_words_to_now(user.last_login_at) rescue "never") %>&nbsp;<%= "ago." if user.last_login_at -%>&nbsp;(Count: <%= user.login_count %>)<br/>
+            Email: <a href="mailto:<%= user.email -%>"><%= user.email -%></a>
+          
+            <div class="index_card_action_bar">
+              <%= link_to "Edit ", edit_admin_user_path(user.id), :class => "action_link" %>
+              <%= raw ("| " + link_to("Delete", admin_user_path(user.id), :method => :delete, :class => "action_link") ) unless user.username == "administrator"%>
+            </div>
+          </div>
+        </td>
+      <%= raw "</tr>" if (idx % 2) != 0 || idx == @users.length - 1 %>
+    <% end %>
+  </table>
+
+<% else %>
+
+  <div class="light-highlight" style="padding:5px; ">No Users to Display</div>
+
+<% end %>

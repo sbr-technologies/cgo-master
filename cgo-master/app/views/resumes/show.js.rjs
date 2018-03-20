@@ -1,0 +1,11 @@
+page << "if($('link_to_forward')) {"
+    page.replace_html "link_to_forward", :inline => "<%= link_to_remote 'Send', :url => forward_resume_path(@resume.id), :method => :get, :with=> '\\'recipients=\\' + $F(\\'recipients\\')', :complete => 'forwardPanel.hide()' %>"
+page << "}"
+
+page << "if($('message-panel-id')) {"
+    page.replace_html 'message-panel-id', :partial => "/messages/send_message_form.html.erb" , :locals => { :recipient => @resume.applicant.id }
+page << "}"
+
+page << "resumePanel.setHeader('View Applicant Details');"
+page << "resumePanel.setBody('#{escape_javascript(render(:partial => 'show'))}');"
+page << "resumePanel.show();"

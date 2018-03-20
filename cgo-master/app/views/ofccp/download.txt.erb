@@ -1,0 +1,24 @@
+<% @ofccp.each do |entry| %>
+
+Date: <%= entry.created_at.to_s(:human) %>
+
+Job Code: <%= entry.job_code %>
+Title:	<%= entry.job_title %>
+Description: <%= entry.job_description %>
+
+Query: <%= entry.query_string %>
+
+Employer Name: <%= entry.employer_name %>
+Recruiter Name: <%= entry.recruiter_name %>
+Recruiter Email: <%= entry.recruiter_email %>
+
+Applicant Name: <%= entry.applicant_name %>
+Modification Date: <%= entry.applicant_modification_date %>
+Ethnicity: <%= entry.applicant_ethnicity %>
+Gender: <%= entry.applicant_gender %>
+Resume Post Date: <%= entry.resume_post_date %>
+
+<%= entry.resume %>
+
+--------------------------------------------------------------------------------
+<% end %>

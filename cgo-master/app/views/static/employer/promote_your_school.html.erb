@@ -1,0 +1,25 @@
+<% content_for :page_title do %>
+Promote Your School with Corporate Gray
+<% end %>
+
+<div class="instructional-text" style="margin-left: 10px; margin-right: 10px;">
+  <p>The U.S. government provides $80 billion in G.I. Bill benefits. Let Corporate Gray help you connect 
+  with these prospective military students in print, in person, and online.</p>
+  <br/>
+  <p>In Print:  Advertise your educational programs to everyone leaving active duty.</p>
+  <br/>
+  <p>In Person:  Meet face-to-face at the Corporate Gray Job Fairs.</p>
+  <br/>
+  <p>Online:  Be a featured school on the Education Page of Corporate Gray Online.</p>
+  <br/>
+</div>
+
+
+<%= render :partial => "/shared/cgo_book_sponsor" %>
+  
+
+<% content_for :right do %>
+  <%= link_to "Create An Employer Account", new_employer_path, :class => "flat-button flat-button-red", :style => "display:block; text-align: center;" %>
+<% end %>
+
+

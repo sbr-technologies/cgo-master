@@ -1,0 +1,82 @@
+<style> 
+  .large {
+    font-size: 1.2em;
+  }
+
+  .x-large {
+    font-size: 1.4em;
+  }
+
+  .bold {
+    font-weight: bold;
+  }
+
+  .red {
+    color: #BD0000;
+  }
+
+</style> 
+
+<% jobfair = Jobfair.first_upcoming %>
+
+<% if jobfair %>
+
+<% # Determine the right tagline based on the jobfair's category
+   (tagline = "Only for those job seekers with an active or current security clearance at Secret or above") if jobfair.category == "security_clearance"
+   (tagline = "Especially for job seekers with military experience; civilians welcome") if jobfair.category == "military_friendly"
+   (tagline = "Only for separating Junior Military Officers at the grade of O-1 to O-3.  Military ID cards will be checked at registration.") if jobfair.category == "junior_officer"
+%>
+
+<% # Determine Title 
+   (title = "Officer & Sr. NCO") if jobfair.category == "military_officer"
+   (title = jobfair.category.titleize) if jobfair.category != "military_officer"
+ %>
+
+<div id="featured_jobfair" style="height: 260px;">
+  <div class="large bold">
+    <p><%= "Join us #{jobfair.date.to_s(:human_no_year)}" -%></p>
+    <p><%= "#{jobfair.location} (#{jobfair.city})" -%></p>
+  </div>
+
+  <br/>
+  <p class="x-large bold red" >
+    <%= link_to "Corporate Gray", jobfair_path(jobfair.id) %>
+    <br/>
+    <%= link_to "#{title}", jobfair_path(jobfair.id) %>
+    <br/>
+    <%= link_to "Job Fair", jobfair_path(jobfair.id) %>
+  </p>
+
+  <br/>
+  <div style="margin: 0 1em" ><%=tagline -%></div>
+
+  <p class="bottomLinks">
+    <%= link_to "View Attending Employers", jobfair_path(jobfair.id) -%>
+  </p>
+
+</div>
+
+<% end %>
+
+<style>
+
+  #featured_jobfair {
+    font-family: Georgia;
+    font-size: 1.1em;
+
+    background: #EFEFEF; 
+    text-align: center;
+
+    padding: 10px 0;
+  }
+
+  #featured_jobfair .bottomLinks {
+    margin-top: 20px;
+  }
+
+  #featured_jobfair a {
+    color: inherit;
+  }
+
+</style>
+

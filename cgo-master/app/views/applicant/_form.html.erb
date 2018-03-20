@@ -1,0 +1,184 @@
+
+<div id="military">
+
+    <legend>Your Name and Military Information</legend>
+
+    <% if current_user && current_user.has_role?('administrator') %>
+      <%= f.check_box :status, {:label => "Active?"}, "active", "inactive" -%>
+    <% end %>
+  
+    <div class="control-group">
+      <label class="control-label required" for="applicant_first_name">First Name</label>
+      <div class="controls">
+        <%= f.text_field :first_name, :class=> "input-xlarge" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_last_name">Last Name</label>
+      <div class="controls">
+        <%= f.text_field :last_name, :class => "input-xlarge" %>
+      </div>
+    </div>
+
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_branch_of_service">Branch Of Service</label>
+      <div class="controls">
+        <%= f.select :branch_of_service, options_from_hash(Constants::BRANCH_OF_SERVICE, {:include_blank => true}) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_type_of_applicant">Rank</label>
+      <div class="controls">
+        <%= f.select :type_of_applicant, options_from_hash(Constants::TYPE_OF_APPLICANT, {:include_blank => true}), :label => "Rank" %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_security_clearance">Security Clearance</label>
+      <div class="controls">
+        <%= f.select :security_clearance, options_from_hash(Constants::SECURITY_CLEARANCE, {:include_blank => true}) %>
+      </div>
+    </div>
+
+</div>
+
+<div id="contact">
+    <legend>Contact Information</legend>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_email">Email</label>
+      <div class="controls">
+        <%= f.text_field :email, :class=>"input-xlarge", :id => "user_email" -%>
+      </div>
+    </div>
+
+    <script>
+      $('user_email').on('change', function() { 
+        if($('applicant_username').readAttribute('data-manual-edit') == null) {
+          $('applicant_username').value = $F('user_email'); 
+          $('applicant_username').setStyle({fontStyle: 'italic', color: '#A1A1A1'}); 
+        }
+      });
+    </script>
+
+    <div class="control-group">
+      <label class="control-label" for="applicant_linkedin_handler">LinkedIn Profile URL</label>
+      <div class="controls">
+        <%= f.text_field :linkedin_handler, :class=>"input-xlarge", :id => "user_linkedin_handler" -%>
+      </div>
+    </div>
+
+    <%= render :partial => "address/bootstrap_address_form.html.erb", :locals => {:address => @address}  %>
+</div>
+
+
+<div id="other">
+
+    <legend>Employment Information</legend>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_occupational_preference">Occupational Preference</label>
+      <div class="controls">
+        <%= f.select :occupational_preference, options_from_hash(Constants::OCCUPATIONAL_PREFERENCE, {:include_blank => true}) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_education_level">Education Level</label>
+      <div class="controls">
+        <%= f.select :education_level, options_from_hash(Constants::EDUCATION_LEVEL, {:include_blank => true}) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="applicant_willing_to_relocate">Willing To Relocate</label>
+      <div class="controls">
+    <%= f.check_box :willing_to_relocate, :label => "Willing To Relocate?" -%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="applicant_us_citizen">U.S. Citizen</label>
+      <div class="controls">
+    <%= f.check_box :us_citizen, :label => "U.S. Citizen?" -%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="applicant_availability_date">Availability Date</label>
+      <div class="controls">
+    <%= f.date_select :availability_date, :order =>[:month, :year], :start_year => Time.now.year, :discard_day => true, :include_blank => true, 
+                      :label => "Availability Date (leave blank for immediate availability)" %>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="demographics">
+
+    <legend>Optional Demographic Information</legend>
+
+    <div style="margin:1em auto; width: 80%;">
+      The Department of Labor requires Federal contractors 
+      to track gender and ethnicity/race data on Internet 
+      Applicants. Completion of these two data fields is voluntary.
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="applicant_gender">Gender</label>
+      <div class="controls">
+        <%= f.select :gender, Constants::GENDER, :include_blank => true %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="applicant_ethnicity">Ethnicity</label>
+      <div class="controls">
+        <%= f.select :ethnicity, Constants::ETHNICITY, :include_blank => true %>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="login">
+
+    <legend>Username &amp; Password</legend>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_username">Username</label>
+      <div class="controls">
+        <%= f.text_field :username if @applicant.new_record?%>
+      </div>
+    </div>
+    <script>
+      $('applicant_username').on('blur', function() {
+        if($F('applicant_username') != $F('user_email')) {
+          $('applicant_username').setAttribute('data-manual-edit', true); 
+          $('applicant_username').setStyle({fontStyle: 'normal', color: 'inherit'}); 
+        }
+      });
+    </script>
+    <div class="control-group">
+      <label class="control-label required" for="applicant_password">Password</label>
+      <div class="controls">
+        <%= f.text_field :password %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="applicant_password_confirm">Password Confirm</label>
+      <div class="controls">
+        <%= f.text_field :password_confirmation %>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 1em; margin-right: 0.5em; margin-bottom: 0.5em; height:30px; text-align: right; padding: 10px; border:1px solid #DDD; background: whitesmoke;">
+    <%= f.submit "Submit", :class => "btn btn-primary" %>
+  </div>
+
+

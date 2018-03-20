@@ -1,0 +1,221 @@
+input, input.L {
+    font-size: 1.3em;
+    width: 16em;
+}
+
+select.XL {
+		width: 18em;
+}
+select.L {
+		width: 16em;
+}
+
+input[type=radio] {
+	width: 1em;
+}
+
+input.M, select.M {
+    width: 12em;
+}
+
+input.S, select.S {
+    width: 6em;
+}
+
+input.XS, select.XS {
+    width: 4em;
+}
+
+input.name {
+    text-transform: capitalize;
+}
+
+input.all_lower {
+    text-transform: lowercase;
+}
+
+input.big_font {
+    font-size: 1.8em;
+}
+
+fieldset {
+    width: 97%;
+    display: block;
+    margin: 1em 0 3em 0;
+    padding-top: 1em;
+    padding-left: 0.25em;
+    border-top: 1px solid #ccc;
+}
+
+fieldset.no-border {
+    border: 0px;
+}
+
+
+fieldset legend {
+    background: #FFF;
+    font-size: 1.3em;
+    color: #4C4C4C;
+    padding-right: 3px;
+    padding-left: 3px;
+}
+
+fieldset div {
+    float: left;
+    clear: both;
+    width: 98%;
+    margin-top: 10px;
+}
+
+fieldset div.round-corners, form > fieldset div.round-corners div {
+		float:none;
+		width: auto;
+		margin:0;
+}
+
+
+div.inline {
+    float: left;
+    clear: both;
+    overflow: hidden;
+    width: 100%;
+} /* fix floated elements container's height */
+
+div.inline div {
+    float: left;
+    clear: none;
+		width: auto;
+    margin-right: 10px;
+}
+
+fieldset span.field_label {
+    float: left;
+    clear: both;
+    font-size: 1.1em;
+    font-weight: normal;
+    margin-bottom: 3px;
+}
+
+fieldset span.field_label label.required {
+    color: #BD0000;
+}
+
+fieldset span.form_field {
+    float: left;
+    clear: both;
+	width: 99%;
+}
+
+fieldset div.date_select span.form_field {
+		width: auto;
+}
+
+fieldset div.radio_button span.form_field {
+				width: auto;
+				}
+
+fieldset div.check_box input {
+    width:1em;
+}
+
+fieldset div.check_box {
+		white-space: nowrap;
+}
+
+fieldset div.check_box .field_label {
+    float: left;
+    clear: none;
+}
+
+fieldset div.check_box .form_field {
+    float: left;
+    clear:none;
+    width: 1em;
+		margin-right: 15px;
+}
+
+fieldset div.file_field .field_label {
+		font-weight: bold; 
+		margin-right: 5px;
+}
+
+fieldset p {
+    color: #4C4C4C;
+    font-size: 0.9em;
+    background: #CCC;
+    margin-top: 10px;
+    padding: 6px;
+    border: 1px solid #4C4C4C;
+}
+
+.form_field .form_error_message {
+    font-size: 0.9em;
+    font-style: italic;
+    color: #BD0000;
+}
+
+/* Right area Filters */
+
+#filters label {
+    font-weight: bold;
+    margin-bottom: 2px;
+    margin-left: 4px;
+}
+
+#filters span.remove_filter {
+    color: #bd0000;
+    font-size: 11px;
+    cursor: pointer;
+}
+
+#filters input, #filters select {
+    width: 100%;
+    margin-bottom: 10px;
+    font-weight: normal;
+    font-size: 1em;
+}
+
+#filters option {
+    font-weight: normal;
+}
+
+
+/* Buttons and Links */
+
+form a.cancel {
+    color: #BD0000;
+    text-decoration:none;
+}
+
+form a.cancel:visited {
+    color: #BD0000;
+}
+
+form a.cancel:hover {
+    text-decoration:underline;
+}
+
+
+#page_sidebar form.block {
+    margin-left: 10px; 
+}
+
+
+#page_sidebar form.block div {
+    margin-top: 15px;
+}
+
+#page_sidebar form.block input {
+    font-size: 1em;
+    font-weight: normal;
+    width: 200px;
+}
+
+#page_sidebar form.block label {
+    font-size: 1em;
+    font-weight: bold; 
+}
+
+#page_sidebar form.block div {
+    margin-top: 10px;
+}

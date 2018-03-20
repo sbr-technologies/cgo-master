@@ -1,0 +1,24 @@
+<% content_for :page_title do %>
+	<%= @recruiter.name -%>
+<% end %>
+
+<% if current_user.has_role?('employer_admin')%>
+	<% content_for :page_header_links do %>
+		<%= link_to "Edit", edit_employer_recruiter_path(:employer_id => current_user.employer.id, :id => @recruiter.id) %>&nbsp;|&nbsp;
+		<%= link_to "Delete", employer_recruiter_path(:employer_id => current_user.employer.id, :id => @recruiter.id), :method => :delete %>&nbsp;|&nbsp;
+		<%= link_to "New", new_employer_recruiter_path(:employer_id => current_user.employer.id) -%>&nbsp;|&nbsp;
+		<%= link_to "View All", employer_recruiters_path(:employer_id => current_user.employer.id)  if current_user.has_role?("employer_admin")-%>
+	<% end %>
+<% end %>
+
+<table class="show-model">
+	<tr class="name"><td class="label">Name:</td><td><%= @recruiter.name %></td></tr>
+	<tr class="email"><td class="label">Email:</td><td><%= or_unspecified(@recruiter.email) %></td></tr>
+	<tr class="usename"><td class='label'>Username:</td><td><%= @recruiter.username -%></td>
+	<tr class="password"><td class="label">Password:</td><td><%= @recruiter.password %></td></tr>
+	<tr class="roles"><td class="label">Roles:</td><td><%= @recruiter.roles %></td></tr>
+	<tr class="created_at"><td class="label">Created:</td><td><%= @recruiter.created_at %></td></tr>
+	<tr class="modified_at"><td class="label">Last Modified On:</td><td><%= @recruiter.updated_at %></td></tr>
+	<tr class="last_login_at"><td class="label">Last Login On:</td><td><%= @recruiter.last_login_at %> (Count: <%=@recruiter.login_count%>)</td></tr>
+</table>
+

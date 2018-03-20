@@ -1,0 +1,17 @@
+<div>
+  <h2 style="margin-top:0;">
+    Send Message:
+    <span class="indicator" style="display:none"><%= image_tag "/images/dots.gif" -%></span>
+  </h2>
+  <div class="message-status" style="text-align:left; margin-bottom:5px; background:green; color:white; padding:4px 8px; margin-right:18px; display: none;">
+    Your message has been sent
+  </div>
+  <%= form_for :message, :url => messages_path, :remote => true, :html => {:id => "send-message-form"} do |f| %>
+    <%= f.hidden_field :recipient, :value => ((!recipient.to_s.blank? ? recipient : @recipient) rescue @recipient) -%>
+    <%= f.hidden_field :job_id, :value => (@job_id rescue 'na') -%>
+    <div><%= f.text_area :body, :size => "70x8" -%></div>
+    <div class="button-bar" style="margin-top: 18px">
+      <%= image_submit_tag "/images/buttons/bt_send_green.gif", :style=>"width:auto; border:none; outline: none;" -%>
+    </div>
+  <% end %>
+</div>

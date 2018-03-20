@@ -1,0 +1,2 @@
+module Admin::OfccpHelper
+end

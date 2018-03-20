@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	
+  <head>
+    <title>Job Fair Registration Form</title>
+
+    <style>
+
+      body {
+        font-family: Arial, Tahoma, "Sans Serif";
+        font-size: 1em;
+      }
+
+      h1 {
+        color: #191919;
+        font-size: 1.75em;
+        font-weight: bold; 
+        margin-bottom: 0;
+      }
+
+      h2 {
+        font-size: 1em;
+      }
+
+      div.subtitle {
+        padding: 4px;
+        background: #CFCFCF;
+        font-size: 0.875em;
+        margin-top: 0;
+      }
+
+      fieldset {
+        margin-top: 2em;
+        border: 0px;
+        font-family: Arial, Tahoma, "Sans Serif"; 
+        font-size: 1.1em; 
+        border-top: 1px solid #CCC;
+      }
+
+      div {
+        width: 99%;
+        margin-top: 10px;
+      }
+
+      div.buttonBar {
+        margin-top: 20px; 
+        width: 99%; 
+        padding: 5px; 
+        border: 1px solid #224422;
+        background: #338833;
+      }
+
+      div.errorExplanation {
+        border: 1px solid #BD0000;
+      }
+
+      div.errorExplanation h2 {
+        color: #FFF;
+        background: #BD0000;
+      }
+
+      label {
+        display: block;
+        float: left; 
+        clear: none;
+        width: 13em;
+        margin-right: 5px;
+        font-family: Arial, Tahoma, "Sans Serif";
+        font-weight: bold;
+        font-size: 0.875em; 
+        text-align: right;
+      }
+
+      input {
+        width: 20em; 
+        margin-left: 5px;
+      }
+
+      textarea {
+        width: 50em;
+        height: 20em;
+      }
+
+      input.S {
+        width: 8em; 
+      }
+
+    </style>
+  </head>
+
+  <body>
+    
+    <h1>Job Fair Registration Form</h1>
+    <div class="subtitle"><%="#{@jobfair.date.to_s(:human)} #{@jobfair.location} - #{@jobfair.city}"-%></div>
+
+
+    <%= error_messages_for @registration %>
+
+    <% if @registration.to_s.blank? %>
+    <div style="margin-top: 2em;  border: 1px solid #CCC; padding: 5px;">
+      <div>
+        <b>Fees: </b><%= number_to_currency(@jobfair.fees) %>
+      </div>
+
+      <div>
+        <%= render :partial => "jobfair/services.html.erb" %>
+      </div>
+    </div>
+    <% end %>
+
+    <%= form_for :external_registration, @registration, :url => post_from_affiliate_registrations_path, :html=>{:id => "exteranlRegistrationform" } do |f| %>
+
+      <input type="hidden" name="jobfair_id" value="<%=@jobfair.id-%>"/>
+
+      <fieldset>
+        <legend>Company Information</legend>
+
+        <div>
+          <label for="external_registration_company_name">Company Name:</label>
+          <%= f.text_field :company_name -%>
+        </div>
+
+        <div>
+          <label for="external_registration_street_address">Street Address:</label>
+          <%= f.text_field :street_address -%>
+        </div>
+
+        <div>
+          <label for="external_registration_city">City:</label>
+          <%= f.text_field :city -%>
+        </div>
+
+        <div>
+          <label for="external_registration_state">State:</label>
+          <%= f.select :state, options_from_hash(Constants::STATE_APO, :include_blank=>true) %>
+        </div>
+
+        <div>
+          <label for="external_registration_zip">Zip:</label>
+          <%= f.text_field :zip, :class => "S" -%>
+        </div>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Contact Information</legend>
+
+        <div>
+          <label for="external_registration_contact_name">Contact Name:</label>
+          <%= f.text_field :contact_name -%>
+        </div>
+
+        <div>
+          <label for="external_registration_phone">Phone:</label>
+          <%= f.text_field :phone -%>
+        </div>
+
+        <div>
+          <label for="external_registration_fax">Fax:</label>
+          <%= f.text_field :fax -%>
+        </div>
+
+        <div>
+          <label for="external_registration_email">Email:</label>
+          <%= f.text_field :email -%>
+        </div>
+
+      </fieldset>
+
+      <fieldset>
+        <legend>Additional Information</legend>
+
+        <div>
+          <label for="external_registration_website">Website URL:</label>
+          <%= f.text_field :website -%>
+        </div>
+
+        <div>
+          <label for="external_registration_description">Company Description:</label>
+          <%= f.text_area :description -%>
+        </div>
+
+        <div>
+          <label for="external_registration_electrical">Electrical Outlet?:</label>
+          <%= f.select :electrical, [["Yes", "Yes"],["No", "No"]] -%>
+        </div>
+
+        <div>
+          <label for="external_registration_directory_ad">Directory Ad:</label>
+          <%= f.select :directory_ad, [["Yes", "Yes"],["No", "No"]] -%>
+        </div>
+
+        <div>
+          <label for="external_registration_security_clearance">Min. Security Clearance:</label>
+          <%= f.select :state, options_from_hash(Constants::SECURITY_CLEARANCE, :include_blank=>false) %>
+        </div>
+
+      </fieldset>
+
+      <div class="buttonBar">
+        <%= f.submit "Submit" %>
+      </div>
+
+
+
+
+    <% end %>
+
+    
+
+  </body>
+
+</html>
+

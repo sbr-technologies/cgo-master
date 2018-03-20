@@ -1,0 +1,21 @@
+<% content_for :page_title do %>
+  Job Fair Registration
+  <h2><%= "#{@registration.jobfair.name}" -%></h2>
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "Save", "#", :onclick => "$('registrationform').submit();return false" -%> |
+  <%= link_to "Cancel", admin_employer_recruiter_path(:employer_id => @registration.attendant.employer.id, :id => @registration.attendant.id) %>
+<% end %>
+
+<%= error_messages_for @registration %>
+
+<%= error_handling_form_for @registration, :url => admin_registrations_path, :html=>{:id => "registrationform" } do |f| %>
+	<%= hidden_field_tag :jobfair_id, @registration.jobfair.id -%>
+	<%= hidden_field_tag :attendant_id, @registration.attendant.id -%>
+  <%= render :partial => "/registrations/form", :object => f -%>
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('registrationform').submit(); return false;"><span>save</span></a>
+    <div>or <%= link_to "Cancel", admin_employer_recruiter_path(:employer_id => @registration.attendant.employer.id, :id => @registration.attendant.id), :class=>"cancel"%></div>
+  </div>
+<% end %>

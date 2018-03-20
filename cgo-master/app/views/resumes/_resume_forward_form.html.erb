@@ -1,0 +1,12 @@
+<div style="font-weight: bold; margin-bottom:5px;color:black; cursor:default;">Recipients' Email (separated by comma)</div>
+<%= form_for :forward, :url => forward_resume_path(resume.id), :remote => true do |f| %>
+<%= f.text_field :recipients %>
+<div class="actionButton" style="float:right; clear:none;">
+  <div>
+    <button type="submit">Send</button>
+  </div>
+</div>
+<% end %>
+<script>
+  $$('#forward_resume_form')[0].on('ajax:complete', function() { forwardPanel.hide(); } );
+</script>

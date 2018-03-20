@@ -1,0 +1,14 @@
+<table class="list">
+  <tr>
+    <th width="40%">Posted</th>
+    <th width="11%">Code</th>
+    <th width="12%">Title</th>
+  </tr>
+  <% for job in @jobs %>
+    <tr id="job_<%=job.id%>" class="item-row">
+      <td><%=job.created_at.to_s(:human_short) -%></td>
+      <td><%=job.code) -%></td>
+    <td><%=link_to job.title, admin_employer_job_path(:employer_id => @employer.id, :id => job.id) -%></td>
+  </tr>
+<% end %>
+</table>

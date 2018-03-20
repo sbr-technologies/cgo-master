@@ -1,0 +1,37 @@
+<%= content_for :title_tag do %>
+  Upload Your Resume to Corporate Gray Online
+<% end %>
+
+<%= content_for :meta_keywords do %>
+	military friendly employers, veteran friendly employers, job search, resume, military transition
+<% end %>
+
+<%= content_for :meta_description do %>
+  Upload the latest version of your resume in Microsoft Word to enable hundreds of “military friendly” employers to find and contact you!	
+<% end %>
+
+
+<% content_for :page_title do %>
+Upload Your Resume to Corporate Gray Online
+<% end %>
+
+<div style="margin-left: 5px">
+  <p>Upload the latest version of your resume in Microsoft Word to enable hundreds of “military friendly” employers to find and contact you!</p>
+  <br/>
+
+  <div style="text-align: center; margin: 20px 0">
+    <a style="background: #B00004; padding: 10px 20px; font-size: 1.2em; text-decoration: none; text-align: center; color: white; display: inline-block; width: 200px; margin-right: 20px;" href="<%= new_applicant_path %>">Create a free account</a>
+    <a style="background: #311D5F; padding: 10px 20px; font-size: 1.2em; text-decoration: none; text-align: center; color: white; display: inline-block; width: 200px" href="<%= new_session_path %>">Login to your account</a>
+  </div>
+
+  <br/>
+  <p>For more information about creating your resume, visit <%= link_to "Step 5: Construct Your Resume", "/static/transition_guide/5_construct_your_resume" %> in the Online Transition Guide. Here you’ll find 
+  downloadable sample resumes in Microsoft Word format.</p>
+</div>
+
+
+<% content_for :right do %>
+  <%= render :partial => 'shared/featured_employer_skyscraper' %>
+<% end %>
+
+

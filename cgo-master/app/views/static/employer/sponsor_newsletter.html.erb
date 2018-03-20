@@ -1,0 +1,34 @@
+<% content_for :page_title do %>
+Sponsor the Corporate Gray eNewsletter
+<% end %>
+
+<div class="instructional-text" style="margin-left: 10px; margin-right: 10px;">
+  <p>Promote your company’s job opportunities or service offerings through our eNewsletter, 
+  which is sent to thousands of Corporate Gray Online subscribers on a monthly basis.</p>
+  <br/>
+  <p>The Corporate Gray eNewsletter sponsorship rate is $1,000. Your ad will appear in 
+  the Transition Advice Column on Page 1 as shown:</p>
+</div>
+
+<div style="margin-left: 10px; margin-top: 20px;">
+  <%= image_tag "newsletter_image.jpg", :style => "width: 350px" %>
+</div>
+  
+
+<% content_for :right do %>
+  <div style="background: white">
+
+    <div style="text-align: center; margin-bottom: 10px;">
+      <div style="font-size: 1.4em; font-weight: bold; margin-bottom: 5px;">Employers</div>
+      <div style="font-size: 1.1em; font-weight: bold; ">SEARCH FOR CANDIDATES</div>
+    </div>
+
+    <div style="margin: 5px">
+      <%= link_to "Try a Free Resume Search!", guest_search_resumes_path, :class => "flat-button flat-button-red", :style => "display:block; text-align: center;" %>
+    </div>
+    <br/>
+  </div>
+<% end %>
+
+
+

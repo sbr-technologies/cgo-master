@@ -1,0 +1,102 @@
+<% jobfairs = Jobfair.all_upcoming %>
+<% if jobfairs then %>
+<div id="jobfair-calendar" class="portlet" style="border: 2px solid #FFF; border-bottom: 0px;">
+  <div class="phead" style="padding-top: 5px; padding-bottom: 5px; font-size: 116%">
+    Job Fair Calendar <%= "#{Time.now.year} - #{Time.now.year + 1}" %> 
+  </div>
+  <div class="pbody">
+    <table id="jobfair-calendar-blotter">
+      <thead>
+	<tr>
+	  <th width="17%">Date</th>
+		<th width="8%">Type</th>
+	  <th width="38%">Title</th>
+	  <th width="20%">City</th>
+		<% if (current_user && current_user.has_role?(:recruiter)) || @display_fees %>
+						<th width="9%">Fee</th>
+		<% end %>
+	  <th>Status</th>
+	</tr>
+      </thead>
+      <tbody>
+	<% jobfairs.each do |jobfair| %>
+	  <tr>
+	    <td>
+	      <%= jobfair.date.to_s(:human) -%>
+	    </td>
+
+        <td>
+          <% case jobfair.category 
+              when "military_friendly" %>
+                MF 
+          <% when "virtual" %>
+                VI 
+          <% when "military_officer" %>
+                MO 
+          <% when "healthcare" %>
+                HC
+          <% else  %>
+                SC  
+          <% end %>
+        </td>
+
+        <td>
+          <%= link_to jobfair.category.titleize + " Job Fair", jobfair_path(jobfair.id) -%>
+        </td>
+
+        <td>
+          <%= jobfair.city -%>
+        </td>
+
+        <% if (current_user && current_user.has_role?(:recruiter)) || controller.request.fullpath.match(/employers\/job_fairs/) %>
+            <td><%= number_to_currency(jobfair.fees, :precision => 0) -%></td>
+        <% end %>
+
+	    <td>
+		  <% if current_user %>
+		    <% if !current_user.registered?(jobfair) %>
+              <% if current_user.is_a?(Recruiter)  %>
+                <%= link_to "register", jobfair.external_registration_url.to_s.strip.blank? ? new_jobfair_registration_path(jobfair.id) : jobfair.external_registration_url, :class=> jobfair.external_registration_url.to_s.strip.blank? ? "action_link" : "external" %>
+              <% else %>
+                <% if jobfair.applicant_can_register?(current_user) %>
+                  <%= link_to "register", jobfair.applicant_external_registration_url.to_s.strip.blank? ? new_jobfair_registration_path(jobfair.id) : jobfair.applicant_external_registration_url, :class => jobfair.applicant_external_registration_url.to_s.strip.blank? ? "action_link" : "external" -%>
+                <% else %>
+                 Officers/Sr NCOs Only
+                <% end %>
+              <% end %>
+            <% else %>
+              <span style="color:green; font-style:italic">registered</span>
+            <% end %>
+          <% else %>
+            <span style="color:green; font-style:italic"><%= link_to "please login", new_session_path -%></span>
+          <% end %>
+	    </td>
+	  </tr>
+	<% end %>
+      </tbody>
+    </table>
+  </div>
+  <div style="text-align: left; padding-top: 15px; padding-bottom: 5px; margin-left: 3px; font-size: 0.9em; color: #444;">
+			MF: Especially for transitioning and former military personnel. Civilians welcome.<br/>
+            VI: Virtual Career Fair.
+	 </div>
+</div>
+<% end %>
+
+<style>
+  #jobfair-calendar-blotter {
+    width: 100%; 
+    text-align: left; 
+  }
+  
+  #jobfair-calendar-blotter th {
+    font-weight: bold; 
+  }
+  
+  #jobfair-calendar-blotter td, #jobfair-calendar-blotter th {
+    padding-left: 3px; 
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-bottom: 1px solid #ccc;
+  }
+</style>

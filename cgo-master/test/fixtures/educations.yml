@@ -1,0 +1,17 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  school_name: MyString
+  field_of_study: MyString
+  degree: MyString
+  start_date: MyString
+  end_date: MyString
+  notes: MyText
+
+two:
+  school_name: MyString
+  field_of_study: MyString
+  degree: MyString
+  start_date: MyString
+  end_date: MyString
+  notes: MyText

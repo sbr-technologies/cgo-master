@@ -1,0 +1,36 @@
+<% if @query.nil? || @query.blank? %>
+
+  $('employer_name').focus(); 
+  alert("You must provide an employer name (or the first few characters) to continue");
+
+<% else %>
+
+  $('continue_button').hide();
+  <% if !@employers.to_s.blank? %>
+
+    $('suggestions').update("<%= escape_javascript(render :partial => 'matches.html.erb') %>");
+    $('suggestions').show(); 
+
+    Event.addBehavior({
+      '.radio-employer-none:click':   function() {
+          $('company_information').show();
+          $('button-bar').show();
+          $('employer_id').value = null;
+      },
+
+      '.radio-employer-select:click': function() {
+          $('employer_id').value = this.value;
+          $('button-bar').show();
+          $('company_information').hide();
+        }
+    });
+
+  <% else %>
+
+    $('company_information').show();
+    $('button-bar').show();
+
+  <% end %>
+
+<% end %>
+

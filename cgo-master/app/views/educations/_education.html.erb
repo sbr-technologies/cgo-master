@@ -1,0 +1,10 @@
+<div id='<%="edu_#{education.unique_identifier}" %>' class="education" style="margin-top: 3em; clear: both; border-left: 10px solid #4c4c4c;">
+  <div class="show">    
+    <%= render :partial => 'educations/show', :locals => { :education => education } %>
+    <div style="height: 30px; padding-top: 10px; margin-top: 1em; background: whitesmoke; border-top: 1px solid #CCC; border-bottom: 1px solid #4c4c4c;">
+      <%= link_to "Delete", education_path(:id => education.id), :method => "delete", :style => "float: right; margin-right: 10px;" %>
+      <%= link_to "Edit", edit_education_path(:id => education.id), :style => "float: right; margin-right: 10px;" %>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,61 @@
+<% content_for :page_title do %>
+    Job Fair Registrations
+<% end %>
+
+<%= will_paginate %>
+
+<div style="margin-top: 20px; " id="registrations">
+        <ul>
+          <% @registrations.each do |registration| %>
+              <li id='<%= "reg_#{registration.id}" -%>' style="padding-top: 5px; padding-bottom: 5px; border-bottom: 1px dotted #CCC">
+                <span id='<%="reg_handle_#{registration.id}" -%>' style="margin-right: 5px;">
+                  <%= link_to image_tag('/images/icns/crystal/16x16/actions/cancel.png', :style=>"vertical-align:bottom"), 
+                  admin_registration_path(:id => registration.id), :remote => true, :method => :delete %>
+                </span>
+
+                <script>
+
+                  $('reg_handle_<%=registration.id-%>').on("ajax:before", function() {
+                    $$('#reg_handle_<%=registration.id-%> a')[0].innerHTML = "<img src='/images/arrows.gif' style='vertical-align: bottom;'/>"; 
+                  });
+
+                  $('reg_handle_<%=registration.id-%>').on("ajax:success", function() {
+                    Effect.Fade("reg_<%=registration.id-%>", {"duration": 0.50});
+                  });
+
+                  $('reg_handle_<%=registration.id-%>').on("ajax:failure", function() {
+                    $('reg_handle_<%=registration.id-%>').innerHTML = "<img src='/images/icns/crystal/16x16/actions/cancel.png' style='vertical-align: bottom; '/>";
+                  });
+
+                </script>
+
+                <%= raw "#{registration.created_at.to_s(:mm_dd_yyyy).tr('_', '/')} #{'<b>' + registration.attendant.employer.name + '</b>/' if registration.attendant.type == "Recruiter"}#{ registration.attendant.name} (#{registration.attendant.type}):<br/><span style='margin-left:25px'>#{registration.jobfair.name}</span>" -%>
+                <div style="margin-left:25px;"><%= link_to("[edit]", edit_admin_registration_path(:id => registration.id), :class=>"action_link") if registration.attendant.instance_of?(Recruiter) %></div>
+            </li>
+        <% end %>
+        </ul>
+</div>
+
+
+<% content_for :right do %>
+    <%= form_tag admin_registrations_path, :method => :get, :id => "search_form", :style=>"height:15px" do %>
+
+        <h2 style="margin-top: 0px">Filters</h2>
+        <div>
+          <label style="font-weight: bold; float:left; clear:both; margin-bottom: 5px;margin-left: 5px;">Job Fair:</label>
+          <%= jobfair_select :jobfair_id, :include_blank => true, :style=>"clear:both; float:left" -%>
+        </div>
+
+        <div>
+          <label style="font-weight: bold; float:left; clear: both; margin-top: 20px; margin-bottom: 5px; margin-left: 5px;">Attendant:</label>
+          <%= select_tag :attendant_type, options_for_select([["All", ""], ["Recruiters", "Recruiter"], ["Applicants", "Applicant"]], params[:attendant_type]), :style => "float:left; clear:both" -%>
+        </div>
+
+        <div style="float:none; clear:both;"/>
+
+    <% end %>
+
+    <div class="button-bar" style="padding-top: 20px">
+        <a class="button" onclick="$('search_form').submit(); return false;" href="#"><span>Filter</span></a>
+    </div>
+<% end %>

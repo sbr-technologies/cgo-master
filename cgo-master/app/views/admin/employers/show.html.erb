@@ -1,0 +1,67 @@
+<% content_for :page_title do %>
+  <%= @employer.name -%>
+<% end %>
+
+
+<% content_for :page_header_links do %>
+  <%= link_to "View All", admin_employers_path %> |
+  <%= link_to "Edit", edit_admin_employer_path(@employer.id) %> | 
+  <%= link_to "New", new_admin_employer_path %> |
+  <%= link_to "Jobs", admin_employer_jobs_path(:employer_id => @employer.id) %>
+<% end %>
+
+<table class="show-model">
+  <tr><td class="label">ID:</td><td><%=@employer.id-%></td></tr>
+  <tr><td class="label">Ticker:</td><td><%=@employer.ticker_symbol-%></td></tr>
+  <tr><td class="label">Created On:</td><td><%=@employer.created_at.to_formatted_s(:short_with_year)-%></td></tr>
+  <tr><td class="label">Last Update On:</td><td><%=@employer.updated_at.to_formatted_s(:short_with_year)-%></td></tr>
+  <tr><td class="label">Name:</td><td><%=@employer.name-%></td></tr>
+  <tr><td class="label">Profile:</td><td><%=@employer.profile-%></td></tr>
+  <tr><td class="label">Comments:</td><td><%=@employer.comments-%></td></tr>
+  <tr><td class="label">Website:</td><td><%=@employer.website-%></td></tr>
+  <tr><td class="label">Twitter Handle:</td><td><%=@employer.twitter_handler-%></td></tr>
+  <tr><td class="label">Track Image URL:</td><td><%=@employer.track_image_url-%></td></tr>
+  <tr><td class="label">Federal Contractor:</td><td><%=to_yes_no(@employer.is_federal_employer).capitalize-%></td></tr>
+  <tr><td class="label">Referal Source:</td><td><%=@employer.referal_source-%></td></tr>
+  <tr><td class="label">Job Postings Until:</td><td><%= @employer.job_postings_expire_at.to_s(:mm_dd_yyyy).tr("_","/") if !@employer.job_postings_expire_at.nil? -%></td></tr>
+  <tr><td class="label">Resume Search Until:</td><td><%= @employer.resume_search_expire_at.to_s(:mm_dd_yyyy).tr("_","/") if !@employer.resume_search_expire_at.nil? -%></td></tr>
+  <tr><td class="label"># Recruiters(Max):</td><td><%="#{@employer.recruiters.size} (#{@employer.max_recruiters})"-%></td></tr>
+  <tr><td class="label">Replace All on Import?:</td><td><%=to_yes_no(@employer.is_replace_all_on_import).capitalize -%></td></tr>
+</table>
+
+<% content_for :right do %>
+
+  <h2 style="margin-top: 65px">Recruiters&nbsp;
+    <%= link_to "[Add]", new_admin_employer_recruiter_path(:employer_id => @employer.id), :class=>"link-action" %> 
+    <%= link_to "[Download Recruiters]", download_to_excel_admin_employer_recruiters_path(:employer_id => @employer.id, :format => :xls), :class=>"link-action" %>
+  </h2>
+
+  <ul>
+    <% @employer.recruiters.sort_by { |r| r.name }.each do |recruiter| %>
+      <li style="margin-bottom: 8px" class="recruiter<%=recruiter.status == 'inactive' ? ' inactive' : ' active' %>"><%=  "#{recruiter.name} (#{recruiter.username} / #{recruiter.password})" -%>&nbsp;
+		<%=  link_to "[edit]", edit_admin_employer_recruiter_path(:employer_id => @employer.id, :id => recruiter.id), :class=>"link-action" %>
+	  </li>
+    <% end %>
+  </ul>
+
+  <div id="jobfair-registrations">
+      <h2>Registered Job Fairs</h2>
+      <ul>
+        <% @employer.recruiters.collect {|recruiter| recruiter.registrations }.flatten.uniq.sort {|a, b| a.created_at <=> b.created_at}.each do |reg| %>
+          <li>
+            <div style="margin-bottom: 3px; font-weight:bold;"><%= reg.jobfair.name -%></div>
+            <%= check_box :registration, :enable_search,
+                :onclick => "new Ajax.Request('/admin/registrations/#{reg.id}/enable_search', {parameters: {enable:this.checked ? 'yes' : 'no'}, asynchronous:true, evalScripts:true, method: 'get'})",
+                :style => "width: 0.8em; margin-right: 4px;",
+                :checked => (true if reg.enable_search?)   %>
+
+            <span style="vertical-align:top">Enable Search</span>
+            <span style="vertical-align: top; margin-left: 5px">
+              <%= link_to "[ Edit Registration ... ]", edit_admin_registration_path(reg.id), :class=>"link-action" -%>
+            </span>
+          </li>
+      <% end %>
+      </ul>
+  </div>
+
+<% end if not @employer.recruiters.nil? %>

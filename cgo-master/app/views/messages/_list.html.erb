@@ -1,0 +1,34 @@
+<% unless messages.empty? %>
+  <ul style="margin-left: 5px; margin-top: 10px;">
+    <% messages.group_by {|message| message.created_at.to_date}.sort {|a,b| b[0] <=> a[0]}.each do |m| %>
+    <li class="date-group" style="margin-top:20px; color:#A80C1E; font-family: georgia; font-weight: bold;"><%= relative_date(m[0].to_date).capitalize -%></li>
+      <% m[1].each do |message| %>
+        <li style="list-style-type:disc; margin-left: 25px;">
+        <span>
+          <%="#{message.created_at.to_s(:hh_mm)} Message from #{message.sender.name}: " unless message.sender.nil?-%>
+          <%= message.body-%>&nbsp;
+          <%= link_to("Reply", new_message_path(:recipient => message.sender.id), :class => 'send-message-handler action_link', :style => 'font-size: 90%') unless message.sender.nil? %>
+        </span>
+          <span><%= link_to(message.action, message.action_url) unless message.action.nil? -%></span>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <script>
+    document.observe('dom:loaded', function() {
+      $$('.send-message-handler').each(function(handler) {
+        var mdl = new Control.Modal(handler, {
+          className: 'modal',
+          method: 'GET', 
+          overlayOpacity: 0.75,  
+          indicator: $('loading-indicator'),
+          fade: true
+        });
+      });
+    });
+  </script>
+
+<% else %>
+  <div style="text-align:center; font-style: italic; font-weight: bold; color: #CCC; border-bottom: 1px dashed #CCC;">None</div>
+<% end %>

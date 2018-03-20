@@ -1,0 +1,86 @@
+<% content_for :page_title do %>
+  Develop Your Transition Plan
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:transition_guide => "/static/transition_guide/overview" },
+      :develop_your_transition_plan
+  ] } %>
+<% end %>
+
+
+<p>Where do you start and what should you do first? 
+Much of what is involved in finding a job is common sense and follows a 
+rational decision-making model outlined in this guide.</p>
+
+<h2>The Process</h2>
+<p>In the military, you are used to setting goals, developing plans, 
+and focusing on accomplishing the mission. Therefore, the job-finding 
+process should make good sense to you. This guide walks you through a 
+step-by-step process of well-defined career planning and job search 
+steps involving investigation, written communication, and employer 
+contact activities. Successful job seekers learn to implement each 
+of these sequential steps that involve planning, organizational, 
+and communication skills.</p>
+
+<h2>Best Jobs for the 21st Century</h2>
+<p>The job market is in a constant state of change. Today, 
+individuals with the right education, skills, and experience are 
+in a better position to find good jobs that should lead to career 
+advancement in the years ahead. In fact, a list of the fastest 
+growing occupations to the year 2020 can be found on the U.S. 
+Department of Labor's website at <%= link_to "www.bls.gov", "http://www.bls.gov/emp/ep_table_103.htm" %>.</p>
+
+<h2>Develop an Action-Oriented Timeline</h2>
+<p>As with any military operation, it is important to establish a 
+timeline and be disciplined in the execution of your planned activities. 
+Developing a sound yet flexible search plan is critical to conducting a 
+successful employment campaign. The time spent planning and organizing 
+your activities will result in a far more effective job search.</p>
+
+<p>Use <%= link_to "Exercise 1a: Planning Worksheet", "/exercises/Exercise_1a.pdf" %> to plan and track the steps in your career transition process</p>.
+
+<h2>Your Job Search Competency</h2>
+<p>Before you acquire names, addresses, and phone numbers of potential 
+employers, you should possess the necessary job search knowledge and 
+skills for gathering and using job information effectively. Valuable 
+awareness is gained by examining your present level of job search competency. 
+You can begin by testing the level of job search information, skills, and 
+strategies you currently possess as well as those you need to develop and improve. 
+Identify your level of job search competence by completing <%= link_to "Exercise 1b: 
+Career Competency Assessment", "/exercises/Exercise_1b.pdf" %>.</p>
+
+<% content_for :right do %>
+
+  <%= render :template => 'static/transition_guide/right_menu.html.erb' %>
+
+  <h3>Exercises:</h3>
+
+  <ul class="resources">
+    <li><%= link_to "1a: Planning Worksheet", "/exercises/Exercise_1a.pdf" %></li>
+    <li><%= link_to "1b: Career Competency Assessment", "/exercises/Exercise_1b.pdf" %></li>
+  </ul>
+
+  <h3>Additional Resources:</h3>
+
+  <%= link_to "10 Job Search Myths and Realities", "/Myths_and_Realities.pdf" %> 
+
+  <div style="margin-top: 10px">&nbsp;</div>
+  <%= render :partial => "shared/featured_employer_skyscraper.html.erb" %>
+  
+<% end %>
+
+
+<% content_for :head do %>
+
+  <%= stylesheet_link_tag 'transition_guide' %>
+
+  <script>
+    document.observe('dom:loaded', function() {
+      $$('#develop_transition_plan a')[0].addClassName('selected');
+    });
+  </script>
+<% end %>

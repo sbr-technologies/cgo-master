@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+  Jobs for: <%= @employer.name -%>
+<% end %>
+
+<% if not @jobs.empty? %>
+  <%= render :patial => "jobs.html" -%>
+<% else %>
+  <div style="width:99%; text-align: center; font-weight:bold;border-bottom: 1px solid #CCC;">No jobs found for this employer</div>
+<% end %>

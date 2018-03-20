@@ -1,0 +1,107 @@
+<% content_for :page_title do %>
+  All Applicants
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "View All", admin_applicants_path -%> | 
+  <%= link_to "New", new_admin_applicant_path -%> |
+  <%= link_to "Download to Excel", admin_applicants_path(:format => :xls) %>
+<% end %>
+
+    
+<div id="applicants">
+  <% if not @applicants.nil? %>
+  
+    <div style="margin-bottom: 20px"><%= will_paginate @applicants %></div>
+    <%= render :partial => "applicants" -%>
+    <div style="margin-top:20px"><%= will_paginate @applicants %></div>
+  
+  <% else %>
+    Unexpected error, please contact support. 
+  <% end %>
+</div>
+
+
+<% content_for :right do %>
+
+  <div>
+    <h2>Search</h2>
+  
+    <%= form_for admin_applicants_path, :remote => true, :html => {:method => :get, :id =>"search_form", :class=>"block"} do |f| %>
+	    
+      <div>
+        <label>Name (<u>Last</u>, First)</label>
+        <input style="margin-top: 4px" type="text" name="q[name]" id="name" />
+      </div>
+  
+      <div style="margin-top: 20px">
+        <label>Email</label>
+        <input style="margin-top: 4px" type="text" name="q[email]" id="email" />
+      </div>
+
+      <div class="button-bar" style="margin-top: 10px">
+        <button type="submit" style="padding: 0.3em; background: #FFF; color: #00FF00, border:1px solid #CCC;">Search</button>
+      </div>
+  
+    <% end %>
+
+
+  </div>
+
+  <hr style="margin-top: 20px;"/>
+
+	<div>
+		<h2 style="margin-top:10px">Download to Excel</h2>
+
+		<%= form_tag download_to_excel_admin_applicants_path(:format => "xls"), :id => "download_form" do %>
+
+      <div>
+				<label style="font-weight: bold">Job Fair</label>
+                <%= select_tag :jobfair, options_for_select(Jobfair.find(:all, :order => "date DESC").collect {|x| ["#{x.date.to_s(:short_with_year)} -- #{x.city} - #{x.category[0..2]}", x.id]}) -%>
+      </div>
+
+			<div style="margin-top: 20px">
+				<%= check_box_tag :status, "active", true, :style => "padding-top: 5px;" -%>
+				<label style="font-weight:bold">Only Active Applicants</label>
+			</div>
+
+			<div class="button-bar" style="margin-top:15px">
+				<a class="button" onclick="$('download_form').submit(); return false;" href="#"><span>Download</span></a>
+      </div>
+
+
+		<% end %>
+
+	</div>
+
+  <hr style="margin-top: 20px;"/>
+
+  <div>
+    <h2 style="margin-top: 10px">Upload Resumes</h2>
+  
+    <%= form_for :applicants, :url => upload_admin_applicants_path,  :html => {:multipart => true, :class=>"block", :id => "upload_form" }, :method => :post  do |f| %>
+    
+      <div style="margin-top: 20px">
+        <label style="font-weight: bold">Job Fair</label>
+        <%= select_tag :jobfair, options_for_select(Jobfair.find(:all, :order => "date desc").collect {|x| ["#{x.date.to_s(:short_with_year)} -- #{x.city}", x.id]}) -%>
+      </div>
+  
+      <div style="margin-top: 20px">
+        <label style="font-weight: bold">Header File (.zip)</label>
+        <%= file_field_tag :headers_file, :style=>"margin-top:4px; font-size:1em;" %>
+      </div>
+  
+      <div style="margin-top: 20px">
+        <label style="font-weight: bold;">Resumes File (.zip)</label>
+        <%= file_field_tag :resumes_file , :style=>"margin-top:4px; font-size:1em;"%>
+      </div>
+  
+      <div class="button-bar" style="margin-top:15px">
+        <a class="xbutton green" onclick="$('upload_form').submit(); return false;" href="#">Upload</a>
+      </div>
+  
+    <% end %>
+  </div>
+
+
+<% end %>

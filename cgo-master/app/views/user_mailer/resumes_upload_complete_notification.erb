@@ -1,0 +1,20 @@
+Uploaded resumes for Job Fair: <%=  @jobfair.name -%> on <%=  Date.today %>.
+
+Statistics:
+        Total Headers: <%= @total_headers %>
+        Total Resumes: <%= @total_resumes %>
+
+        Total Accounts Created: <%= @total_created %>
+        Total Accounts Updated: <%= @total_updated %>
+
+        Total Records Rejected: <%=  @total_rejected %>
+
+Username and Passwords file location:
+		<%= @passw_filename %>
+
+<% unless @warnings.to_s.blank? %>
+		Warnings:
+		<% @warnings.each do |warning| %>
+				<%= warning[:filename] -%>: <%= warning[:errors].collect {|e| e.entries.inspect}.join(', ') %>
+		<% end %>
+<% end %>

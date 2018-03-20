@@ -1,0 +1,111 @@
+<% # This is the Search Form Code -%>
+<div class="search-block">
+    <%= form_tag search_admin_resumes_path, :id =>"search_form", :method => :get  do %>
+
+
+      <div>
+        <label style="font-weight:bold; display:block; white-space:nowrap;">
+            Search by Keyword
+            <div>
+              <%= text_field_tag "q[keyword]", q[:keyword], :style =>"width: 300px; margin-top: 5px;" %>
+              <div style="white-space:nowrap; padding-top:2px; padding-bottom: 5px; font-weight: normal; font-size: 87%; color:#E6901A;">
+                  (example: "program manager" AND defense)
+              </div>
+            </div>
+        </label>
+      </div>
+      
+
+      <div>
+        <label style="margin-bottom: 5px; margin-top: 10px; font-weight: bold; display: block; white-space:nowrap">
+            Search by Last Name
+            <div>
+              <%= text_field_tag "q[applicant_last_name]", q[:applicant_last_name], :style =>"width: 300px; margin-top: 5px;" %>
+          </div>
+        </label>
+      </div>
+
+      <div style = "margin-bottom: 30px; margin-top: 10px;">
+        <a class="xbutton magenta" style="margin-top: 3px; margin-left: 0px;" onclick="$('search_form').submit(); return false;" href="#"><span>Search</span></a>
+        <%= check_box_tag :is_download, true, false, :style => "margin-left: 5px; width: 1em" %>
+        Download Results?
+      </div>
+
+
+        <hr style="float:none; clear:both; color: #DDD;"/>
+
+        <!-- rank, branch_of_service, security_clearance, education_level, state, availability, posted_by, jobfair attendance -->
+        <div class="filter-block">
+            <h3>Filters:</h3>
+
+            <div id="by-state" class="css-filter">
+                <p>By State</p>
+                <ul>
+                    <li><%=select_tag("q[state][]", options_for_select(options_from_hash(Constants::STATE_APO), q[:state] ), :multiple => true, :size => 4) %></li>
+                </ul>
+            </div>
+
+            <div id="by-rank" class="css-filter">
+                <p>By Rank</p>
+                <ul>
+                    <li><%=select_tag("q[type_of_applicant][]", options_for_select(options_from_hash(Constants::TYPE_OF_APPLICANT), q[:type_of_applicant] ), :multiple => true, :size => 4)-%></li>
+                </ul>
+            </div>
+
+            <div id="by-branch-of-service" class="css-filter">
+                <p>By Branch Of Service</p>
+                <ul>
+                    <li><%=select_tag("q[branch_of_service][]", options_for_select(options_from_hash(Constants::BRANCH_OF_SERVICE), q[:branch_of_service] ), :multiple => true, :size => 4)-%></li>
+                </ul>
+            </div>
+
+
+            <div id="by-security-clearance" class="css-filter">
+                <p>By Security Clearance</p>
+                <ul>
+                    <li><%=check_box_tag 'q[security_clearance][]', 3, (q[:security_clearance].include?("3") rescue true) %>None&nbsp;<span id="security_clearance_3"></span></li>
+                    <li><%=check_box_tag 'q[security_clearance][]', 1, (q[:security_clearance].include?("1") rescue true) %>Secret&nbsp;<span id="security_clearance_1"></span></li>
+                    <li><%=check_box_tag 'q[security_clearance][]', 2, (q[:security_clearance].include?("2") rescue true) %>Top Secret&nbsp;<span id="security_clearance_2"></span></li>
+                    <li><%=check_box_tag 'q[security_clearance][]', 0, (q[:security_clearance].include?("0") rescue true) %>Unspecified&nbsp;<span id="security_clearance_0"></span></li>
+                </ul>
+            </div>
+
+            <div id="by-education" class="css-filter">
+                <p>By Education Level</p>
+                <ul>
+                    <li><%=check_box_tag 'q[education_level][]', 1, (q[:education_level].include?("1") rescue true) %>High School / GED&nbsp;<span id="education_level_1"></span></li>
+                    <li><%=check_box_tag 'q[education_level][]', 3, (q[:education_level].include?("3") rescue true) %>Associates Degree&nbsp;<span id="education_level_3"></span></li>
+                    <li><%=check_box_tag 'q[education_level][]', 4, (q[:education_level].include?("4") rescue true) %>Bachelors Degree or Higher&nbsp;<span id="education_level_4"></span></li>
+                    <li><%=check_box_tag 'q[education_level][]', 0, (q[:education_level].include?("0") rescue true) %>Unspecified&nbsp;<span id="education_level_0"></span></li>
+                </ul>
+            </div>
+
+            <div id="by-post-date" class="css-filter">
+                <p>By Post Date</p>
+                <ul>
+                    <li><%= select_tag 'q[posted_date_for_solr]', options_for_select([['All', ''], ['One Month Ago', 'one-month'], ['Three Months Ago', 'three-months'], ['Six Months Ago', 'six-months']], q[:posted_date_for_solr] ) -%></li>
+                </ul>
+            </div>
+
+            <div id="willing-to-relocate" class="css-filter">
+              <p>By Willingness to Relocate</p>
+              <ul>
+                <li><%= select_tag 'q[willing_to_relocate]', options_for_select([["Don't Care", ''], ['Yes', 'true'], ['No', 'false']], q[:willing_to_relocate]) -%></li>
+              </ul>
+            </div>
+
+
+            <div id="by-jobfair-attendance" class="css-filter">
+                <p>By Job Fair Attendance</p>
+                <ul>
+                  <li><%=  select_tag "q[job_fair_registrations]", options_for_select([["Select All", ""]] + Jobfair.all.collect {|jobfair| [truncate(jobfair.name, :length => 40), jobfair.id] }.compact, q[:job_fair_registrations]) -%></li>
+                </ul>
+            </div>
+
+
+        </div>
+    <% end %>
+
+    <a class="xbutton" style="float:left; clear:both; margin-top: 15px; margin-left: 5px; margin-bottom: 20px;" onclick="$('search_form').submit(); return false;" href="#"><span>Search</span></a>
+
+</div>

@@ -1,0 +1,22 @@
+<li class="applicant">
+  <div id="applicant_<%= applicant.id %>">
+
+    <h1 class="title"><%= link_to applicant.name, applicant_path(applicant) , :style => "color:inherit!; text-decoration: none;" %></h1>
+
+    <div class="sub-title">
+      <%= "#{applicant.address.city}, #{applicant.address.state}" unless applicant.address.to_s.blank? %>
+      &nbsp;
+      (Posted: <%= (applicant.resume.updated_at || applicant.resume.created_at || applicant.updated_at || applicant.created_at).to_date.to_s(:human) %>
+      &nbsp;
+      Available: <%= applicant.availability_date.nil? ? 'Now' : applicant.availability_date.to_date.to_s(:human) %>)
+    </div>
+
+    <div style="margin-top: 20px; text-align: right; padding-right: 10px;">
+      <%= link_to "View", applicant_path(applicant), :class => "xbutton grey", :style => "color: #DEDEDE" %>
+      <% unless !applicant.resume || current_user.inbox_entries.contains?(applicant.resume) %>
+        <%= link_to "Save for Later", add_to_inbox_resume_path(applicant.resume.id), :remote => true, :class => "xbutton grey inbox-handler" %>
+      <% end %>
+      <%= link_to "Contact Job Seeker", new_message_path(:recipient => applicant.id), :class => "send-message-handler xbutton grey" %>
+    </div>
+  </div>
+</li>

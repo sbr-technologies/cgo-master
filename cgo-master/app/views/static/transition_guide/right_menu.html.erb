@@ -1,0 +1,93 @@
+<%= content_for :title_tag do %>
+	Corporate Gray Military to Civilian Transition Guide and Advice
+<% end %>
+<%= content_for :meta_keywords do %>
+	military transition assistance, transition guide, career advice, military resume, interviewing, veteran employment, job search, networking, skill assessment, resume writing
+<% end %>
+
+<%= content_for :meta_description do %>
+	Corporate Gray includes military to civilian transition assistance information and expert advice from nationally recognized authors and transition experts. 
+<% end %>
+
+<div id='tg_menu'>
+  <h2>Transition Guide</h2>
+  <ol>
+    <li id="develop_transition_plan"><%= link_to "Develop Your Transition Plan", "1_develop_your_transition_plan" %></li>
+    <li id="obtain_transition_assistance"><%= link_to "Obtain Transition Assistance", "2_obtain_transition_assistance" %></li>
+    <li id="assess_your_skills_and_interests"><%= link_to "Assess Your Skills & Interests ", "3_assess_your_skills_and_interests" %></li>
+    <li id="conduct_company_research"><%= link_to "Conduct Company Research", "4_conduct_company_research" %></li>
+    <li id="construct_your_resume"><%= link_to "Construct Your Resume", "5_construct_your_resume" %></li>
+    <li id="build_your_network"><%= link_to "Build Your Network", "6_build_your_network" %></li>
+    <li id="interview_like_a_pro"><%= link_to "Interview Like a Pro", "7_interview_like_a_pro" %></li>
+    <li id="gain_federal_employment"><%= link_to "Gain Federal Employment", "8_gain_federal_employment" %></li>
+    <li id="negotiate_your_best_salary"><%= link_to "Negotiate Your Best Salary", "9_negotiate_your_best_salary" %></li>
+  </ol>
+  <br/>
+  <%= link_to "About the Authors", "about_the_authors" %>
+</div>
+
+
+<script>
+
+  <%
+    # Open External Links on new Window
+    #   1) All PDF Files
+    #   2) All links not within the current domain (normaly: corporategray.com) 
+    
+    # Note: This file is included in every Transition Guide Document so it takes
+    # care of every external link. 
+  %>
+  document.observe("dom:loaded", function() {
+
+    var anchors = $$('a');
+
+    anchors.each(function(anchor) {
+      anchor.observe('click', function() {
+        var url = anchor.href.toLowerCase();
+        if(url.indexOf('pdf') != -1  ||
+          (url.indexOf(window.location.hostname) == -1 && ( url.indexOf("http") != -1 || url.indexOf("https") != -1)) ) {
+          anchor.target = "_blank";
+        }
+      });
+    });
+
+  });
+
+</script>
+
+<style>
+
+  ul.sponsors li {
+    list-style-type: disc !important;
+    list-style-position: inside; 
+    line-height: 2em;
+  }
+
+  #tg_menu ol {
+    margin-left: 20px;
+  }
+
+  #tg_menu li {
+    line-height: 2.0em;
+    list-style-type: decimal;
+  }
+
+  #tg_menu a {
+    text-decoration: none; 
+  }
+
+  #tg_menu a:visited {
+    color: #00F;
+  }
+
+  #tg_menu a:hover {
+    text-decoration: underline;
+  }
+
+  #tg_menu a.selected {
+    color: #BD0000; 
+    font-weight: bold;
+    text-decoration: underline;
+  }
+
+</style>

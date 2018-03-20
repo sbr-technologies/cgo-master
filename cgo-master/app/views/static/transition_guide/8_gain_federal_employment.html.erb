@@ -1,0 +1,123 @@
+<%= content_for :page_title do %>
+  Step 8 – Gain Federal Employment
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:transition_guide => "/static/transition_guide/overview" },
+      :gain_federal_employment
+  ] } %>
+<% end %>
+
+<p>With 2+ million workers, the federal government is the single largest employer in the United States. Here we will identify various resources for finding government employment and explain the job application and selection process.</p>
+
+<h2>Finding the Job</h2>
+<p>There are numerous resources available to help you find federal jobs:</p>
+
+<h2>Federal Government</h2>
+<ul>
+  <li><%= link_to "USA JOBS", "http://www.usajobs.gov" %></li> 
+  <li><%= link_to "Veteran Employment Program Offices", "http://fedshirevets.gov/AgencyDirectory/index.aspx" %> This website lists individuals responsible for promoting Veterans’ recruitment, employment, training and development, and retention within their respective agencies.</li>
+  <li><%= link_to "Department of Defense Careers in National Defense", "http://www.godefense.com" %></li>
+</ul>
+
+<h2>Military Services</h2>
+<ul>
+  <li><%= link_to "Navy Civilian Jobs", "http://www.donhr.navy.mil" %></li>
+  <li><%= link_to "Army Civilian Jobs", "http://www.cpol.army.mil" %></li>
+  <li><%= link_to "Air Force Civilian Jobs", "http://www.afciviliancareers.com" %></li>
+  <li><%= link_to "Coast Guard Civilian Jobs", "http://www.uscg.mil/civilian" %></li>
+</ul>
+
+<h2>Commercial Websites</h2>
+<ul>
+  <li><%= link_to "Federal Research Service", "http://www.fedjobs.com" %></li>
+  <li><%= link_to "America Job", "http://www.americajob.com" %></li>
+  <li><%= link_to "Federal Jobs Digest", "http://www.jobsfed.com" %></li>
+  <li><%= link_to "Resume Place", "http://www.resume-place.com" %></li>
+  <li><%= link_to "Federal Job Results", "http://www.federaljobresults.com" %></li>
+</ul>
+
+<p>In addition to the above resources, you should talk with people in your network who are working for the government to learn about job opportunities.</p>
+
+<h2>Understanding Federal Job Announcements</h2>
+
+<p>Each federal job announcement includes the following:</p>
+<ul>
+  <li>Job Title</li>
+  <li>Series – A 3- or 4-digit “series” number similar to a Military Occupational Specialty code or rating. For a list of all the series numbers and job titles, visit <%=link_to "www.opm.gov/fedclass/index.asp","http://www.opm.gov/fedclass/index.asp" %>.</li>
+  <li>Grade – Relates directly to the salary for the position.</li>
+  <li>Position Information – The type of position (temporary, term, permanent).</li>
+  <li>Duty Location – The location of the position.</li>
+  <li>Who May Be Considered – Who is eligible to apply for the position.</li>
+  <li>Duties– The job duties and responsibilities.</li>
+  <li>Specialized Experience – experience required by the applicant documented on the resume</li>
+  <li>KSAs (Knowledge, Skills, & Abilities) or Qualifications and Evaluations – requirements that need to appear in your resume.</li>
+  <li>How To Apply – This provides specifics on how and where to submit your job application and the closing date for applying to the position.</li>
+</ul>
+
+<h2>Competitive vs. Excepted Service</h2>
+<p>Federal agencies/sub agencies offer their positions on a competitive basis or on an excepted service basis. If on a competitive basis, the Office of Personnel Management’s Human Resource office provides oversight for the hiring process. Excepted agencies, on the other hand, develop their own hiring process. In this case, they would list the job opening on their website and all interested job seekers would apply directly to that agency. Excepted service positions are not posted on usajobs.gov, so it is important to look at individual agency websites for job announcements. A list of excepted service agencies can be found here <%= link_to "https://www.federalregister.gov/articles/2012/03/30/2012-7745/excepted-service-consolidated-listing-of-schedules-a-b-and-c-exceptions","https://www.federalregister.gov/articles/2012/03/30/2012-7745/excepted-service-consolidated-listing-of-schedules-a-b-and-c-exceptions" %>.</p>
+
+<h2>Applying for the Position</h2>
+<ol class="decimal">
+  <li><span>Carefully review the job announcement. Are you eligible to apply? Are you qualified to apply? Are you comfortable with the duties, and have you performed them in the past? Do you have the specialized experience and KSAs/competencies the government agency is seeking?</span></li>
+  <li>
+    <span>
+      Write your federal resume. There are multiple ways to apply for a federal job, so follow the job posting directions carefully.
+      <ol class="alpha">
+        <li><span>The recommended way to apply is to create your resume using the Resume Builder found in <%= link_to "my.usajobs.gov", "https://my.usajobs.gov/Account/Login"%>. Tailor your resume to the duties of the position and explain how your experience meets the required specialized experience. Include your country of citizenship, highest grade level if you have previous federal employment, and how much Veteran’s preference you have, if any.</span></li>
+        <li><span>You can upload your resume (if you do this include the last four of your social security number on every page).The federal resume, unlike the corporate resume, should be long (4 to 5 pages is average) and detailed. </span></li>
+        <li><span>If you are submitting a hard copy application, place the position title and job announcement number on each page.</span></li>
+        <li><span>You can use the brochure OF 510 <%= link_to "Applying for a Federal Job", "http://www.gpo.gov/pdfs/careers/apply/of0510.pdf" %> for guidance. </span></li>
+        <li><span>Some agencies may require the use of OF 612 <%= link_to "Optional Application for Federal Employment", "http://www.opm.gov/forms/pdf_fill/of612.pdf" %>. </span></li>
+      </ol>
+    </span>
+  </li>
+  <li><span>Give careful thought to the KSA/competencies section. This is the most important part of the federal job application process and is normally listed under “Qualifications and Evaluations.” Specialized experience is the most important part. You must incorporate the KSAs/competencies into your resume to show you possess them or you will not qualify for the position. Think of the KSAs as interview questions, and cite 3-4 sentence examples from your work experience to match each.</span></li>
+  <li><span>Complete the package. Your completed job application package should consist of a cover letter (optional), your resume, your short responses addressing each KSA, and any additional information or optional forms that are specified in the job announcement. For additional or optional forms visit <%= link_to "www.opm.gov/forms", "http://www.opm.gov/forms" %>.</span></li>
+</ol>
+
+<h2>Veterans’ Preference</h2>
+<p>Veterans discharged or released from active duty in the armed forces under honorable conditions during a time of war are eligible for veteran’s preference. If you are a retired member of the armed forces you are not included in the definition of preference eligible unless you are a disabled veteran or you retired below the rank of major or its equivalent. Visit <%= link_to "www.fedshirevets.gov", "http://www.fedshirevets.gov/job/vetpref/index.aspx" %> for details on Veterans’ Preference.</p>
+
+<p>Veteran’s Recruitment Appointment (VRA) – This special government hiring authority can name select you (if you are qualified) up to the GS-11 level. The VRA applies to all active duty military but not to those who have been out of the military for more than two years.</p>
+
+<h2>The Selection Process</h2>
+<p>The hiring agency will review your job application for completeness and basic qualifications. Your application resume will be compared against the required qualifications and KSAs/competencies, and a score and numerical rating will be rendered. The applications are then ranked according to their scores. Hiring Reform allows for any application package with a rating of 70 or more points to be referred to the hiring manager for consideration. Applicants with Veteran’s Preference are placed at the top of each category (gold, silver, or bronze), and considered first. The hiring manager reviews each application package and makes the final decision. If you are selected, you will receive an interim offer letter contingent on a background/security check.</p> 
+
+<% content_for :right do %>
+
+  <%= render :template => 'static/transition_guide/right_menu.html.erb' %>
+
+  <h2>Exercises:</h2>
+
+  <ul class="resources">
+    <li><%= link_to "8a: Federal Employment Resources", "/exercises/Exercise_8a_2.pdf" %></li>
+    <li><%= link_to "8b: Federal Employment Checklist", "/exercises/Exercise_8b_2.pdf" %></li>
+  </u>
+
+  <h2>Additional Resources:</h2>
+
+  <p><%= link_to "List of Excepted Service Agencies from USAJOBS", "http://www.usajobs.gov/Content/pdfs/excepted_service.pdf" %></p>
+
+  <div style="margin-top: 10px">&nbsp;</div>
+  <%= render :partial => "shared/featured_employer_skyscraper.html.erb" %>
+
+<% end %>
+
+
+<% content_for :head do %>
+
+  <%= stylesheet_link_tag 'transition_guide' %>
+
+  <script>
+    document.observe('dom:loaded', function() {
+      $$('#gain_federal_employment a')[0].addClassName('selected');
+    });
+  </script>
+
+<% end %>
+

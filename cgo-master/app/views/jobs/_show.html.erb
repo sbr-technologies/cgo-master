@@ -1,0 +1,152 @@
+<% if(display_title.nil? || display_title == true) %>
+ <h2 style="float:left;margin:0; padding:0;"><%= @job.title -%></h2>
+<% end %>
+
+ <div style="width: 155px; float:right; margin:0; padding:0; margin-right: 30px;">
+   <% if current_user.is_a?(Applicant) %>
+
+     <% if(!@job.online_application_url.nil? && !@job.online_application_url.empty?) %>
+        <%=link_to "Apply for this Job", @job.online_application_url, :popup => true, :id => "apply_button", :class=>"xbutton green offsite" %>
+
+        <script>
+            $$('.offsite').each(function(el) {
+                el.on('click', function() {
+                  new Ajax.Request("<%= apply_notify_job_path(@job.id) %>", { 
+                    method: 'GET', 
+                    onSuccess: function() {
+                      console.log("Stat Increment Complete !!!!");
+                    }
+                  });
+                  return true; 
+                });
+            });
+        </script>
+     <% elsif not current_user.applied?(@job) %>
+        <span>
+          <%= form_for :application, :url => apply_applicant_path(current_user.id), :remote => true, :html => {:id =>"applyForm"} do |f| %>
+            <%= f.hidden_field :job_id, :value => @job.id %>
+            <button id="submitButton" type="submit">Submit job inquiry</button>
+          <% end %>
+        </span>
+        <span id="indicator" style="display: none; float: right; clear: none; margin-top: 13px;margin-right: 3px;"><%=image_tag "/images/dots.gif"-%></span>
+          
+        <script>
+
+            $('applyForm').on('ajax:before', function() {
+                $('indicator').show(); 
+            });
+
+
+            $('applyForm').on('ajax:complete', function() {
+                $('indicator').hide(); 
+                $('submitButton').innerHTML = "Inquiry Submitted"; 
+                $('submitButton').addClassName('disabled');
+            });
+                    
+        </script>
+
+        <style>
+
+          #submitButton {
+            float: right; 
+            clear: none; 
+            border: 0px; color: blue; 
+            text-decoration: underline; 
+            background: transparent; 
+            cursor: pointer; 
+            font-size: 0.9em;
+          }
+
+          #submitButton.disabled {
+            color: #4c4c4c; 
+            text-decoration: none; 
+            cursor: normal;
+          }
+
+
+        </style>
+     <% else %>
+        <span style="font-weight: bold; font-style: italic; color: #BD0000">You already applied</span>
+     <% end %>
+   <% end %>
+ </div>
+
+<div style="float:none; clear:both">&nbsp;</div>
+<div id="notification"></div>
+
+<table class="show-model">
+  <tr><%=raw "<td class='label'>Code:</td><td>#{@job.code}</td>" if not @job.code.nil? %></tr>
+ <tr><td class="label">Location:</td><td><%= "#{@job.location.city}, #{@job.location.state}" -%></td></tr>
+  <tr><td class="label">Company Name:</td><td><%= @job.company_name || @job.employer.name %>
+      <% if !@job.employer.nil? && !@job.employer.profile.to_s.blank? %>
+    <span style="margin-left: 5px; color:#BD0000; text-decoration: underline; cursor: pointer;" onclick="$('profile').show(); this.hide();">show profile</span>
+    <div id="profile" style="margin-top: 5px; padding-top: 5px; display:none; border-top: 1px dotted #CCC;"><%=@job.employer.profile -%></div>
+      <% end %>
+      <% unless @job.hr_website_url.blank? %>
+        <p><%= link_to(" Employment Page", @job.hr_website_url.starts_with?("http://") ? @job.hr_website_url : "http://" + @job.hr_website_url, :class=>"action_link", :popup => true) unless @job.hr_website_url.nil? || @job.hr_website_url.empty?-%></p>
+      <% end %>
+  </td></tr>
+  <tr><td class="label">Description:</td>
+    <td>
+      <% description_text = highlight(@job.description, @keyword , '<em>\1</em>') %>
+      <% if @job.input_method == "manual" %>
+        <div class="ritch-text"><%= description_text %></div>
+      <% else %>
+        <%= raw description_text.gsub(/\n/, "<br/>") %>
+      <% end %>
+    </td>
+  </tr>
+  <% if(!@job.requirements.to_s.blank?) %> <tr><td class="label">Requirements:</td><td><%= @job.requirements %></td></tr><%end%>
+
+  <% unless @job.education_level == "0" %>
+    <tr><td class="label">Education Level:</td><td><%= or_unspecified(to_label(@job.education_level, Constants::EDUCATION_LEVEL).capitalize) %></td></tr>
+  <% end %>
+
+  <% unless @job.payrate.blank? %>
+    <tr><td class="label">Pay Rate:</td><td><%= or_unspecified(to_label(@job.payrate, Constants::PAY_RATE).capitalize) %></td></tr>
+  <% end %>
+
+  <% unless @job.hr_website_url.blank? %>
+    <tr><td class="label">HR. Website URL:</td><td><%= or_unspecified(@job.hr_website_url) %></td></tr>
+  <% end %>
+
+  <% unless @job.security_clearance == "0" %>
+    <tr><td class="label">Security Clearance:</td><td><%= or_unspecified(to_label(@job.security_clearance, Constants::SECURITY_CLEARANCE).capitalize) %></td></tr>
+  <% end %>
+
+  <% unless @job.travel_requirements == "0" %>
+    <tr><td class="label">Travel Requirements:</td><td><%= or_unspecified(to_label(@job.travel_requirements, Constants::TRAVEL_REQUIREMENT).capitalize) %></td></tr>
+  <% end %>
+
+  <% unless @job.relocation_cost_paid.to_s.blank? %>
+    <tr><td class="label">Relocation Costs Paid?:</td><td><%= @job.relocation_cost_paid.gsub(/_/, " ").titleize %></td></tr>
+  <% end %>
+
+  <% unless !current_user || current_user.is_a?(Applicant) %>
+    <tr><td class="label">Show Company Profile?:</td><td><%= to_yes_no(@job.show_company_profile).capitalize %></td></tr>
+  <% end %>
+
+  <% unless !current_user || !current_user.is_a?(Applicant) || current_user.authentications.blank?  %>
+    <tr>
+      <td class="label">LinkedIn Contacts:</td>
+      <td>
+        <div class="avatar-group" >
+          <div class="avatars">
+            <% @connections.select {|c| c.positions.any? {|p| (p.ticker == @job.employer.ticker_symbol) || (p.company.downcase.start_with?(@job.employer.name.downcase) ) } }.each do |conection| %>
+              <div class="avatar" style="float:left; margin-right: 15px; margin-bottom: 15px; width:90px;">
+                  <%= image_tag conection.picture_url || "/images/no_avatar.gif", :size => "80x80", :style => "border:5px solid #DEDEDE; padding: 3px; background: whitesmoke" %>
+                  <div class="name" style="text-align: center; margin-top: 4px;"><%= "#{conection.first_name} #{conection.last_name}" %></div>
+              </div>
+            <% end %> 
+          </div>
+        </div>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<% if !@job.recruiter.employer.track_image_url.nil? && !@job.recruiter.employer.track_image_url.empty? %>
+  <% now_tstamp = Time.now.to_s(:tstamp) %>
+  <%= image_tag @job.recruiter.employer.track_image_url + (@job.recruiter.employer.track_image_url.include?("?") ? "&" : "?") + "tstamp=#{now_tstamp}" + "&ord=#{now_tstamp}" + "&job_code=#{CGI::escape(@job.code)}", :width => 0, :height => 0, :alt=>"" -%>
+<% end %>
+

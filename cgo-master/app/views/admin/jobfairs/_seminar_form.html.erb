@@ -1,0 +1,10 @@
+<div class="seminar" style="margin-top:0px; margin-bottom: 10px">
+  <%= fields_for_seminar(seminar_form) do |sf| -%>
+	  <div class="inline">
+      <%= sf.text_field :description , :style=>"width: 19em;" %>
+      <%= sf.text_field :duration , :class => "S" %>
+      <%= sf.text_field :time, :class => "S" %>
+			<%= link_to_function "remove", "$(this).up('.seminar').remove()", :style=>"margin-left: 15px; color:red;" %>
+	  </div>
+  <% end %>
+</div>

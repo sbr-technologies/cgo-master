@@ -1,0 +1,21 @@
+<%= form.hidden_field :lunches_required, :value => 0 -%>
+
+<fieldset>
+  <legend>Registration Information</legend>
+  <%= form.text_field :banner_company_name, :label => "Company Name (for your banner)" -%>
+  <%= form.text_field :fax -%>
+  <%= form.text_field :url, :label => "Company Website" -%>
+  <%= form.text_area  :available_positions , :cols=>80, :label =>"Company Description + Open Positions"-%>
+</fieldset>
+
+<fieldset>
+  <legend>Optional Services</legend>
+  <%= form.check_box  :outlet_required, :label => "Electrical Outlet $100 (check box if desired)" -%>
+  <%= form.check_box  :resume_search_access, :label => "Full resume search access for 1 month: $300 (a 25% discount)" -%>
+</fieldset>
+
+<fieldset>
+  <legend>Full Page Ad</legend>
+  <%= form.radio_button :ad_type, :black_and_white.to_s , :label => "Black and White $200"-%>
+  <%= form.radio_button :ad_type, :color_ad.to_s, :label => "Color $400" -%>
+</fieldset>

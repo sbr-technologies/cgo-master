@@ -1,0 +1,64 @@
+<% content_for :page_title do %>
+	Post Resume
+<% end %>
+
+
+<% content_for :page_header_links do %>
+	<%= link_to "Save", "#", :onclick=> "$('resume').submit(); return false;" -%>&nbsp;|&nbsp;
+	<%= link_to "Cancel", applicants_path -%>
+<% end %>
+
+<%= error_messages_for @resume %>
+
+<%= error_handling_form_for @resume, :html=>{:id => "resumeform", :multipart => true } do |f| %>
+	<%= render :partial => "form", :object => f -%>
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('resumeform').submit();"><span>save</span></a>
+    <div>or <%= link_to "Cancel", applicants_path, :class=>"cancel"%></div>
+  </div>
+<% end %>
+
+<% content_for :right do %>
+
+	<div style="clear:both; float:none; margin-top: 0px">
+	<%= image_tag "/images/icns/aesthetica/16x16/info.png" -%>
+	<span style="font-size: 16px; font-weight: bold; margin-top:0px; margin-bottom:25px"><%= link_to "Military-to-Civilian Skills Translator", "http://online.onetcenter.org/crosswalk", :style=>"color:#000; text-decoration:underline;", :popup => true -%></span>
+	</div>
+
+	<div style="clear:both; float:none; margin-top: 25px">
+				<h2 style="margin-top:0px">Cover &amp; Approach Samples</h2>
+				<%= image_tag "letter_thumb.gif", :style=>"float:left; margin-right: 5px" -%>
+				<ul id="resume_samples" style="font-size: 10px; float:left;">
+								<li><%= link_to "Cover Letter Sample", "/cover_letters/Cover_Letter.pdf", :popup => true -%></li>
+								<li><%= link_to "Approach Letter Sample", "/approach_letters/ApproachLetter.pdf", :popup => true -%></li>
+				</ul>
+				<div style="float:none; clear:both"></div>
+	</div>
+
+	<div style="clear:both; float:none; margin-top: 25px;">
+      <%= render :partial => "samples.html.erb" %>
+	  <div style="float:none; clear:both"></div>
+	</div>
+
+	<div style="clear:both; float:none; margin-top: 25px;">
+				<h2 style="margin-top:0px">Thank You Letters</h2>
+				<%= image_tag "letter_thumb.gif", :style=>"float:left; margin-right: 5px" -%>
+				<ul id="resume_samples" style="font-size: 10px; float:left;">
+								<li><%= link_to "Job Offer Acceptance.pdf",					"/thankyou_letters/Thank_You_Letter_Job_Offer_Acceptance.pdf", :popup => true -%></li>
+								<li><%= link_to "Post Informational Interview.pdf", "/thankyou_letters/Thank_You_Letter_Post_Informational_Interview.pdf", :popup => true -%></li>
+								<li><%= link_to "Post Job Interview.pdf",				    "/thankyou_letters/Thank_You_Letter_Post_Job_Interview.pdf", :popup => true -%></li>
+				</ul>
+				<div style="float:none; clear:both"></div>
+	</div>
+<% end %>
+
+
+<script>
+		function submitForm() {
+				resumeEditor.setEditorHTML(cleanMSWordTags(resumeEditor.getEditorHTML()));
+				resumeEditor.saveHTML();
+				$('resume').submit();
+
+				return false;
+		}
+</script>

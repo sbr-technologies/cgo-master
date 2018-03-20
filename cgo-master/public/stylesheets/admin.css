@@ -1,0 +1,145 @@
+.yui-t6 #yui-main .yui-b {
+    background: #FFF url('/images/shadowy.gif') repeat-y top right;
+    margin-right:23.0759em;
+}
+
+#hd {
+    background: #229922
+}
+
+#hd .header {
+    padding-bottom: 0px;
+    padding-top: 25px;
+    height: 24px; 
+    background: #292
+}
+
+#hd .links {
+    float:right; 
+    clear: both;
+    margin-right: 8px;
+    padding-top: 6px;
+}
+
+#hd .links a {
+    text-decoration: none; 
+    color: #FFF;
+    font-weight: bold;
+}
+
+#hd .links a:visited {
+    text-decoration: none; 
+    color: #FFF; 
+}
+
+#content-container {
+	background: #FFF; 
+}
+
+#menu {
+    padding: 0px; 
+    padding-top: 5px;
+    width: 100%;
+    voice-family: "\"}\"";
+    height: 32px;
+}
+
+
+#menu ul {
+		float:left;
+    font: normal 12px Arial;
+    margin:0;
+    margin-left: 0px; /*margin between first menu item and left browser edge*/
+    padding: 0;
+    padding-top: 1px;
+    list-style: none;
+}
+
+#menu ul.right {
+		clear: none;
+    float: right;
+}
+
+#menu li {
+    display: inline;
+    margin: 0 2px 0 0;
+    padding: 0;
+}
+
+#menu li.right {
+    float: right;
+    font-size: 0.9em;
+    text-transform: none;
+    padding-top: 2px;
+    font-weight: normal;
+}
+
+
+#menu a {
+    float: left;
+    display: block;
+    color: white;
+    margin: 0 8px 0 0; /*Margin between each menu item*/
+    padding: 7px 10px 10px 10px;
+    text-decoration: none;
+    letter-spacing: 1px;
+}
+
+#menu a.current, #menu a.current:hover {
+    background: url(/images/current_menu_item_indicator.gif) no-repeat center bottom;
+}
+
+#menu li.current a, .tabnav li.current a:hover {
+    background-color: #BD0000; 
+    color: #FFF;
+    border-bottom: 1px solid #BD0000; 
+}
+
+
+
+/* Action Links */
+a.link-action, a.link-action:visited {
+    color: #BD0000;
+    font-size: 10px;
+    text-decoration: none;
+}
+
+
+/* Blotters */
+table.list tr.item-row td {
+    border-bottom: 1px solid #CCC;
+}
+
+table.list tr.item-row:hover {
+    background: #FFC;
+}
+
+table.list tr.item-row:hover td {
+    border-bottom: 1px solid #FB7A31;
+}    
+
+table.list tr.item-row td {
+    padding: 3px 0px;
+}
+
+table.list tr.item-row a, table.list tr.item-row.a:visited {
+    color: #00C;
+    text-decoration: none;
+}
+
+
+/* Applicant Blotter */
+
+tr.inactive a {
+  font-style: italic; 
+  color: #2c2c2c !important; 
+}
+
+/* Employer's Recruiters */
+
+li.recruiter.inactive {
+  font-style: italic; 
+  color: #2c2c2c;
+}
+
+  

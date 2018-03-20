@@ -1,0 +1,59 @@
+<%= content_for :page_title do %>
+	<%= @recruiter.name -%>
+<% end %>
+
+<% content_for :page_header_links do %>
+	<%= link_to "Edit", edit_admin_employer_recruiter_path(:employer_id => @employer.id, :id => @recruiter.id) -%>&nbsp;|&nbsp;
+	<%= link_to "Delete", admin_employer_recruiter_path(:employer_id => @employer.id, :id => @recruiter.id), :method => :delete -%>&nbsp;|&nbsp;
+	<%= link_to "New", new_admin_employer_recruiter_path(:employer_id => @employer.id) -%>&nbsp;|&nbsp;
+	<%= link_to "View All", admin_employer_path(:id => @employer.id) -%>
+<% end %>
+
+<table class="show-model">
+	<% unless @recruiter.active? %>
+	<tr>
+			<td class="label">Email Verified?</td>
+			<td>
+			<%= check_box :recruiter, :email_verified,
+										:onclick => remote_function(:url => skip_email_verification_admin_user_path(@recruiter.id),
+																								:method => "get",
+																								:with => "'enable=yes'",
+																								:loading => "$('indicator').show()",
+																								:complete => "$('indicator').innerHtml('email verified, confirmation email sent')"),
+										:style => "width: 0.8em; margin-right: 4px;",
+										:checked => @recruiter.active?,
+										:disabled => @recruiter.active?
+			%>
+			<span id="indicator" style="display:none;vertical-align:top;color:#BD0000;font-size:90%;"><%= image_tag "/images/dots.gif", :style=> "padding-top: 5px;" -%></span>
+			</td>
+	</tr>
+	<% end %>
+
+	<tr class="name"><td class="label">Name:</td><td><%= @recruiter.name -%></td></tr>
+	<tr class="email"><td class="label">Email:</td><td><%= or_unspecified(@recruiter.email) %></td></tr>
+	<tr class="usename"><td class='label'>Username:</td><td><%= @recruiter.username -%></td>
+	<tr class="password"><td class="label">Password:</td><td><%= @recruiter.password -%></td></tr>
+	<tr class="roles"><td class="label">Roles:</td><td><%= @recruiter.roles.gsub(/\s/, ", ").titleize -%></td></tr>
+	<tr class="created_at"><td class="label">Created:</td><td><%= @recruiter.created_at -%></td></tr>
+	<tr class="modified_at"><td class="label">Last Modified On:</td><td><%= @recruiter.updated_at -%></td></tr>
+	<tr class="last_login_at"><td class="label">Last Login On:</td><td><%= @recruiter.last_login_at -%> (Count: <%=@recruiter.login_count -%>)</td></tr>
+</table>
+
+
+<% content_for :right do %>
+			<div>
+								<%= form_tag new_admin_registration_path, :id=>"registrationform", :method => :get do %>
+												<%= hidden_field_tag :attendant_id, @recruiter.id -%>
+												<label><b>New Registration for job fair:</b>
+																				<%= select_tag :jobfair_id , 
+																								options_for_select(Jobfair.find(:all, :order => 'date DESC').select { |x|
+																													!@recruiter.registered?(x)
+																								}.collect {|x| ["#{x.date.to_s(:short_with_year)} -- #{x.city}", x.id.to_s]}) %>
+												</label>
+								<% end %>
+								<div class="button-bar" style="padding-top: 20px">
+												<a class="button" onclick="$('registrationform').submit(); return false;" href="#"><span>Create ...</span></a>
+								</div>
+
+			</div>
+<% end %>

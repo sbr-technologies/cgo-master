@@ -1,0 +1,20 @@
+<table class="list">
+  <tr>
+    <th width="25%">Name</th>
+    <th width="35%">Username</th>
+    <th width="20%">Password</th>
+    <th width="8%">Res?</th>
+    <th width="12%">Last Login</th>
+  </tr>
+  
+  <% @applicants.each do |applicant| -%>
+    <tr class="item-row <%=applicant.status == 'inactive' ? 'inactive' : 'active' %>" >
+      <td><%=link_to applicant.name, admin_applicant_path(applicant.id) -%></td>
+      <td><%=applicant.username %></td>
+      <td><%=applicant.password%></td>
+      <td><%=to_y_n(!applicant.resume.nil?).capitalize %></td>
+      <td><%=applicant.last_login_at.to_formatted_s(:mmddyyyy) if !applicant.last_login_at.nil?%></td>
+    </tr>
+  <% end %>
+    
+</table>

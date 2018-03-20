@@ -1,0 +1,21 @@
+<% content_for :page_title do %>
+  Edit Registration
+  <h2><%= "#{@registration.attendant.employer.name}/#{@registration.attendant.name}" -%></h2>
+<% end %>
+
+
+<% content_for :page_header_links do %>
+  <%= link_to "Save", "#", :onclick => "$('registrationform').submit();return false" -%> |
+  <%= link_to "Cancel", admin_registrations_path %> |
+  <%= link_to "View All Recruiter Registrations", admin_registrations_path + '?attendant_type=Recruiter'%>
+<% end %>
+
+<%= error_messages_for @registration %>
+
+<%= error_handling_form_for @registration, :url => admin_registration_path(:id => @registration.id), :html=>{:id => "registrationform" } do |f| %>
+  <%= render :partial => "/registrations/form", :object => f -%>
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('registrationform').submit(); return false;"><span>save</span></a>
+    <div>or <%= link_to "Cancel", admin_registrations_path, :class=>"cancel"%></div>
+  </div>
+<% end %>

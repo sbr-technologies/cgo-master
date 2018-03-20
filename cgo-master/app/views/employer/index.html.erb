@@ -1,0 +1,203 @@
+<%= content_for :head do %>
+
+  <style>
+    #signUp {
+      padding-bottom: 10px;
+      margin-top: 30px; 
+      font-size: 1.6em;
+      color: #FFF; 
+    }
+
+    #signUp p {
+      margin-left: 0;
+      padding-left: 0;
+    }
+
+    #signUpLink {
+      margin-top: 5px; 
+      border: 4px solid #546A72;
+      background: #657B83;
+      color: #EEE8D5;
+      padding: 5px;
+    }
+
+    #signUpLink a {
+      color: #FFF; 
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    #searh_form { 
+      position: absolute; 
+      top:20px; 
+      right: 10px; 
+      opacity: 0.90; 
+      width: 290px;
+    }
+
+    #banner {
+      position: relative; 
+    }
+
+    #image_container {
+      position:absolute; 
+      left: 290px;
+      margin-top: 0px;
+      margin-right: 0px;
+      margin-bottom: 0px;
+      margin-left: 10px;						
+    }
+    
+    #image_container img {
+      width: 420px;
+    }
+
+    .fade-box {
+        position: absolute;
+        text-align:center;
+    }
+
+    #banner_actions {
+      position: absolute; 
+      top: 0;
+      right: 0; 
+      width: 234px;
+      height: 260px;
+      padding: 10px;
+      background: #EFEFEF;
+    }
+
+    #banner_actions .banner-button {
+      background: white; 
+      padding: 10px;
+    }
+
+    #banner_actions div {
+      margin-bottom: 5px;
+    }
+
+    #banner_actions .button {
+      text-align: center; 
+      padding: 10px 5px;
+    }
+
+    #banner_actions .inverse-blue {
+      background: RGB(25,16,93); //#002b36; 
+    }
+    
+    #banner_actions .inverse-red {
+      background: #BD0000; 
+    }
+
+    #banner_actions a {
+      color: white; 
+      text-decoration: none; 
+      letter-spacing: 1px;
+    }
+
+    .actions {
+      height: 120px;
+    }
+
+    .actions li {
+      float: left;
+      margin-left: 10px;
+      color: black;
+    }
+
+    .actions li div {
+      background: whitesmoke; 
+      width: 100px; 
+      height: 100px;
+    }
+
+  </style>
+
+<% end %>
+
+<%= content_for :title_tag do %>
+	Corporate Gray Military Transition and Military Recruiting Website
+<% end %>
+
+<%= content_for :meta_keywords do %>
+military transition assistance, veteran employment, military job fairs, security clearance, retiring military, separating military, transition guide, government jobs, career advice, military spouse employment, civilian jobs, military resume, military recruitment</meta>
+<% end %>
+
+<%= content_for :meta_description do %>
+	Corporate Gray connects military veterans with employers through its military career transition books, military job fairs, and military to civilian website.</meta>
+<% end %>
+
+
+<%= content_for :banner do %>
+  <div id="banner">
+
+    <div id="image_container">
+      <div class="fade-box" id="stock-03"><%= image_tag "stock_photos/employer_homepage_photo.jpg" %></div>
+    </div>
+
+    <div id="featured_job_fair" style="width: 300px;">
+      <%= render :partial => "/shared/featured_jobfair" -%>
+    </div>
+
+    <% if !current_user %>
+      <div id="banner_actions" style="">
+
+        <div class="banner-button">
+          <div class="large bold blue">FIND CANDIDATES</div>
+          <div class="button inverse-red"><%= link_to "Try a Free Resume Search!", guest_search_resumes_path %></div>
+        </div>
+
+        <br/><br/>
+        
+        <div class="banner-button">
+          <div class="large bold blue">SEE ALL OUR SERVICES</div>
+          <div class="button inverse-blue"><%= link_to "Military Recruiting Services", services_employers_path %></div>
+        </div>
+
+      </div>
+    <% else %>
+      <div id="banner_actions" style="">
+
+        <div class="banner-button">
+          <div class="large bold blue">SEARCH CANDIDATES</div>
+          <div class="button inverse-red"><%= link_to "Search Resumes", search_resumes_path %></div>
+        </div>
+
+        <br/>
+        <br/>
+
+        <div class="banner-button">
+          <div class="large bold blue">POST JOBS</div>
+          <div class="button inverse-blue"><%= link_to "Post a Job", new_job_path %></div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="action-bar background-blue" style="margin-top: 5px; color: white; padding: 10px 15px;"> 
+
+      <div style="text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 10px; color: yellow;">FOR EMPLOYERS</div>
+
+      <div class="book" style="float:left;">
+        <%=link_to image_tag("book_sponsors.gif", :style => "height: 150px"), "/static/transition_guide/overview" %>
+      </div>
+
+      <div class="actions" style="margin-left: 120px;">
+        <ul >
+          <li><div class="action"><%= link_to image_tag('post_jobs.png', :size => "100x100"), current_user && (current_user.has_role?(:recruiter) || current_user.has_role?(:employer_admin)) && current_user.employer.job_post_allowed? ? jobs_path : "/static/employer/promote_post_job" , :alt => "Search Jobs" %></div></li>
+          <li><div class="action"><%= link_to image_tag('search_resumes.png', :size => "100x100"), guest_search_resumes_path, :alt => "Post your Resume" %></div></li>
+          <li><div class="action"><%= link_to image_tag('attend_job_fairs.png', :size => "100x100"), "/employers/job_fairs", :alt => "Attend Job Fairs" %></div></li>
+          <li><div class="action"><%= link_to image_tag('promote_your_school.png', :size => "100x100"), "/static/employer/promote_your_school", :alt => "Earn a Degree" %></div></li>
+          <li><div class="action"><%= link_to image_tag('promote_your_franchise.png', :size => "100x100"), "/static/employer/promote_your_franchise", :alt => "Be Your Own Boss" %></div></li>
+          <li><div class="action"><%= link_to image_tag('sponsor_newsletter.png', :size => "100x100"), "/static/employer/sponsor_newsletter", :alt => "View Newsletter" %></div></li>
+          <li><div class="action"><%= link_to image_tag('all_services.png', :size => "100x100"), services_employers_path, :alt => "All Services" %></div></li>
+      </div>
+    </div>
+    <div style="background: #AAA; color: white; text-align: center; padding: 10px; font-weight: bold; ">CORPORATE GRAY BOOK SPONSORS</div>
+
+  </div>
+<% end %>
+
+
+<div>
+  <%= render :partial => 'shared/military_friendly_sponsors' %>
+</div>

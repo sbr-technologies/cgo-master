@@ -1,0 +1,44 @@
+<%= render :partial => "layouts/head" %>
+
+<style>
+  #page-header {margin-right: 0;}
+</style>
+
+<body class="yui-skin-sam">
+
+  <!-- #doc4 = 974px width, centered -->
+  <div id="doc4">
+
+    <%= render :partial => "layouts/hd" %>
+
+    <div id="bd">
+      <div style="background: #FFF">
+
+        <% title = yield :page_title %>
+        <% unless title.blank? %>
+          <div id="page-header">
+            <div class="page-header-links"><%= yield :page_header_links -%></div>
+            <h1><%= yield :page_title %></h1>
+          </div>
+        <% end %>
+
+        <%=raw flashers %>
+
+        <%= yield :banner %>
+
+        <div id="page-content">
+          <%= yield %>
+          <div style="float: none; clear:both">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+
+    <%= render :partial => "layouts/ft" %>
+
+    </div><!-- bd -->
+
+
+
+</body>
+
+</html>

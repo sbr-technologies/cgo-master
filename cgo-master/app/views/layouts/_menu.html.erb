@@ -1,0 +1,54 @@
+
+<div id="menu" class="<%= @menu %>" >
+  <% if (@menu == :applicant) ||
+    (/public_profile/i =~ request.env["REQUEST_URI"]) || 
+    ((controller.controller_name != "employer") && (
+      !(/employer/i =~ request.env['REQUEST_URI']) &&
+      !(/contact_info/i =~ request.env['REQUEST_URI']) &&
+      !(/guest_search/i =~ request.env['REQUEST_URI']) )) %>
+
+    <% if (current_user.nil? || current_user.has_role?(:applicant))  %>
+      <ul>
+        <li><%= link_to_tagged_current "Home", welcome_path %></li>
+        <li><%= link_to_tagged_current "Dashboard", applicants_path %></li>
+        <li><%= link_to_tagged_current "My Resume",  current_user ? resumes_path : guest_index_resumes_path %></li>
+        <li><%= link_to_tagged_current "Find Jobs", search_jobs_path %></li>
+        <li><%= link_to_tagged_current "Job Fairs", jobfairs_path %></li>
+        <li><%= link_to_tagged_current "Transition Guide", "/static/transition_guide/overview" %></li>
+        <li><%= link_to_tagged_current "Education", "/static/career_training" %></li>
+        <li><%= link_to_tagged_current "Franchise", "/static/franchise" %></li>
+        <li><%= link_to "Blog", "http://blog.corporategray.com/", :target => "_blank" %></li>
+      </ul>
+    <% end %>
+  <% end %>
+
+  <% if (@menu == :employer) || !current_user.is_a?(Applicant)  %>
+    <% if (!current_user.nil? && (current_user.has_role?(:employer_admin) || current_user.has_role?(:recruiter))) ||
+          (current_user.nil? && (controller.controller_name == "employer")) || 
+          (current_user.nil? && ((/employer/i =~ request.env['REQUEST_URI']) || (/contact_info/i =~ request.env['REQUEST_URI']) || (/guest_search/i =~ request.env['REQUEST_URI']))) %>
+
+      <ul>
+        <li><%= link_to_tagged_current "Home", current_user && (current_user.has_role?(:recruiter) || current_user.has_role?(:employer_admin)) ?  employers_path : welcome_path %></li>
+        <li><%= link_to_tagged_current("Dashboard", dashboard_employer_recruiter_path(:employer_id => current_user.employer.id, :id => current_user.id)) if !current_user.nil? && (current_user.has_role?(:employer_admin) || current_user.has_role?(:recruiter)) %></li>
+        <li><%= link_to_tagged_current "Post Jobs", current_user && (current_user.has_role?(:recruiter) || current_user.has_role?(:employer_admin)) && current_user.employer.job_post_allowed? ? jobs_path : "/static/employer/promote_post_job", :highlights_on=>[{:controller=>"job"} ] %></li>
+        <li><%= link_to_tagged_current "Search Resumes", current_user && ( current_user.has_role?(:recruiter) || current_user.has_role?(:employer_admin) ) && current_user.employer.resume_search_allowed? ? search_resumes_path : guest_search_resumes_path %></li>
+        <li><%= link_to_tagged_current "Job Fairs", "/employers/job_fairs" -%></li>
+        <li><%= link_to_tagged_current "All Services", services_employers_path %></li>
+        <li><%= link_to_tagged_current "Blog", "http://blog.corporategray.com/", :target => "_blank" %></li>
+
+        <%if(controller.controller_name == "employer" || /employer/i =~ request.env['REQUEST_URI'] || /guest_search/i =~ request.env['REQUEST_URI'] || /contact_info/i =~ request.env['REQUEST_URI'] || (!current_user.nil? && (current_user.has_role?(:employer_admin) || current_user.has_role?(:recruiter))) ) %>
+           <li><%= link_to_tagged_current('Contact Us', '/static/contact_info') %>
+        <% end %>
+      </ul>
+      <% end %>
+    <% end %>
+
+    <% if !current_user.nil? %>
+      <ul class="right">
+        <%= raw "<li>#{link_to_tagged_current('Settings', employer_recruiters_path(current_user.employer.id))}</li>" if(current_user.has_role?(:employer_admin)) %>
+      </ul>
+    <% end %>
+</div>
+<div>
+  <%= yield :breadcrums %>
+</div>

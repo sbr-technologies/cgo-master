@@ -1,0 +1,27 @@
+<% content_for :page_title do %>
+	Editing: <%= @job.title -%>
+<% end %>
+
+<% content_for :page_header_links do %>
+	<%= link_to "New", new_job_path -%>&nbsp;|&nbsp;
+	<%= link_to "View All", jobs_path -%>
+<% end %>
+
+<%= error_messages_for @job, @address %>
+
+<%= error_handling_form_for @job, :html=>{:id => "jobform" } do |f| %>
+	<%= render :partial => "form", :object => f -%>
+
+  <div class="button-bar">
+    <a class="button" href="#" onclick="submitForm(); return false;"><span>save</span></a>
+    <div>or <%= link_to "Cancel", jobs_path, :class=>"cancel"%></div>
+  </div>
+<% end %>
+
+
+<script>
+		function submitForm() {
+				editor.saveHTML();
+				$('jobform').submit();
+		}
+</script>

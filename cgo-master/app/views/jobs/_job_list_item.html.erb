@@ -1,0 +1,5 @@
+<% div_for job_list_item do %>
+	<span><%= job_list_item.id -%></span>
+	<span><%= job_list_item.title %></span>
+	<span><%= "#{job_list_item.location.city}, #{job_list_item.location.state}" -%></span>
+<% end %>

@@ -1,0 +1,277 @@
+
+<h1 style="line-height: 1em; margin-bottom: 0em; padding-bottom: 0em; text-align: center; font-style: italic; color: black">
+	Corporate Gray Job Fair
+</h1>
+
+<br/>
+
+<h1 style="line-height: 1em; margin-bottom: 0em; padding-bottom: 0em; text-align: center; font-weight: bold; color: black">
+	Registration Form
+</h1>
+
+<br/>
+
+<div style="width: 99%; text-align: center; color: black; font-size: 1.2em; font-weight: bold;">
+	<%= "#{@registration.jobfair.city} -- #{@registration.jobfair.date.to_s(:human_long)}" %>
+</div>
+
+<p style="margin-top: 1em; margin-bottom: 1.5em; text-align: center;"><span style="color: green; font-weight: bold;">
+ Please print out this completed form and bring it with you to the Job Fair. Feel free to make any necessary corrections directly on this form after printing. 
+</span></p>
+
+<div style="width: 100%; text-align: center;  color: green; font-weight: bold;"><a style="font-size: 1.5em; color:red; font-weight: bold; font-decoration: underline; border: 1px solid green; padding: 4px;" href="#" onclick="javascript: window.print()">Click here to print your registration</a><br/><br/>(Or use your browser's print button).</div>
+</p>
+
+<br/>
+
+<style>
+
+table#registration-form {
+
+    width: 90%;
+    margin: auto; 
+	border: 1px solid black; 
+}
+
+table#registration-form tr {
+	line-height: 2em; 
+}
+
+table#registration-form td:first-child {
+  padding-left: 0.5em;
+}
+</style>
+
+
+
+<table id="registration-form"> 
+
+<tr>
+	<td colspan="5"><b>First Name:</b>&nbsp;<%= @registration.attendant.first_name -%></td>
+	<td colspan="2"><b>M.I:</b>&nbsp;____</td>
+	<td colsapn="5"><b>Last Name:</b>&nbsp;<%= @registration.attendant.last_name -%></td>
+</tr>
+
+<tr>
+	<td colspan="12"><b>Street Address:</b>&nbsp;<%= @registration.attendant.addresses[:primary].street_address1 -%></td>
+</tr>
+
+<tr>
+	<td colspan="5"><b>City:</b>&nbsp;<%= @registration.attendant.addresses[:primary].city -%></td>
+	<td colspan="2"><b>St:</b>&nbsp;<%= @registration.attendant.addresses[:primary].state -%></td>
+	<td colspan="5"><b>Zip:</b>&nbsp;<%= @registration.attendant.addresses[:primary].zip -%></td>
+</tr>
+
+<tr>
+	<td colspan="12"><b>E-mail Address:</b>&nbsp;<%= @registration.attendant.email -%></td>
+</tr>
+
+	<% if !@registration.attendant.type_of_applicant().nil? %>
+		<tr>
+			<td colspan="1"><b>Rank:</b></td>
+			<td colspan="11"><%= to_label(@registration.attendant.type_of_applicant, Constants::TYPE_OF_APPLICANT) -%></td>
+		</tr>
+
+	<% else %>
+
+		<tr>
+			<td><b>Rank:&nbsp;</b></td> <td>O-1</td> <td>O-2</td> <td>O-3</td> <td>O-4</td> <td>O-5</td> <td>O-6</td> <td>O-7</td> <td>O-8</td> <td>O-9</td> <td>O-10</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td> <td>W-1</td> <td>W-2</td> <td>W-3</td> <td>W-4</td> <td>W-5</td> 
+		</tr>
+		<tr>
+			<td>&nbsp;</td> <td>E-1</td> <td>E-2</td> <td>E-3</td> <td>E-4</td> <td>E-5</td> <td>E-6</td> <td>E-7</td> <td>E-8</td> <td>E-9</td> <td></td> <td>Civilian</td> 
+		</tr>
+		<tr>
+			<td colspan="12">(Circle highest rank ever held)</td>
+		</tr>
+
+	<% end %>
+
+
+<tr>
+	
+	<% if !@registration.attendant.branch_of_service.nil?  %>
+
+		<tr>
+			<td colspan="1"><b>Branch Of Service:</b></td>
+			<td colspan="11"><%= "#{@registration.attendant.branch_of_service} -- #{to_label(@registration.attendant.branch_of_service, Constants::BRANCH_OF_SERVICE)}" -%>
+		</tr>
+
+	<% else %>
+
+		<tr>
+			<td><b>Branch of Service:</b>&nbsp;</td> <td colspan="3">Army</td> <td colspan="4">Army Reserve</td> <td colspan="4">Army National Guard</td>
+		</tr>
+
+		<tr>
+			<td>&nbsp;</td> <td colspan="3">Navy</td> <td colspan="8">Navy Reserve</td>
+		</tr>
+
+		<tr>
+			<td>&nbsp;</td> <td colspan="3">Marine Corps</td> <td colspan="8">Marine Corps Reserve</td>
+		</tr>
+
+		<tr>
+			<td>&nbsp;</td> <td colspan="3">Air Force</td> <td colspan="5">Air Force Reserve</td> <td colspan="6">Air National Guard</td>
+		</tr>
+
+		<tr>
+			<td>&nbsp;</td> <td colspan="3">Cost Guard</td> <td colspan="8">Cost Guard Reserve</td>
+		</tr>
+
+		<tr>
+			<td colspan="10">(circle your current or final branch of service)</td> <td colspan="2">Not Applicable</td>
+		</tr>
+
+	<% end %>
+
+
+	<% if !@registration.attendant.security_clearance.nil? %>
+
+		<tr>
+			<td><b>Security Clearance:</b>&nbsp;</td> <td colspan="11"><%= to_label(@registration.attendant.security_clearance, Constants::SECURITY_CLEARANCE) -%></td>
+		</tr>
+
+	<% else %>
+
+		<tr>
+			<td><b>Security Clearance:</b>&nbsp;</td> <td colspan="3">Secret</td> <td colspan="4">Top Secret or Higher</td> <td colspan="4">None</td>
+		</tr>
+
+		<tr>
+			<td></td><td colspan="11">(circle security clearance level if held within the past 2 years)</td>
+		</tr>
+
+	<% end %>
+
+
+	<% if !@registration.attendant.education_level.nil? %>
+
+		<tr>
+			<td><b>Education Level:</b>&nbsp;</td> <td colspan="11"><%= "#{@registration.attendant.education_level} -- #{to_label(@registration.attendant.education_level, Constants::EDUCATION_LEVEL)}" -%>
+		</tr>
+
+	<% else %>
+
+		<tr>
+			<td><b>Education Level:</b>&nbsp;</td> <td colspan="3">High School</td> <td colspan="4">Associate Degree</td> <td colspan="4">Associate Degree or Higher</td>
+		</tr>
+
+		<tr>
+			<td></td>
+			<td colspan="11">(circle highest level attained)</td>
+		</tr>
+
+	<% end %>
+
+	<tr>
+		<td><b>Willing to Relocate:</b>&nbsp;</td> <td colspan="11"><%= to_yes_no(@registration.attendant.willing_to_relocate) -%></td>
+	</tr>
+
+	<tr>
+		<td><b>Availability Date:</b>&nbsp;</td><td colspan="11">Now or Enter(mm/dd/yyyy):___________</td>
+	</tr>
+
+	<tr>
+      <td colspan="12"><b>How did you hear about today's event? (circle):</b>
+        <table style="margin-left: 1em; margin-bottom: 1.5em; width: 95%; background: whitesmoke;">
+          <tr>
+            <td>Civilian Newspaper</td>
+            <td>Military Newspaper</td> 
+          </tr>
+          <tr>
+            <td>Military Transition Office</td>
+            <td>State Employment Office</td>
+          </tr>
+          <tr>
+            <td>Corporate Gray Online</td>
+            <td>Corporate Gray Books</td>
+          </tr>
+          <tr>
+            <td>MOAA</td>
+            <td>NCOA</td>
+          </tr>
+          <tr>
+            <td>ROA</td>
+            <td>REA</td>
+          </tr>
+          <tr>
+            <td>Internet</td>
+            <td>Word of Mouth</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+</table>
+
+<br/><br/>
+<div style="font-size: 1.5em; color: black; ">Job Fair Information</div>
+<p><b>Location:</b>&nbsp; <%= "#{@registration.jobfair.location}, #{@registration.jobfair.city} #{@registration.jobfair.date.to_s(:human_long)} form #{@registration.jobfair.start_time} to #{@registration.jobfair.end_time}" -%><br/>
+<b>Recommended Hotel:</b> <%= @registration.jobfair.recommended_hotel -%>
+</p>
+
+<style>
+
+table#seminars {
+	border: 1px solid #4F4F4F; 
+	border-spacing: 0px; 
+	border-style: none;  
+	border-collapse: collapse;
+}
+
+table#seminars td {
+	border-width: 1px; 
+	border-color: #4F4F4F; 
+	padding: 6px; 
+	border-style: inset; 
+}
+
+
+table#seminars th {
+	text-align: left;
+	color: white; 
+	font-weight: normal;
+	background: #BD0000;
+	border-width: 2px; 
+	border-color: #AD0000;
+	padding: 4px; 
+	border-style: inset; 
+}
+
+</style>
+
+
+<% if not @registration.jobfair.seminars.empty? %>
+
+<p><b>Seminars:</b></p>
+
+<table id="seminars" width="99%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<th>Description</th>
+		<th>Location</th>
+		<th>Time</th>
+		<th>Duration</th>
+	</tr>
+
+	<% @registration.jobfair.seminars.each do |seminar| %>
+		<tr>
+				<td><%= seminar.description %></td>
+				<td><%= seminar.time %></td>
+				<td><%= seminar.duration %></td>
+	  </tr>
+	<% end %>
+
+</table>
+
+<% end  # if not .... empty? %>
+
+
+
+<p><b>Dress:</b><br/>
+Business attire is recommended. If military, duty uniform is fine.</p>
+
+<p><b>Resume:</b><br/>
+By posting your resume in advance of the job fair, participating employers will have an opportunity to contact you before the event.</p>

@@ -1,0 +1,51 @@
+<% content_for :page_title do %>
+  About <span property="v:name"><%=@employer.name-%></span>
+<% end %>
+
+<% content_for :title_tag do %>
+  <%= "#{@employer.name} Public Profile" %>
+<% end %>
+
+<% content_for :meta_description do %>
+  <%= @employer.profile.gsub(/\n/, '') %>
+<% end%>
+
+<div style="margin: 0 1.5em 0 0.5em;" xmlns:v="http://rdf.data-vocabulary.org/#" typeof="v:Organization">
+  <p style="line-height: 2em; color:#2c2c2c;"><%= raw @employer.profile.gsub(/\n/, "<br/>") unless @employer.profile.nil? %></p>
+  <% if not @employer.website.blank? %>
+    <div style="margin-top: 20px">
+      <span property="v:url"><%= link_to "Visit #{@employer.name} Website", "http://#{@employer.website.gsub(/^http:\/\//,'')}", :class => "xbutton large blue", :target => "_blank" %></span>
+    </div>
+  <% end %>
+</div>
+
+<% 
+  jobfairs = Jobfair.all_upcoming.select do |upcoming_jobfair| 
+    @employer.registrations.any? {|r| r.jobfair.id == upcoming_jobfair.id}
+  end
+%>
+
+<% unless jobfairs.empty? %>
+  <div style="margin-left: 0.5em">
+  <h3>Visit Us At These Upcoming Job Fairs</h3>
+  <ul>
+    <% jobfairs.each do |jobfair| %>
+      <li style="margin-bottom: 0.5em; margin-left: 1em;list-style: disc inside;"><%= "#{jobfair.location}, #{jobfair.city} on #{jobfair.date.to_s(:human)}" %></li>
+    <% end %>
+
+  </ul>
+  </div>
+<% end %>
+
+
+
+<% unless @jobs.empty? %>
+  <% content_for :right do %>
+    <h3>Recent Jobs Posted By <%= @employer.name -%></h3>
+    <ul>
+    <% @jobs.each do |job| %>
+      <li style="margin-top: 5px"><%= link_to "#{truncate(job.title, :length => 50)}", public_profile_job_path(job.code.gsub("/", "#2F#")), :title=> "View Job: #{job.title}", :style => "text-decoration: none;" %></li>
+    <% end%>
+    </ul>
+  <% end %>
+<% end %>

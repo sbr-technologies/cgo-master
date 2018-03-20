@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  New Job
+<% end %>
+
+
+<%= content_for :title_tag do %>
+	Recruiter Military to Civilian Job Posting
+<% end %>
+
+<%= content_for :meta_keywords do %>
+post jobs, job search, veteran employment, security clearance, government jobs, military spouse employment, civilian jobs, military recruitment, military friendly companies, hire military, hiring veterans
+<% end %>
+
+<%= content_for :meta_description do %>
+Corporate Gray military to civilian website enables recruiters to post their company job opportunities and openings to attract military candidates.
+<% end %>
+
+
+<%= error_messages_for @job, @address %>
+
+<%= error_handling_form_for @job, :html=>{:id => "jobform" } do |f| %>
+  <%= render :partial => "form", :object => f -%>
+  <div class="button-bar">
+    <a class="button" href="#" onclick="javascript: submitForm();"><span>save</span></a>
+    <div>or <%= link_to "Cancel", jobs_path, :class=>"cancel"%></div>
+  </div>
+<% end %>
+
+
+
+<script>
+    function submitForm() {
+      editor.saveHTML();
+      $('jobform').submit();
+
+      return false;
+    }
+</script>

@@ -1,0 +1,45 @@
+<fieldset>
+  <div class="inline">
+  <%= form.select :sponsor,  Jobfair::SPONSORS.collect {|k,v| [v, k]}, {:include_blank => false } -%>
+  <%= form.select(:category, Jobfair::TYPES.collect {|x| [x.titleize,x]}, {:include_blank => false}) -%>
+</div>
+
+
+<div class="inline">
+  <%= form.text_field :date , :class=>"S"-%>
+  <%= form.text_field :start_time, :class=>"S" -%>
+  <%= form.text_field :end_time, :class=>"S" -%>
+</div>
+
+<%= form.select :security_clearance_required , [["No", false], ["Yes", true]] %>
+
+</fieldset>
+
+<fieldset>
+  <%= form.text_field :external_registration_url, :label => "Employer External Registration URL" %>
+  <%= form.text_field :applicant_external_registration_url, :label => "Applicant External Registration URL" %>
+  <%= form.text_field :fees -%>
+  <%= form.text_field :city -%>
+</fieldset>
+
+<fieldset class="inline">
+  <%= form.text_field :location -%>
+  <%= form.text_field :location_url -%>
+</fieldset>
+
+<fieldset class="inline">
+  <%= form.text_field :recommended_hotel -%>
+  <%= form.text_field :recommended_hotel_url -%>
+</fieldset>
+
+<fieldset>
+	<legend>Seminars</legend>
+	<div style="font-weight: bold"><span style="margin-right:20em">Description</span><span style="margin-right: 5em">Duration</span><span>Time</span></div>
+
+	<div id="seminars" style="margin-top: 0px;">
+			<%= render :partial => "seminar_form", :collection => @jobfair.seminars -%>
+	</div>
+	<div style="margin-top: 15px">
+			<%= add_seminar_link "Add Seminar" %>
+	</div>
+</fieldset>

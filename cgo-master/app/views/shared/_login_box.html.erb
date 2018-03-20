@@ -1,0 +1,17 @@
+<div class="round-corners dark-highlight" >
+  <div style="postion: relative; width: 300px;">
+    <h2 style="margin: 0px 5px 5px 5px;text-align:center; padding-bottom:5px;">
+      <%= user_type == :employer ? "Employer Login" : "Job Seeker Login" -%>
+    </h2>
+
+    <%= render :partial => "/session/new.html.erb" %>
+
+    <div style="text-align:right; border-top:1px solid #CCC; padding:6px 10px 2px 3px; margin:5px 5px 0px 5px;">
+      <% if user_type != :employer %>
+        <%= link_to "Not a member? Create an account", new_applicant_path, :class=>"action_link", :style=>"color:#FFF;" -%>
+      <% else %>
+        <%= link_to "Not a member? Create an account", new_employer_path, :class=>"action_link", :style=>"color:#FFF;" -%>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<% content_for :page_title do %>
+About the Authors
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag "transition_guide" %>
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:transition_guide => "/static/transition_guide/overview" },
+      :about_the_authors
+  ] } %>
+<% end %>
+
+<div>
+<%= image_tag "carl_savino.jpeg", :style => 'float:right; margin-left: 1em; margin-bottom: 1em; margin-right: 0.5em;' %>
+<p><b>Carl Savino</b>, is a recognized leader in the field of military-to-civilian career transition. After completing active service, he worked as a consultant for Booz-Allen & Hamilton and later the Hay Group. In 1996, Carl founded Competitive Edge Services, a company dedicated to connecting employers with transitioning and former military.</p>
+<p>His popular "Corporate Gray Job Fairs for Military Personnel" (www.corporategray.com) are held at various locations across the country. Carl is co-author of The Military-to-Civilian Transition Guide and Military Resumes and Cover Letters.</p>
+<p>Carl holds a bachelor's degree in Engineering from the U.S. Military Academy at West Point and advanced degrees from George Washington University and the University of Pennsylvania. He can be contacted at carl@corporategray.com.</p>
+</div>
+
+
+<div style="margin-top: 3em;">
+<%= image_tag "ron_krannich.jpeg", :style => 'float:right; margin-left: 1em; margin-bottom: 1em; margin-right: 0.5em;' %>
+<p><b>Ron Krannich</b> is one of America's leading career and travel writers who has authored more than 80 books. A former Peace Corps Volunteer and Fulbright Scholar, he received his Ph.D. in Political Science from Northern Illinois University. He operates Development Concepts Incorporated, a training, consulting, and publishing firm in Virginia (www.impactpublications.com).</p>
+<p>Ron is a former university professor, high school teacher, management trainer, and consultant. He has completed numerous projects on management, career development, local government, population planning, and rural development in the United States and abroad.</p>
+<p>His career books focus on key job search skills, military and civilian career transitions, government and international careers, travel jobs, and nonprofit organizations. They include such classics as High Impact Resumes and Letters, Interview for Success, and Change Your Job, Change Your Life. Ron can be contacted at ron@impactpublications.com.</p>
+</div>
+
+<% content_for :right do %>
+  <%= render :template => 'static/transition_guide/right_menu.html.erb' %>
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'transistion_guide' %>
+<% end %>

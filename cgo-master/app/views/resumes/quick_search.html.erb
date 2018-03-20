@@ -1,0 +1,28 @@
+<% if @resumes.nil? %>
+
+								<div style="cursor:pointer;" onclick="Effect.Fade('quick-search-results', {duration: 0.75});">
+																<%= image_tag "/images/icns/aesthetica/16x16/warning.png", :style=>"margin-right: 5px; vertical-align: bottom;"%>
+																You must enter a search keyword in the space above (i.e. 'engineer')
+								</div>
+
+<% elsif @resumes.docs.empty? %>
+
+								<div style="cursor:pointer;" onclick="Effect.Fade('quick-search-results', {duration: 0.75});">
+																<%= image_tag "/images/icns/aesthetica/16x16/warning.png", :style=>"margin-right: 5px; vertical-align: bottom;"%>
+																No resumes found, please try similar keywords
+								</div>
+
+<% else %>
+								<div style="cursor:pointer;" onclick="$('quick-search-results').hide();">
+																<h3 style="margin-top: 3px;float:left;clear:none; margin-bottom: 3px;"><%= "Showing 3 results out of #{@resumes.total} in our database" -%></h3>
+																<%= image_tag "/images/icns/custom/16x16/close.gif", :style=>"float:right; clear:none; margin-right: 5px;"-%>
+								</div>
+								<ul style="float:none; clear:both; padding-top: 5px; margin-right: 8px; border-top: 1px solid #CCC;">
+																<% 3.times do |i| %>
+																								<li style="padding-bottom: 5px; padding-left: 10px;">
+																																<%= truncate("<b>#{@resumes.docs[i].applicant.first_name}, #{@resumes.docs[i].applicant.last_name[0..0]}:</b> #{try {@resumes.docs[i].applicant.address.city_state} }", 80) -%>
+																								</li>
+																<% end %>
+								</ul>
+								<div style="text-align: right; margin-top: 5px; margin-right: 5px;" ><%= link_to "Want to see more? Register or Login", applicants_path, :class=>"action_link"%></div>
+<% end %>

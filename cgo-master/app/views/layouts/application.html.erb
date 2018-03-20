@@ -1,0 +1,46 @@
+<%= render :partial => "layouts/head" %>
+
+<body class="yui-skin-sam">
+
+  <!-- #doc4 = 974px width, centered, yui-t6: 2 cols 300px on right. -->
+  <div id="doc4" class="yui-t6">
+
+    <%= render :partial => "layouts/hd" %>
+
+    <div id="bd">
+
+      <div id="yui-main">
+	    <div class="yui-b" id="content-container" >
+          <% title = yield :page_title %>
+          <% unless title.to_s.blank? %>
+            <div id="page-header">
+              <div class="page-header-links"><%= yield :page_header_links -%></div>
+              <h1><%= yield :page_title %></h1>
+            </div>
+          <% end %>
+
+          <div id="page-content">
+            <% if flashers %>
+              <%=raw flashers %>
+              <br/>
+            <% end %>
+            <%= yield %>
+            <div style="float: none; clear:both">&nbsp;</div>
+          </div>
+	    </div>
+	    <div style="background: url(/images/bottom-bg.gif) no-repeat top right; height: 7px;margin-right: 313px;"></div>
+      </div>
+
+      <div id="page-sidebar" class="yui-b">
+	    <%= yield :right %>
+      </div>
+
+    </div><!-- bd -->
+
+    <%= render :partial => "layouts/ft" %>
+
+  </div><!-- doc4 -->
+
+</body>
+
+</html>

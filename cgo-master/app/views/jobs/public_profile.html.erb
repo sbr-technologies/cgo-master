@@ -1,0 +1,71 @@
+<% if !@job.blank? %>
+
+  <% content_for :page_title do %>
+    Job Title:&nbsp;<%= @job.title %>
+  <% end %>
+
+  <% content_for :title_tag do %>
+    <%= @job.title.titleize %>
+  <% end %>
+
+  <% content_for :meta_description do %>
+    This is a search for <%= @job.title -%> by <%= @job.employer.name -%>. Candidates are welcome to apply to this job posting on
+    http://www.corporategray.com 
+  <% end %>
+
+  <% content_for :head do %>
+    <%= stylesheet_link_tag 'bootstrap.min'  %>
+  <% end %>
+
+
+  <table>
+    <tr>
+      <td>
+        <div>Posted by: <%= link_to @job.employer.name, "http://#{@job.employer.website.strip.gsub(/^http:\/\//, '')}", :popup => true %> on <%= @job.updated_at.to_date.to_s(:human) %></div>
+        <h3>Description:</h3>
+        <% if @job.input_method == "manual" %>
+          <div class="ritch-text"><%= raw @job.description %></div>
+        <% else %>
+          <%= raw @job.description.gsub(/\n/, "<br/>") %>
+        <% end %>
+      </td>
+    </tr>
+  </table>
+
+
+  <% content_for :right do %>
+
+      <div class="well" style="text-align: center">
+        <h3 style="margin-top:0"><%= link_to "Sign Up", new_applicant_path %> to Apply to this position, or if you already have a CGO account, just press "Apply ..." </h3>
+        <% if @job.online_application_url.blank? %>
+          <%= link_to "Apply To This Position", apply_job_path(@job.id), :class => "btn btn-primary btn-large", :style => "text-decoration: none !important" %>
+        <% else %>
+          <%= link_to "Apply To This Position", @job.online_application_url, :class => "btn btn-primary btn-large", :style => "text-decoration: none !important" %>
+        <% end %>
+      </div>
+
+      <div style="margin-top: 30px; margin-bottom: 20px;">
+        <h3 style="margin-top:0px; text-decoration: underline">About <%= @job.employer.name -%></h3>
+        <%= @job.employer.profile -%>
+
+        <div style="margin-top: 1em">Please visit this employer's <%= link_to "Public Profile", public_profile_employer_path(@job.employer.id), :style=>"font-weight: bold; " %> to see more jobs offered by <%= link_to @job.employer.name, "http://#{@job.employer.website.gsub(/^http:\/\//, '')}", :style=>"font-weight: bold;", :popup => true -%></div>
+      </div>
+
+
+  <% end %>
+
+<% else %>
+
+  <% content_for :page_title do %>
+    Job Not Found
+  <% end %>
+
+  <% content_for :title_tag do %>
+    Job Not Found
+  <% end %>
+
+  <div>
+    The referenced job can't be found; the job's ID might have changed.
+  </div>
+
+<% end %>

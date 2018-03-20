@@ -1,0 +1,46 @@
+<fieldset style="margin-bottom:10px;">
+    <legend>Company Information</legend>
+  <!-- hidden_field_tag "recruiter[employer_id]", nil, :id => "employer_id" -->
+
+  <%= form.text_field :name, :id =>"employer_name", :style => "width:18em", :label => "Company Name" %>
+  <%= form.text_field :ticker_symbol, :label => "Ticker Symbol (i.e. MSFT, INTC, IBM)" %>
+
+</fieldset>
+
+<fieldset id="company_information" style="margin-top:0px; padding-top:0px;" class="no-border">
+    <legend></legend>
+
+  <%= form.check_box :is_federal_employer, :label => "Federal Contractor?" %>
+    <div style="margin-top: 0; margin-bottom: 5px; font-size: 82%; font-style:italic; color:#4c4c4c; padding:0px; float:left; clear:both; ">
+      Check 'Federal Contractor' if you are a goverment contractor required to comply with OFCCP regulations
+    </div>
+
+  <%= form.text_field :track_image_url -%>
+  <%= form.check_box :is_replace_all_on_import, :label => "Replace all jobs on import?" %>
+  <%= form.text_field :website %>
+  <%= form.text_field :twitter_handler, :label => "Twitter Handle (optional)" %>
+  <%= form.text_area :profile, :rows => 8, :cols => 75 %>
+
+</fieldset>
+
+<fieldset>
+  <legend>Site Access Information</legend>
+  <%= form.datetime_select(:job_postings_expire_at, :include_blank => true, :start_year => 2009,:use_month_numbers => true, :order => [:month, :day, :year]) %>
+  <%= form.datetime_select(:resume_search_expire_at, :include_blank => true, :start_year => 2009,:use_month_numbers => true, :order => [:month, :day, :year]) %>
+</fieldset>
+
+<fieldset>
+  <legend>Sales Information</legend>
+  
+  <%= form.select :referal_source,  [["Please Choose", -1]] + (Employer::REFERRAL_SOURCES.collect {|k, v| [v.titleize, k.to_s]}) %>
+  <%= form.select :sales_person_id, [['Please Choose', -1]] + (User.administrators.collect {|adm| [adm.name, adm.id]}) %>
+  <%= form.text_field :max_recruiters, :class => "S" -%>
+  
+  <%= form.text_area :comments, :rows => 8, :cols => 75 %>
+</fieldset>
+
+<script>
+  document.observe("dom:loaded", function() { 
+    $('company_information').show(); 
+  });
+</script>

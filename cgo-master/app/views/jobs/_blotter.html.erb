@@ -1,0 +1,55 @@
+<% content_for :head do %>
+
+  <%= stylesheet_link_tag "blotter", "jobs" %>
+
+  <script language="javascript">
+
+        function showIndicator(el) {
+          $(el).up(1).down('.indicator').show(); 
+        }
+
+        function hideIndicator(id) {
+          $$('job_'+id+' img.indicator')[0].show();
+        }
+
+        function showStatus(model_id, msg) {
+          var el = $$('#job_'+model_id+' .actionStatus')[0];
+          el.innerHTML = msg;
+          el.show();
+          Effect.Fade(el, {duration:8.0});
+        }
+
+
+        // Link Behaviors
+        document.observe('dom:loaded', function() {
+
+
+          $$('.inbox-handler').invoke('observe', 'click', function() {
+            showIndicator(this);
+          });
+
+          $$('.send-message-handler').each(function(handler) {
+            var mdl = new Control.Modal(handler, {
+              className: 'modal',
+              method: 'GET', 
+              overlayOpacity: 0.75,  
+              indicator: $('loading-indicator'),
+              fade: true
+            });
+          });
+
+        });
+
+  </script>
+
+<% end %>
+
+<div class="blotter">
+  <ul id="jobs">
+    <%= render :partial =>  @jobs.results  %>
+  </ul>
+</div>
+
+<div id="loading-indicator" style="display: none; position: absolute; top: 45%; left: 45%; font-size: 1.5em; font-weight: bold; background:#FFF; border: 2px solid #A0A0A0; padding: 1em; padding-right: 0.85em; ">
+  Loading <%= image_tag "dots.gif" %>
+</div>

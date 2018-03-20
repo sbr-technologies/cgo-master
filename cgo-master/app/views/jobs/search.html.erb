@@ -1,0 +1,63 @@
+<% content_for :page_title do %>
+  <% unless @jobs.nil? %>
+    <%= @jobs.total %> jobs found for: <%= @keywords.blank? ? @employer_name : "'#{@keywords}' #{!@employer_name.blank? ? 'within ' + @employer_name : ''}"%> <%= "in states: #{@states.join(', ')}" unless @states.blank? %>
+  <% else %>
+    Find Jobs On Corporate Gray Online
+  <% end %>
+<% end %>
+
+<%= content_for :title_tag do %>
+	Job Seeker Military to Civilian Job Search
+<% end %>
+
+<%= content_for :meta_keywords do %>
+	military transition assistance, job search, find jobs, veteran employment, security clearance, government jobs, military spouse employment, civilian jobs, military recruitment, military friendly companies
+<% end %>
+
+<%= content_for :meta_description do %>
+	Corporate Gray military to civilian website helps veterans search for and find civilian jobs.
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      :jobs, 
+      :search
+  ] } %>
+<% end %>
+
+
+<% if !@jobs.nil? && !@jobs.hits.empty? %>
+
+  <div style="margin-top: 30px">
+    <%= will_paginate @jobs.hits %>
+  </div>
+
+  <%= render :partial => "blotter", :jobs => @jobs -%>
+
+  <div style="margin-top: 30px">
+    <%= will_paginate @jobs.hits %>
+  </div>
+
+<% else %>
+
+  <div class="instructional-text" style="margin: 0 10px;">
+    <p>Use Corporate Gray to find jobs posted by hundreds of military-friendly companies nationwide. 
+    There are thousands of employment opportunities for you to search and apply online.</p>
+    <br/>
+    <p>Companies such as Lockheed Martin, Hewlett-Packard, State Farm, Engility, Amazon, Averitt Express, 
+    Coca-Cola, and many more, have their jobs posted on Corporate Gray Online.</p>
+  </div>
+
+<% end %>
+
+<% content_for :right do %>
+	<%= render :partial => "search_form", :locals => {:q => params[:q] || {} } %>
+    <br/>
+    <%= render :partial => "shared/featured_employer_skyscraper.html.erb" %>
+
+    <br/>
+
+    <iframe width="300" src="http://www.youtube.com/embed/vWJU3RhqoQA?rel=0" frameborder="0" allowfullscreen></iframe>
+<% end %>

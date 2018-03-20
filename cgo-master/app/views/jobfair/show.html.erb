@@ -1,0 +1,101 @@
+<% content_for :page_title do %>
+  <%= @jobfair.category == "military_officer" ? "Officer and Sr. NCO" : @jobfair.category.titleize %> Job Fair
+<% end %>
+
+<% content_for :title_tag do %>
+  <%= "Corporate Gray Job Fair: #{@jobfair.date.to_s(:human_long)} at #{@jobfair.location}" %>
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:job_fairs => jobfairs_path}, 
+      @jobfair.location + " (" + @jobfair.category + ") / " + @jobfair.date.to_s(:human)
+  ] } %>
+<% end %>
+
+<% if !current_user || current_user.is_a?(Applicant) %>
+  <%= content_for :meta_description do %>
+    Corporate Gray job fairs connect military veterans in career transition with military friendly employers and schools.
+  <% end %>
+<% else %>
+  <%= content_for :meta_description do %>
+    Corporate Gray Job Fairs enable recruiters to screen and evaluate military veterans for company employment.
+  <% end %>
+<% end %>
+
+
+<% # Determine Audience 
+   (audience = "Officer & Sr. NCO") if @jobfair.category == "military_officer"
+   (audience = @jobfair.category.titleize) if @jobfair.category != "military_officer"
+ %>
+
+<table class="show-model">
+  <tr><td class="label">Audience:</td><td><%= audience %></td>
+  <tr><td class="label">Sponsor:</td><td><%= Jobfair::SPONSORS[@jobfair.sponsor.to_sym] %></td></tr>
+  <tr><td class="label">Date:</td><td><%= @jobfair.date.to_s(:human_long) %></td></tr>
+  <tr><td class="label">Time:</td><td><%= "#{@jobfair.start_time} - #{@jobfair.end_time}"%></td></tr>
+  <% if current_user.is_a?(Recruiter) %>
+    <tr><td class="label">Fees:</td><td><%= @jobfair.fees %></td></tr>
+  <% end %>
+  <tr><td class="label">Location:</td><td><%= raw "<a class='external' href='http://#{@jobfair.location_url.gsub(/^http:\/\//, "").downcase}'>#{@jobfair.location.titleize}</a> - #{@jobfair.city}"%></td></tr>
+  <tr><td class="label">Recommended Hotel:</td><td><%= raw "<a class='external' href='http://#{@jobfair.recommended_hotel_url.gsub(/^http:\/\//, "").downcase}'>#{@jobfair.recommended_hotel.titleize}</a>" %></td></tr>
+  <tr><td class="label">Clearance Required?:</td><td><%= to_yes_no(@jobfair.security_clearance_required?).capitalize %></td></tr>
+</table>
+
+<%= render :partial => "seminars.html.erb" %>
+
+<% if current_user %>
+  <div class="button-group" style="margin-top: 20px; margin-right: 20px; text-align: center; ">
+    <% if !current_user.registered?(@jobfair) %>
+        <% if current_user.is_a?(Recruiter)  %>
+          <%= link_to "Register to this Event", @jobfair.external_registration_url.to_s.strip.blank? ? new_jobfair_registration_path(@jobfair.id) : @jobfair.external_registration_url, :class=> "flat-button flat-button-red" %>
+        <% else %>
+            <% if @jobfair.applicant_can_register?(current_user)  %>
+              <%= link_to "Register to this Event", @jobfair.applicant_external_registration_url.to_s.strip.blank? ? new_jobfair_registration_path(@jobfair.id) : @jobfair.applicant_external_registration_url, :class => "flat-button flat-button-red" -%>
+            <% else %>
+              <div style="font-style:italic; font-weight: bold; background-color: whitesmoke; padding: 8px; " >Officers/Sr NCOs Only</div>
+            <% end %>
+        <% end %>
+    <% else %>
+      <div style="font-style:italic; font-weight: bold; background-color: whitesmoke; padding: 8px; " >Your are already registered</div>
+    <% end %>
+  </div>
+<% end %>
+
+
+<% content_for :right do %>
+
+  <div style="text-align: center">
+    <% if !current_user %>
+      <div style="margin-bottom: 20px">
+        <%= link_to "Login to Register", login_path, :style => "width: 273px", :class => "flat-button flat-button-red", :style => "display: block" %>
+    </div>
+    <% end %>
+  </div>
+
+  <br/>
+
+  <% if @jobfair.category != 'virtual' %>
+    <iframe width="300" src="http://www.youtube.com/embed/Kknoj-AOPho?rel=0" frameborder="0" allowfullscreen></iframe>
+  <% else %>
+    <iframe width="300" src="http://www.youtube.com/embed/tUa_qmbfm4A?rel=0" frameborder="0" allowfullscreen></iframe>
+  <% end %>
+
+  <% if @jobfair.employer_registrations.length > 0 %>
+    <h3>Attending Employers</h3>
+    <ul>
+      <% @jobfair.employer_registrations.sort {|a,b| a.attendant.employer.name <=> b.attendant.employer.name}.each do |registration| %>
+        <li style="margin-top: 5px;"><%= link_to registration.attendant.employer.name, public_profile_employer_path(registration.attendant.employer.id) -%></li>
+      <% end %>
+    </ul>
+  <% end %>
+
+  <br/>
+
+  <div style="margin-top: 20px;">
+    <%= render :partial => "/shared/featured_employer_skyscraper.html.erb" %>
+  </div>
+
+<% end %>

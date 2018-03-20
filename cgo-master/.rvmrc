@@ -1,0 +1,8 @@
+#!/bin/bash
+
+RVM_DEV_ENV='1.8.7@cgray'
+
+if [ "${RAILS_ENV:-}" == 'development' ]; then  
+	rvm $RVM_DEV_ENV
+	echo "Using rvm's development environment (${RVM_DEV_ENV})"
+fi

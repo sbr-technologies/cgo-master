@@ -1,0 +1,17 @@
+<div>
+  <div id=close-handle onclick="resume_modal.close()">X</div>
+  <h2 style="margin-top:0">Upload Your Resume</h2>
+
+  <%= error_handling_form_for @resume, :html => {:id => "resume-form", :multipart => true } do |f| %>
+
+    <%= render :partial => "form", :object => f %>
+
+
+    <div class="button-bar">
+      <%= link_to "save", "#", :class => "xbutton green large", :style => "float:left; margin-right: 5px;", :onclick => "$('resume-form').submit(); modal.close(); return false;" %>
+      <div>or <%= link_to "Cancel", "#", :class=>"cancel", :onclick => "resume_modal.close(); return false;" %></div>
+    </div>
+  <% end %>
+
+
+</div>

@@ -1,0 +1,62 @@
+#applicants {
+  margin-right: 3px;
+}
+
+#applicants .applicant { 
+  margin-top: 10px; 
+  border: 1px solid #CCC; 
+  padding: 15px;
+}
+
+#applicants .applicant .sub-title {
+  color: #4c4c4c;
+  font-size: 1em;
+  font-style: italic;
+  margin-bottom: 1.5em;
+}
+
+#applicants .applicant .employer {
+  color: #9C9C9C;
+  font-weight: bold; 
+}
+
+#applicants .applicant .title {
+  margin-bottom: 0;
+}
+
+#applicants .applicant .title a, #applicants .applicant a:visited {
+  color: inherit;
+  text-decoration: none;
+}
+
+#applicants .applicant a:hover {
+  text-decoration: underline;
+}
+
+#applicants .applicant .body {
+  color: #4c4c4c;
+  line-height: 1.5em;
+}
+
+#applicants .avatars {
+  overflow:auto;
+  width: 100%;
+}
+
+#applicants .avatar {
+  float: left;
+  text-align: center; 
+  width: 120px
+}
+
+#applicants .avatar img {
+  padding: 3px;
+  border: 1px solid #CCC;
+}
+
+#applicants .avatar .name {
+  color: #4c4c4c;
+  margin-top: 3px;
+  font-size: 1.1em;
+} 
+

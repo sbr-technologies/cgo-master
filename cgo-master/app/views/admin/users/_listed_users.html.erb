@@ -1,0 +1,24 @@
+<style>
+  ul#users_list li {
+    margin-bottom: 3px; 
+    padding: 6px 3px;
+    border: 1px solid #CCC; 
+  }
+
+  ul#users_list a {
+    text-decoration:none
+  }
+
+  ul#users_list a:hover {
+    text-decoration: none;
+    color: white; 
+    background: blue;
+  }
+</style>
+
+<h2 style="background: #010C2A; color:#FFF; padding-top: 2em; padding-left: 4px; margin: 0;" >Recruiters</h2>
+<ul id="users_list">
+  <%  (@users.sort {|a,b| a.name <=> b.name}).each do |user| %>
+    <li><%= link_to user.name, edit_user_path(user.id)-%>&nbsp;(last login: <%=user.last_login_at.to_formatted_s(:short) rescue "Never" -%>)</li>
+  <% end %>
+</ul>

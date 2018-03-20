@@ -1,0 +1,219 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'livepipe' %>
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      :applicant, 
+      :dashboard
+  ] } %>
+<% end %>
+
+<% content_for :page_title do %>
+  Dashboard
+<% end %>
+
+<%= content_for :title_tag do %>
+	Corporate Gray Military to Civilian Career Transition Website Dashboard
+<% end %>
+
+<%= content_for :meta_keywords do %>
+	military transition assistance, veteran employment, military job fairs, security clearance, retiring, separating, transition guide, government jobs, career advice, military spouse employment, civilian jobs, military resume, military recruitment
+<% end %>
+
+<%= content_for :meta_description do %>
+	On the Dashboard page, the job seeker views registered job fairs, recent messages to and from military friendly employers, recent job applications, and saved jobs.
+<% end %>
+
+
+<% if @inbox.empty? && @registrations.empty? && @applications.empty?%>
+  <div class="round-corners" style="background: #DDD; border: 1px solid #CCC; color: #4c4c4c; margin-right: 8px; margin-top: 20px;">
+    <p style="padding:10px;">
+	  In this section you will be notified of important events occuring in your account;
+	  like job fair registrations, saved jobs, or job applications.
+      <b>At the moment there are no notifications to display.</b>
+    </p>
+  </div>
+  <br/>
+<% end %>
+
+
+<div class="messages" style="padding-top: 5px;">
+  <h2 style="margin-left: 5px">Registered Job Fairs</h2>
+  <ul style="margin-top: 10px">
+    <% if not @registrations.empty? %>
+        <% @registrations.each do |registration| %>
+          <li>
+          <span style="float:left" ><%= raw "<b>#{relative_date(registration.jobfair.date)}</b> #{registration.jobfair.location}"-%></span>
+          <span style="float:right"><%= link_to "Print Form", jobfair_registration_path(:jobfair_id => registration.jobfair.id, :id => registration.id), :popup => true -%></span>
+          <span style="float:right; margin-right: 8px;"><%= link_to "View Job Fair", jobfair_path(registration.jobfair.id) -%></span>
+          </li>
+        <% end %>
+
+    <% else %>
+        <div style="text-align:center; font-style: italic; font-weight: bold; color: #CCC; border-bottom: 1px dashed #CCC;">None</div>
+    <% end %>
+  </ul>
+</div>
+
+<div class="messages">
+  <h2 style="margin-left: 5px;">Recent Messages</h2>&nbsp;&nbsp;<%= link_to("View All", messages_path, :class=>"action_link") unless @messages_inbox.empty? %>
+  <%= render :partial => "/messages/list.html.erb", :locals => {:messages => @messages_inbox} %>
+</div>
+
+
+<div class="messages" >
+  <h2 style="margin-left: 5px">Recent Job Inquiries</h2>
+  <ul style="margin-top:10px;">
+     <% if not @applications.empty? %>
+        <% @applications.each do |application| %>
+          <% unless application.job.to_s.blank? %>
+            <li>
+              <span><b><%= relative_date(application.created_at).capitalize -%></b>&nbsp;<%= application.job.title -%></span>
+              <span><%= link_to "View Job", job_path(application.job.id) -%></span>
+            </li>
+          <% end %>
+        <% end %>
+    <% else %>
+      <div style="text-align:center; font-style: italic; font-weight: bold; color: #CCC; border-bottom: 1px dashed #CCC;">None</div>
+    <% end %>
+  </ul>
+</div>
+
+
+<div class="inbox_entries" style="margin-top:20px; margin-left:5px; position:relative;">
+  <h2>Saved Jobs</h2>
+
+  <% if not @inbox.empty? %>
+
+    <table class="blotter">
+      <thead>
+        <tr>
+          <th width="12%">Added On</th>
+          <th width="15%">Employer</th>
+          <th>Job Title</th>
+          <th>Location</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @inbox.each do |inbox_entry| %>
+          <tr id="inbox_entry_<%=inbox_entry.id%>" >
+            <td><%= inbox_entry.created_at.to_date.to_s(:short) %></td>
+            <td><%= truncate(inbox_entry.resource.company_name || inbox_entry.resource.employer.name, :length => 12)  %></td>
+            <td><%= link_to truncate(inbox_entry.resource.title, :length => 45), job_path(inbox_entry.resource.id) %></td>
+            <td><%= "#{truncate(inbox_entry.resource.addresses[:location].city, :length => 16)}, #{inbox_entry.resource.addresses[:location].state}" %></td>
+            <td style="text-align: right"><%= link_to "remove", remove_from_inbox_job_path(inbox_entry.resource.id), :remote => true %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+  <% else %>
+
+      <div style="margin-top: 20px">
+        <div class="round-corners dark-highlight" style="margin:3px;">
+          <p style="padding:15px; line-height: 2em">
+          You can use this area to save interesting job opportunities 
+          for review or analysis. To add a job to your dashboard, just 
+          press the "Save" button on any job search result; we will keep 
+          a maximum of 25 jobs. Jobs already saved to your dashboard will 
+          instead show a "Delete" button that will allow you to delete old 
+          job opportunities from this section.
+          </p>
+        </div>
+      </div>
+  <% end %>
+
+</div>
+
+
+<div id='add-authentication-modal' style="display:none">
+
+  <div id=close-handle onclick="modal.close()">X</div>
+  <h2 style="margin-top:0">Do you want to add your LinkedIn Account?</h2>
+  <p style="line-height: 1.8em; color: #4c4c4c; font-size: 13px">
+  You can add unique social features
+  if you authorize CGO to access your 
+  linkedin account. Click the button
+  bellow to proceed:
+  </p>
+
+  <div style="width: 85px; margin: 15px auto; margin-bottom:0;">
+    <%= link_to image_tag('linkedin.png'), '/auth/linked_in' %>
+  </div>
+
+  <div style="position: absolute; bottom: 10px; text-align: center; width: 95%;">
+    <%= form_for :applicant, :url => enable_social_login_applicant_path(@applicant.id), :remote => true, :html => { :id => "toggle-social-login-form" } do |f| %>
+      <%= f.check_box  :social_login_enabled, :checked => false, :style => "width: 1em; margin-right: 0.5em;" %>No, Thank You. Don't Ask Again
+      <%= f.submit :id => 'submit-button', :style => "display: none;" %>
+    <% end %>
+  </div>
+
+  <script>
+    function showLinkedInModal() {
+      $('applicant_social_login_enabled').on('change', function(e) { 
+        $('submit-button').click();
+        modal.close();
+      });
+    }
+
+    document.observe("dom:loaded", function() {
+        // showLinkedInModal();
+    });
+
+  </script>
+
+</div>
+
+
+
+<% content_for :right do %>
+
+  <div>
+    <h2 style="margin-top: 0px; margin-bottom: 5px;">Your Account Activity</h2>
+
+    <div style="border: 1px solid #A0A0A0; padding: 8px 4px;">
+
+      <div style="font-weight: bold; margin-top: 1em;" >Your resume was last updated on:</div>
+        <% unless @applicant.resume.to_s.blank? %>
+          <%= @applicant.resume.updated_at.to_date.to_s(:human) -%>&nbsp;
+        <% else %>
+          Please&nbsp;<%= link_to "Post Your Resume", new_resume_path -%>
+        <% end %>
+      </div>
+
+    </div>
+
+  <br/>
+
+  <%= render :partial => "/shared/featured_employer_skyscraper.html.erb" %>
+<% end %>
+
+<style>
+  .modal {
+    width:400px; 
+    height:250px; 
+  }
+</style>
+
+<script>
+  <% if(@show_new_authentication_modal && false) %>
+
+    var modal;
+    Event.onReady(function() {
+      //Modal Window  
+      modal = new Control.Modal($('add-authentication-modal'),{  
+          overlayOpacity: 0.75,  
+          className: 'modal',  
+          fade: true  
+      });  
+
+      modal.open();
+    });
+
+  <% end %>
+
+</script>

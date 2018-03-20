@@ -1,0 +1,124 @@
+<% content_for :page_title do %>
+Edit Recruiters Employer Admin
+<% end %>
+
+<script>
+
+  var employerId = -1; 
+
+  function employerNameUpdated(element, value) {
+    
+    selectedId = value.id.split('-')[1];
+    if(selectedId != -1) {
+      window.employerId = selectedId;
+      new Ajax.Updater('employer-admin-name', '/admin/employers/' + employerId + '/administrator_name.xhr', {
+          onComplete: function(response) {
+            new Effect.Highlight('employer-admin-name');
+          }
+      });
+    }
+
+  }
+
+</script>
+
+<div>
+  <div style="font-size: 1.3em; font-weight: bold;  margin-bottom: 15px;">Select Employer Admin</div>
+  <div style="font-weight:bold; margin-bottom: 5px">Company Name</div>
+  <%= text_field_with_auto_complete :employer, :name, {}, { :indicator => "employer-name-indicator", :after_update_element => "employerNameUpdated" } %>
+  <span id="employer-name-indicator" style="display:none; margin-left: 3px; margin-right: 12px;"><%= image_tag "dots.gif" -%></span>
+  <div id="employer-admin-name" style="margin-right: 2em; float: right; clear: none; width:22em; padding: 4px; border: 1px solid #CCC; font-weight: bold;">
+    Employer Admin 
+  </div>
+</div>
+
+
+<div style="margin-top: 30px; border-top: 1px solid #CCC; padding-top: 5px;">
+
+  <div style="font-size: 1.3em; font-weight: bold; margin-top: 3px; margin-bottom: 5px;">Search Recruiters</div>
+
+  <div style="margin-top: 20px">
+
+    <div style="float:left; clear: none;" >
+      <div style="font-weight: bold; ">By Employer</div>
+      <input id="recruiter_employer" name="recruiter_employer" style="width: 15em;"/>
+    </div>
+
+    <div style="float:left; clear: none; margin-left: 10px;" >
+      <div style="font-weight: bold; ">By Last Name</div>
+      <input id="recruiter_last_name" name="recruiter_last_name" style="width: 15em"/>
+    </div>
+
+  </div>
+
+  <div style="float:left; clear: both; margin-top: 16px; margin-left: 0px; ">
+    <%= link_to("Search", "#", :onclick => "javascript: searchRecruiters();", :id => "searchbutton",  :class => "xbutton blue") %>
+    <span id="recruiter-search-indicator" style="display: none;"><%= image_tag "dots.gif", :style => "margin-left: 3px; margin-top: 9px;" -%></span>
+  </div>
+
+  <script>
+    function searchRecruiters() {
+      new Ajax.Updater("recruiters", "/admin/employers/"+window.employerId+"/recruiters.xhr", {
+          method: "GET",
+          parameters: { recruiter_employer : $('recruiter_employer').value, recruiter_last_name : $('recruiter_last_name').value },
+          onCreate: function(request, response) {
+            $('recruiter-search-indicator').show();
+          },
+
+          onComplete: function(request, response) {
+            $('recruiter-search-indicator').hide();
+          }
+      }); 
+    }
+  </script>
+
+</div>
+
+<div style="float:none; clear:both; height:1px">&nbsp;</div>
+
+<div id="recruiters"></div>
+
+
+<style>
+  .recruiters td {
+    border-bottom: 1px solid #DDD;
+    padding-top: 8px;
+  }
+
+  .recruiters th {
+    font-weight: bold;
+    color: #DDD; 
+    background: #4c4c4c;
+  }
+</style>
+
+
+
+<script>
+
+var EmployerNameBehaviors = Behavior.create(); 
+Object.extend(EmployerNameBehaviors.prototype, {
+    onchange: function() {
+      employerId = -1;
+      $('searchbutton').disabled=true;
+    },
+
+    onfocus: function() { 
+      $('employer_name').setStyle({textDecoration: 'none'});
+    },
+
+    onblur: function() {
+      if(employerId == -1) {
+        $('employer_name').setStyle({textDecoration: 'line-through'});
+      }
+    }
+
+});
+
+Event.addBehavior({
+    '#employer_name' : EmployerNameBehaviors()
+});
+
+
+</script>
+

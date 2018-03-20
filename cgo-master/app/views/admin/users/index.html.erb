@@ -1,0 +1,9 @@
+<% content_for :page_title do %>
+  Listing Users    
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "Add User", new_admin_user_path %>
+<% end %>
+
+<%= render :partial => "tableized_users.html.erb", :locals => {:cols => 2 } %>

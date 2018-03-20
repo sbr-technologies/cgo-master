@@ -1,0 +1,36 @@
+<% # This is the Search Form Code -%>
+<div class="search-block">
+  <%= form_tag	search_jobs_path, :id =>"search_form", :method => :get do %>
+
+    <div>
+      <label style="font-weight: bold;">
+        Search by Keyword
+        <%= text_field_tag "q[keyword]", q[:keyword],  :style =>"border: 1px solid #BBB; padding: 5px; width:17em; margin-top: 5px;" %>
+        <div style="font-weight: normal; margin-top: 3px; color: #BD0000; font-style: italic; font-size: 0.95em">You can use multiple keywords, "quotes to search phrases" and +/- for mandatory/excluded terms (i.e: "program manager" +software -aviation)</div>
+      </label>
+    </div>
+
+    <div style="margin-top:20px">
+      <label style="font-weight:bold;">
+        Search By Company Name&nbsp;<span id="employer-name-indicator" style="display:none; margin-left: 3px; margin-right: 12px;"><%= image_tag "dots.gif" -%></span>
+        <div style="margin-top: 5px">
+          <%= text_field_with_auto_complete :employer, :name, {:style => "border: 1px solid #BBB; padding: 5px; width:17em; margin-top: 5px;"}, { :indicator => "employer-name-indicator" } %>
+        </div>
+        <div style="font-weight: normal; margin-top: 3px; color: #BD0000; font-style: italic; font-size: 0.95em">Use this text box to search by employer (keywords will be ignored)</div>
+      </label>
+    </div>
+
+    <div style="margin-top: 20px">
+      <div id="by-state" style="font-weight: bold;">
+        <p>Optionally filter by state to further refine results</p>
+        <div><%=select_tag("q[state][]", options_for_select(options_from_hash(Constants::STATE_APO), q[:state] ), :multiple => true, :size => 6, :style => "width: 100%") %></div>
+        <div style="font-weight: normal; marin-top:3px; color:#BD0000; font-style: italic; font-size: 0.95em;">Use CTRL key to select or de-select multiple states</div>
+      </div>
+    </div>
+								
+    <div style="width: inherit!; text-align: right; margin-top: 10px; margin-right: 5px;">
+      <a class="green xbutton" style="margin-left: 5px; padding-top: 8px;padding-bottom: 7px;" onclick="$('search_form').submit(); return false;" href="#">Search</a>
+    </div>
+
+  <% end %>
+</div>

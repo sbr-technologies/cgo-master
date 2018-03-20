@@ -1,0 +1,166 @@
+
+<div style="width: 96%; padding-left: 5px; padding-right: 5px;">
+  <table id="plans">
+    <thead>
+      <tr>
+        <th width="50%">&nbsp;</th>
+        <th width="25%">Silver<div class="price"></div></th>
+        <th width="25%">Gold<div class="price"></div></th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="feature"><br/>Black &amp; White recruitment ad</td>
+	<td>Half-page</td>
+	<td>Full-page</td>
+      </tr>
+      <tr><td class="feature"># of Corporate Gray Military-Friendly Job Fairs</td>
+	<td>up to 5</td>
+	<td>up to 5</td>
+      </tr>
+      <tr><td class="feature">15% discount on Security Clearance Job Fairs</td>
+	<td>Yes</td>
+	<td>Yes</td>
+      </tr>
+      <tr><td class="feature">Job Posting privileges on CGO for 1 year</td>
+	<td>Yes</td>
+	<td>Yes</td>
+      </tr>
+      <tr><td class="feature">15% discount on CGO Resume Search</td>
+	<td>Yes</td>
+	<td>Yes</td>
+      </tr>
+      <tr><td class="feature">Featured Employer in monthly eNewsletter</td>
+	<td>2</td>
+	<td>4</td>
+      </tr>
+      <tr><td class="feature">Company name w/link on Book Sponsor's page</td>
+	<td>Yes</td>
+	<td>Yes</td>
+      </tr>
+      <tr><td class="feature">Skyscraper banner on CGO's home page</td>
+	<td>Yes</td>
+	<td>Yes</td>
+      </tr>
+      <tr>
+	<td class="feature"></td>
+	<td><%= link_to "Sign In", "mailto:carl@corporategray.com?subject=Silver%20Service%20Level", :style=>"color:#E6901A; font-weight: bold; font-size: 144%; text-decoration: none;"-%></td>
+	<td><%= link_to "Sign In", "mailto:carl@corporategray.com?subject=Gold%20Service%20Level", :style=>"color:#E6901A; font-weight: bold; font-size: 144%; text-decoration: none;"-%></td>
+      </tr>
+      <tr>
+        <td class="feature" style="text-align: left" colspan="3">* Other options available</td>
+      </tr>
+			<tr><td style="background: #222" colspan="4">&nbsp;</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<br/>
+
+<div style="margin-left: 5px; margin-right: 10px">
+<h3>Contract & Copy Requirements</h3>
+
+<p>All advertisements are accepted by the publisher on the representation that the advertiser and/or advertising
+  agency are properly authorized to publish the entire contents and subject matter thereof. It is understood that the
+  advertiser and/or advertising agency will indemnify and save the publisher harmless from and against any loss,
+  expense or other liability resulting from any claims or suits that may arise out of the publication of such
+  advertisement. Publisher shall have the right to hold advertiser liable for such monies are due and payable to the
+  publisher for advertising which advertiser or its agent ordered and which advertising was published. All orders and
+  change orders must be in writing. All copy is subject to the publisher's approval. The publisher reserves the right to
+  decline any advertising copy at any time for any reason. Positioning of advertising is at the discretion of the
+  publisher. The publisher assumes no liability if it becomes necessary to omit an advertisement. No conditions, printed
+  or otherwise, which conflict with the publisher's stated policies will be binding on the publisher. Verbal agreements
+  are not recognized. The publisher's liability for any error will not exceed the charge for advertisement in question.
+  Publisher is not liable for delays in delivery or nondelivery in the event of Act of God, action by any governmental or
+quasi-governmental entity, fire, flood, or any condition beyond the publisher's control.</p>
+
+<h3>Terms</h3>
+
+<p>Payment is due within 30 days of invoice date. Interest will be charged on past due amounts at 1.5% per month
+(18% annual percentage rate).</p>
+
+
+<h3>Issue & Closing Dates</h3>
+
+<p>The next annual edition of the guides will be published in Fall 2012. Closing for space reservations is
+June 15, 2012 and closing for materials is June 30, 2012. No cancellations accepted after space closing.</p>
+
+<br/>
+
+<p><b>Ad Specifications:</b> To download the print ad specifications, <%= link_to "click Ad Specs", "/Ad_Specs.pdf" %></p>
+<p><b>Space Reservation Form:</b> To download the Space Reservation form, <%= link_to "click Space Reservation", "/SpaceReservation.pdf" %></p>
+</div>
+
+<% content_for :right do %>
+				<%= render :partial => "shared/featured_employer_skyscraper.html.erb" -%>
+<% end %>
+
+
+<% content_for :head do %>
+
+  <style>
+
+		    #plans {
+		      width: 98%;
+		      background: #FFF;
+		      margin-bottom: 5px;
+        border-bottom: #222 solid 4px;
+		    }
+
+		    #plans th {
+		      height: 50px;
+		      background: #222;
+		      color: #FFF;
+		      font-weight: bold;
+		      text-align: center;
+		      font-size: 120%;
+        border-right: #222 solid 10px;
+		    }
+
+		    #plans th .price {
+		      font-size: 80%;
+		      font-weight: normal;
+		    }
+
+		    #plans td {
+		      vertical-align: middle;
+		      text-align: center;
+		      border-bottom: 1px solid #CCC;
+		      font-size: 87%;
+		      padding-top: 5px;
+		      padding-bottom: 5px;
+		      padding-left: 5px;
+		      padding-right: 5px;
+        border-right: #222 solid 10px;
+		    }
+
+		    #plans td.feature {
+		      text-align: left;
+		      vertical-align: top;
+		      background: #222;
+		      color: #CCC;
+		      padding-top: 5px;
+		      padding-bottom: 5px;
+		      padding-left: 10px;
+		      padding-right: 15px;
+		      font-weight: normal;
+		      font-size: 100%;
+		      border-bottom: 0px solid #222;
+		    }
+
+		    #plans td.feature .caption {
+		      font-size: 80%;
+		      margin-top: 3px;
+		    }
+
+		    .caption {
+		      font-weight: normal;
+		      font-size: 80%;
+		      margin-left: 5px;
+		      color: #4c4c4c;
+		      margin-bottom: 3px;
+		    }
+
+  </style>
+
+
+<% end %>
+

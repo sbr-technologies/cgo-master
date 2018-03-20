@@ -1,0 +1,38 @@
+<fieldset>
+	<legend>Name and Email</legend>
+	
+	<div class="inline">
+		<%= form.text_field :first_name, :class=> "name M big_font" %>
+		<%= form.text_field :last_name, :class => "name M big_font" %>
+	</div>
+	<%= form.text_field :email, :class=>"big_font L", :id => "user_email" -%>
+</fieldset>
+
+<script>
+ Event.observe("user_email", "change", function(event) {
+    if($('user_username').value == '') {
+        $('user_username').value = $('user_email').value;
+    }
+ });
+</script>
+
+
+<% unless @social_media_account == true %>
+<fieldset>
+	<legend>Account Login Information</legend>
+	
+	<div style="margin:8px 0px">
+      <div class="round-corners light-highlight">
+         <div style="padding:0px 5px">Please enter whatever username and password you desire. (Default username is your email address)</div>
+      </div>
+	</div>
+	<div class="inline">
+	<%= form.text_field :username, :class => "all_lower" , :disabled => !form.object.new_record?, :id => "user_username"-%>
+	<%= form.select(:roles, (@valid_roles || User::ROLES).collect{|role| [role.humanize, role]} , {:include_blank => true}) if @current_user && @current_user.has_role?('admin')  %>
+	</div>
+	<div class="inline">
+      <%= form.password_field :password, :label => "Password (4 to 7 characters required)" %>
+      <%= form.password_field :password_confirmation %>
+	</div>
+</fieldset>
+<% end %>

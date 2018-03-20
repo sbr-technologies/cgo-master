@@ -1,0 +1,40 @@
+<% if user_type != :employer %>
+
+   <div class="dark-highlight" style="border: 3px solid #E11F27; width: 294px">
+
+     <div style="padding: 5px;padding-left: 1em; line-height: 1.65em; display:block; position: relative; text-align: left; font-size: 1.1em">
+          <%= link_to  image_tag("join_for_free.gif", :style=>"z-index: 2147483646; position: absolute; left: -50px; top: -30px; margin-left: 1em;"), new_applicant_path %>
+          <div style="padding-left: 67px;">
+            Get instant access to a host of career building resources: 
+            increase your visibility to 
+          </div> 
+           potential employers, search 1000's of jobs, and pre-register
+          for our military-focused Job Fairs. 
+          <div style="margin-top: 0.75em"><%=link_to "Click HERE to Get Your FREE Account", new_applicant_path , :style => "color: #E11F27" %></div>
+    </div>
+
+  </div>
+
+  <div style="float:none; clear:both; height: 30px">&nbsp;</div>
+
+
+<% else %>
+
+   <div class="dark-highlight" style="border: 3px solid #E11F27; width: 294px">
+
+     <div style="padding: 5px;padding-left: 1em; line-height: 1.65em; display:block; position: relative; text-align: left; font-size: 1.1em">
+          <%= link_to  image_tag("join_for_free.gif", :style=>"z-index: 2147483646; position: absolute; left: -50px; top: -30px; margin-left: 1em;"), new_employer_path %>
+          <div style="padding-left: 67px;">
+            Create a FREE employer account as a first step to connect 
+            with transitioning and 
+          </div> 
+          former military personnel using our print, job fair, and 
+          online military recruitment services.
+          <div style="margin-top: 0.75em"><%=link_to "Click HERE to Get Your FREE Account", new_employer_path , :style => "color: #E11F27" %></div>
+    </div>
+
+  </div>
+
+  <div style="float:none; clear:both; height: 30px">&nbsp;</div>
+
+<% end %>

@@ -1,0 +1,123 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'transition_guide' %>
+
+  <script>
+    document.observe("dom:loaded", function() {
+      $$('#assess_your_skills_and_interests a')[0].addClassName("selected"); 
+    });
+  </script>
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:transition_guide => "/static/transition_guide/overview" },
+      :assess_your_skills_and_interests
+  ] } %>
+<% end %>
+
+
+<% content_for :page_title do %>
+  Assess Your Skills and Interests
+<% end %>
+
+<p>What skills that you acquired in the military are most relevant to today's job market? What other skills do you possess which may or may not be related to your work in the military? Do you need to acquire new skills? To best position yourself in the job markets of today and tomorrow, you should pay particular attention to identifying and refining your present skills as well as achieving new and more marketable skills.</p>
+
+<p>Before you can refine your skills or acquire new ones, you need to know what skills you presently possess. Through your resume and job interviews you must both identify and communicate your skills to employers. Now is the time to take stock of what you have and what you need for pursuing a civilian career.</p>
+
+<h2>Credentialing Resources</h2>
+
+<p>There are several resources to assist you in identifying civilian credentialing requirements:</p>
+
+<ul>
+  <li>Credentialing Opportunities On-Line (COOL)
+    <ul>
+      <li>Army COOL <%= link_to "https://www.cool.army.mil", "https://www.cool.army.mil"%></li>
+      <li>Navy COOL <%= link_to "https://www.cool.navy.mil", "https://www.cool.navy.mil" %></li>
+    </ul>
+  </li>
+
+  <li><%= link_to "America's Career Information Network", "http://www.acinet.org" %></li>
+  <li><%= link_to "Career One Stop", "http://www.careeronestop.org" %></li>
+  <li><%= link_to "Go ArmyEd", "http://www.goarmyed.com" %></li>
+  <li><%= link_to "DANTES", "http://www.dantes.doded.mil" %></li>
+</ul>
+
+<h2>Types of Skills</h2>
+
+<p>Most people possess two types of skills that define their accomplishments and strengths as well as enable them to enter and advance within the job market: work-content skills and functional skills. You need to understand these skills before communicating them to employers.</p>
+
+<p>Work-content skills, or "hard" skills, are those qualifications skills you acquire primarily through education and training. They tend to be technical and job-specific in nature. Examples include helicopter repair, programming computers, teaching history, or operating an X-ray machine. They require formal training, are associated with specific trades or professions, and are used only in certain job and career settings. Work-content skills are communicated using skills vocabulary specific to that technical qualification. As a military service member, you should use your efficiency/performance reports to help identify your work-content skills. Two useful tools described below in Additional Resources are the Military-to-Civilian Skills Translator (<%= link_to "http://www.onetonline.org/crosswalk", "http://www.onetonline.org/crosswalk" %>) and the Verification of Military Experience and Training (VMET) document (DD Form 2586).</p>
+
+<p>To assist you in identifying your work-content skills, use your efficiency/performance reports to complete <%= link_to "Exercise 3a", "/exercises/Exercise_3a.pdf"%>.</p> 
+
+<p>Functional skills, or "soft" skills, are associated with numerous job settings, are mainly acquired through experience rather than formal training, and can be communicated through a general vocabulary. These skills are not easily recognized since they tend to be linked to certain personal characteristics (energetic, intelligent, likable) and the ability to deal with processes (communicate, solve problems, motivate). You must first know your functional skills before you can relate them to the job market, but it is more difficult to identify these subjective skills. They are the skills that can be transferred from one job or career to another and are an important bridge in the career transition process.</p>
+
+<p>Use the <%= link_to "Exercise 3b", "/exercises/Exercise_3b.pdf" %> checklist to identify and record your functional skills. Exercises 3a and 3b are important steps in constructing your resume. You will use these completed worksheets in Step 5 to assist in constructing your resume.</p>
+
+<h2>Testing and Assessment Instruments</h2>
+
+<p>There are many sophisticated testing and assessment instruments used by career counselors to identify work interests. The Strong Interest Inventory and the Myers-Briggs Assessment are two of the tools for assessing career interests. Both these tools are accessible through the DOL/VETS transition assistance program.</p>
+
+The O*Net Interest Profiler is another tool to help you explore your interests, found at <%= link_to "www.mynextmove.org/explore/ip", "http://www.mynextmove.org/explore/ip" %>. 
+
+<h2>Entrepreneurial Skills</h2>
+
+<p>If your self-assessment activities indicate that your abilities and skills are entrepreneurial, you may be best suited for self-employment. Many of the skills and personal qualities you may have acquired while in the service, such as patience, drive, perseverance, sacrifice, problem solving, and handling adversity, are well suited for becoming a successful entrepreneur.</p>
+
+<p>If you decide to go into business for yourself, make sure you choose the right business for your particular skills, abilities, motivation, and interests. Visit the Small Business Administration website’s section on whether you are best suited for the entrepreneurial life at <%= link_to "www.sba.gov/smallbusinessplanner/plan/getready/index.html", "http://www.sba.gov/smallbusinessplanner/plan/getready/index.html" %>.</p>
+Also visit the section on free online courses for starting a business at <%= link_to "www.sba.gov/sba-learning-center", "http://www.sba.gov/sba-learning-center" %>.
+
+<p>Free online business courses are available at <%= link_to "www.myownbusiness.org", "http://www.myownbusiness.org"%>. For information on franchising, click the <b>Franchise</b> tab on the menu bar above. More websites to assist veterans in starting their own business are listed under <b>"Additional Resources"</b> to the right.</p>
+
+<% content_for :right do %>
+
+  <%= render :template => "static/transition_guide/right_menu.html.erb" %>
+
+  <h2>Exercises:</h2>
+
+  <ul class="resources">
+    <li><%= link_to "3a: Work-Content Skills List", "/exercises/Exercise_3a.pdf" %></li>
+    <li><%= link_to "3b: Functional Skills Checklist", "/exercises/Exercise_3b.pdf" %></li>
+  </ul>
+
+  <h2>Additional Resources:</h2>
+  <p>
+    <b>Military-to-Civilian Skills Translator</b><br/>
+    <%= link_to "http://www.onetonline.org/crosswalk", "http://www.onetonline.org/crosswalk" %> <br/>
+    Department of Labor's skills translator in on O*NET Online. It allows you to enter a code or title from another classification to find the related Standard Occupational Classification (SOC).
+  </p>
+
+  <p>
+    <b>Verification of Military Experience and Training</b><br/> 
+    (VMET) document (DD Form 2586)<br/>
+    <%= link_to "http://www.dmdc.osd.mil/appj/vmet/index.jsp", "http://www.dmdc.osd.mil/appj/vmet/index.jsp" %><br/>
+    This is provided to all eligible separating service members to verify their military experience, training history, associated civilian equivalent job title(s), and recommended educational credit information.
+  </p>
+
+  <p>
+    <b>Education Benefits</b><br/>
+    <%= link_to "http://www.gibill.va.gov", "http://www.gibill.va.gov" %><br/>
+    Take advantage of your Post 9-11 GI Bill benefits, especially if you find a gap exists between your current skills set and your career training requirements.
+  </p>
+
+  <b>Entrepreneurial Resources</b><br/>
+  <p>Several government agencies and nonprofit organizations offer a wealth of assistance to veterans interested in starting their own business. The following websites and programs are designed specifically for entrepreneurial veterans:</p>
+
+  <ul class='resources'>
+    <li>The Veterans Corporation – <%= link_to "http://www.veteranscorp.org", "http://www.veteranscorp.org" %></li>
+    <li>Office of Veterans Business Development (SBA) – <%= link_to "http://www.sba.gov/vets", "http://www.sba.gov/vets" %> </li>
+    <li>Department of Veterans Affairs VetBiz <%=link_to "www.vetbiz.gov", "http://www.vetbiz.gov"%></li>
+    <li>Center for Veterans Enterprise – <%= link_to "www.va.gov/osdbu/veteran/index.asp", "http://www.va.gov/osdbu/veteran/index.asp" %></li>
+    <li>VetFriends – <%= link_to "http://www.vetfriends.com", "http://www.vetfriends.com" %></li>
+    <li>Veterans Employment and Training Center – <%= link_to "http://www.dol.gov/vets", "http://www.dol.gov/vets" %></li>
+  </ul>
+
+  <p>The International Franchise Association (IFA) has a program called VetFran that offers financial incentives to veterans seeking to become franchise small-business owners. Learn more about the program at www.franchise.org/vetran.aspx.</p>
+
+  <div style="margin-top: 10px">&nbsp;</div>
+  <%= render :partial => "shared/featured_employer_skyscraper.html.erb" %>
+
+<% end %>
+

@@ -1,0 +1,71 @@
+<% content_for :page_title do %>
+  <% if @applicants.nil? || @applicants.results.empty? %>
+    Search Resumes on Corporate Gray Online
+  <% else %>
+    Found <%= @applicants.nil? ? 0 : @applicants.total%> Job Seekers Matching Your Criteria
+  <% end %>
+<% end %>
+
+<% content_for :title_tag do %>
+  <%= @applicants.nil? ? "Search Resumes" : "Found #{@applicants.total} Job Seeker(s)" %>
+<% end %>
+
+<div id="message" style="margin: 4px;"></div>
+
+<% if !@applicants.nil? && !@applicants.results.empty? %>
+
+  <div style="margin-bottom: 30px;">
+    <p>If you have resume search service:</p>
+
+    <div style="margin-top: 20px">
+      <%= link_to "Login to Your Account", new_session_path, :class => "flat-button flat-button-blue", :style => "display: inline-block; text-align: center; width: 200px" %>
+    </div>
+    <br/>
+    <p>If you do not have resume search service and would like to order, email: <%=link_to "#{UserMailer.sales_email}", "mailto:#{UserMailer.sales_email}?subject=Resume%20Search%20Status"%></p>
+
+  </div>
+
+<% else %>
+
+  <div style="margin:3px;">
+    <p>Search our extensive resume database, most of which are military-experienced candidates! Unlimited resume search for all your recruiters.</p>
+
+    <div style="margin-top: 20px">
+      <%= link_to "Create an Employer Account", new_employer_path, :class => "flat-button flat-button-red", :style => "display: inline-block; text-align: center; width: 200px" %>
+      &nbsp;
+      <%= link_to "Login to Your Account", new_session_path, :class => "flat-button flat-button-blue", :style => "display: inline-block; text-align: center; width: 200px" %>
+    </div>
+
+    <h3>Corporate Gray Online Rates</h3>
+
+    <p><b>Per month:</b> $500 to search the resume database and post all of your jobs</p>
+    <ul>
+      <li>Includes one hour of customized support from a Corporate Gray Online representative.</li>
+      <li>15% discount for a contract of 2 or more months.</li> 
+    </ul>
+
+    <br/>
+
+    <p><b>1 year:</b> $5,000 to search the resume database and post all of your jobs</p>
+    <ul>
+      <li>Includes one hour of customized support for each month purchased.</li>
+    </ul>
+    <br/>
+
+    <p><i>Note: The above rates are ad agency commissionable at 15%.</i></p>
+ 
+    <h3>Job Wrapping Service</h3>
+    <p>We'll do a daily scrape of all the jobs on your website at a cost of $500/month. Three-month minimum. Requires no work at your end!</p>
+
+    <br/>
+
+
+  </div>
+
+<% end %>
+
+<%= render :partial => "/shared/cgo_book_sponsor" %>
+
+<% content_for :right do %>
+  <%= render :partial => "search_form", :locals => {:q => params[:q] || {}, :job_code => params[:job_code] || nil } %>
+<% end %>

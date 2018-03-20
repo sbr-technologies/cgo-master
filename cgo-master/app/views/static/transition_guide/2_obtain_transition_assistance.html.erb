@@ -1,0 +1,83 @@
+<% content_for :page_title do %>
+  Obtain Transition Assistance
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:transition_guide => "/static/transition_guide/overview" },
+      :obtain_transition_assistance
+  ] } %>
+<% end %>
+
+
+<% content_for :right do %>
+  <%= render :template => 'static/transition_guide/right_menu.html.erb' %>
+
+  <h2>Exercises:</h2>
+  <%= link_to "2a: Free Career Transition Services", "/exercises/Exercise_2a.pdf" %>
+
+  <div style="margin-top: 10px">&nbsp;</div>
+  <%= render :partial => "shared/featured_employer_skyscraper.html.erb" %>
+
+<% end %>
+
+<p>You don't have to face your career transition alone. There are many organizations to assist you with your job search. Many services are free, and we recommend starting out "close to home" for such assistance. The Department of Defense, military services, and federal and state agencies sponsor high quality transition services that include many helpful lectures, seminars, and testing services. The transition professionals staffing these programs are highly skilled in their respective fields and will help steer you in the right direction.</p>
+
+<h2>Military Services</h2>
+
+<p>Each branch of the military has its own career transition program that provides these core services:</p>
+
+<ul>
+  <li>Skills assessment</li>
+  <li>Resume writing</li>
+  <li>Interviewing skills</li>
+  <li>Salary negotiations</li>
+  <li>Dress for success</li>
+</ul>
+
+<h2>Military Services Transition Programs:</h2>
+
+<ul>
+  <li><%= link_to "Army Career and Alumni Program (ACAP)", "http://www.acap.army.mil" %></li> 
+  <li><%= link_to "Air Force Community, Transition", "http://www.afcommunity.af.mil/transition" %></li>
+  <li><%= link_to "Navy Fleet and Family Support Program (FFSP)", "http://www.cnic.navy.mil"%></li>
+  <li><%= link_to "Marine Corps Career Resource Management Center", "http://www.usmc-mccs.org"%></li>
+  <li><%= link_to "Coast Guard Office of Work-Life Programs", "http://www.uscg.mil/worklife/contact.asp" %></li>
+  <li><%= link_to "Marine Corps Career Resource Management Center", "http://www.mccshh.com/CRMC.html" %></li>
+  <li><%= link_to "Coast Guard Office of Work-Life Programs", "http://www.uscg.mil/hq/cg1/cg111/transition_assistance.asp" %></li>
+</ul>
+
+<h2>Federal Services</h2>
+<ul>
+  <li><%= link_to "Department of Defense Turbo TAP", "http://turbotap.org" %></li> 
+  <li><%= link_to "Department of Labor Veterans Employment and Training Service (VETS)", "http://www.dol.gov/vets" %></li> 
+  <li><%= link_to "Department of Labor Transition Assistance Program (DoL TAP)", "http://www.dol.gov/vets/programs/tap" %></li>
+  <li><%= link_to "The Verification of Military Experience and Training (VMET) document (DD Form 2586)", "http://www.dmdc.osd.mil/appj/vmet/index.jsp" %></li>
+</ul>
+
+<h2>State Services</h2>
+<ul>
+  <li><%= link_to "America’s Service Locator", "http://www.ServiceLocator.org" %> </li>
+  <li><%= link_to "DoL VETS CareerOneStop", "http://www.careeronestop.org" %></li>
+  <li><%= link_to "DoL VETS", "http://dvoplverlocator.nvti.ucdenver.edu" %> – Locator for the following state and local programs:</li>
+  <ul>
+    <li>Local Veterans' Employment Representative Program (LVER) </li>
+    <li>Disabled Veterans' Outreach Program (DVOP) </li>
+  </ul>
+</ul>
+
+<br/>
+
+<% content_for :head do %>
+
+  <%= stylesheet_link_tag 'transition_guide' %>
+
+  <script>
+    document.observe('dom:loaded', function() {
+      $$("#obtain_transition_assistance a")[0].addClassName('selected');
+    });
+  </script>
+<% end %>
+

@@ -1,0 +1,35 @@
+<%= render :partial => "layouts/head" -%>
+
+<body class="yui-skin-sam">
+  <div id="doc4" class="yui-t6">
+
+    <%= render :partial => "layouts/hd" %>
+
+    <div id="bd">
+      <div id="yui-main">
+        <div id="content-container" class="yui-b static">
+          <% title = yield :page_title %>
+          <% unless title.to_s.blank? %>
+            <div id="page-header" class="page-header">
+              <div class="page-header-links"><%= yield :page_header_links -%></div>
+                <h1><%= title  %></h1>
+            </div>
+          <% else %>
+            <br/>
+          <% end %>
+
+          <%= yield %>
+
+        </div>
+      </div>
+
+      <div class="yui-b"><%= yield :right %></div>
+
+    </div><!-- bd -->
+
+<%= render :partial => "layouts/ft" %>
+
+  </div><!-- doc4 -->
+
+  </body>
+</html>

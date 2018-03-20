@@ -1,0 +1,149 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'transition_guide' %>
+
+  <script>
+    document.observe("dom:loaded", function() { $$('#construct_your_resume a')[0].addClassName('selected'); });
+  </script>
+
+<% end %>
+
+<% content_for :page_title do %>
+  Construct Your Resume
+<% end %>
+
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:transition_guide => "/static/transition_guide/overview" },
+      :construct_your_resume
+  ] } %>
+<% end %>
+
+
+<p>Will a prospective employer be motivated to learn more about you from reading your resume? Resumes are important tools for communicating your purpose and capabilities to employers. A resume advertises your qualifications to prospective employers and is your calling card for getting interviews. You can craft your resume by understanding the different types, construction elements, and refinements necessary to make it your effective first impression to employers.</p>
+
+<h2>Types of Resumes</h2>
+<p>There are three basic types of resumes:</p>
+
+<ol>
+  <li>The chronological resume lists your jobs in reverse chronological order with a description of what you did in each job. It shows the progression of your skills and experience with each assignment.</li>
+  <li>The functional resume describes your core competencies and the functions you can perform. It focuses on what you can do outside the context of specific jobs you’ve held.</li>
+  <li>The combination resume is a hybrid that combines your functional expertise with your work history. It typically doesn’t go back as far as a chronological resume, just highlighting your last two or three assignments.</li>
+</ol>
+
+<p>For most transitioning military, we recommend the combination format because it highlights your functional expertise and also shows your most recent assignments.</p> 
+
+<h2>Constructing Your Resume</h2>
+<p>What you should or should not include in your resume depends on your particular goals, as well as your situation and the needs of your employers – what do they want or need to know about you? At the very least, your resume should include the following five categories of information:</p>
+
+<ol class="decimal">
+  <li><span><b>Contact Information</b> – Who you are/how to contact you – your name, address, phone number and email address. You may also want to include your Linkedin profile’s url.</span></li>
+
+  <li>
+    <span style="display:block">
+      <p><b>Objective</b> – Including a job or career objective relevant to your skills and your employers needs tells an employer what it is you want to do, can do, and will do for them. Your objective should be employer-centered and incorporate both a skill and an outcome in reference to your major strengths and employer’s needs. This objective follows a basic job-skill-benefit format:</p>
+      <p>I want a _(position/job)_ where I will use my _(skills/abilities)_, which will result in _(outcomes/benefits)_.</p>
+
+      <p>
+        For example:<br/>
+        A position in data analysis where skills in mathematics, computer programming, and deductive reasoning will contribute to new systems development.
+      </p>
+    </span>
+  </li>
+
+  <li><span><b>Experience</b> – What you can do – your patterns of skills and accomplishments.</span></li>
+  <li><span><b>Work History</b> – What you have done – your job titles and activities performed.</span></li>
+  <li><span><b>Education</b> – What you have learned – your education and training/degrees and certifications.</span></li>
+</ol>
+
+<p>In Chapter 3, you identified your work-content skills (<%= link_to "Exercise 3a", "/exercises/Exercise_3a.pdf" %>) and your functional skills (<%= link_to "Exercise 3b", "/exercises/Exercise_3b.pdf" %>). Use these worksheets to communicate your experience, work history, and education to employers in your resume.</p>
+
+<p>Other categories may be included but should be limited to only those relevant to your job search, such as professional affiliations, special skills not covered in other sections of your resume, or awards and special recognition. Samples of resumes that can be downloaded and used as a template are found in <b>Additional Resources</b> to the right</p>
+
+<h2>Refining Your Resume</h2>
+<p>Resume Sequence - What is most important to both you and the employer? Your most important information and strongest qualifications should come first. If your education is more relevant to your next job than your recent work experience, then the sequence of elements should be:</p>
+
+<ul>
+<li>Contact Information</li>
+<li>Objective</li>
+<li>Education</li>
+<li>Experience</li>
+<li>Work History</li>
+</ul>
+
+<p>If you have several years of direct work experience that support your objective, and if education is not an important qualifying criteria, then the sequence should be:</p>
+
+<ul>
+  <li>Contact Information</li>
+  <li>Objective</li>
+  <li>Experience</li>
+  <li>Work History</li>
+  <li>Education</li>
+</ul>
+
+<p>Resume Critiquing –Does your resume accurately present your qualifications in the best possible light so that the hiring managers will want to call you in for an interview? That is the true test of an effective resume!</p> 
+
+<p>You should subject your resume to two types of evaluations:</p>
+
+<ol>
+  <li>Internal Evaluation: Review the checklist of “do’s” and “don’ts” in <%= link_to "Exercise 5a", "/exercises/Exercise_5a.pdf" %> to make sure your resume conforms to these rules.</li>
+  <li>External Evaluation: Circulate your resume to three or more individuals whom you believe will give you objective and useful feedback (avoid people who tend to flatter you). Ask that they critique your draft resume and suggest improvements in form and content. The best evaluator would be someone in a hiring position similar to one you will encounter in the actual interview. Not only will you get useful feedback, but it will spread the word that you are job hunting and could lead to an interview!</li>
+</ol>
+
+<h2>Job Search Letters</h2>
+<p>Letters play a key role in a job search and come in several forms, including cover letters, approach letters, and thank you letters. Samples of each type of letter can be found in Additional Resources.</p>
+
+<p>Like good advertisements, job search letters should follow four basic principles for effectiveness:</p>
+
+<ol>
+  <li>Catch the reader’s attention.</li>
+  <li>Persuade the reader of your benefit or value.</li>
+  <li>Convince the reader with factual evidence.</li>
+  <li>Move the reader to acquire the product.</li>
+</ol>
+
+<p>Cover letters provide cover for your resume. A short and succinct one-page letter that highlights one or two points in your resume is enough. Three paragraphs will suffice:</p>
+
+<ol>
+  <li>State your interest and reason for writing.</li>
+  <li>Highlight your possible value to the employer.</li>
+  <li>State that you will call the individual at a particular time to se if an interview can be scheduled.</li>
+</ol>
+
+<p>Approach letters are written for the purpose of developing job contacts, leads, or information. These letters help you gain access to the hidden job market by making networking contacts that lead to those all-important informational interviews. State your purpose, but do not suggest that you are asking for a job – only career advice or information. Request a meeting and indicate you will call to schedule it at a mutually convenient time.</p>
+
+<p>Thank you letters may become your most effective job search letters because they communicate your thoughtfulness. The goal is to be remembered by potential employers in a positive light. A thank you letter is a powerful way to be remembered. Occasions for writing thank you letters include:</p>
+
+<ul>
+  <li>After receiving assistance</li>
+  <li>Following an interview</li>
+  <li>Receiving a job offer</li>
+  <li>Rejected for a job</li>
+  <li>Beginning a new job</li>
+</ul>
+
+
+<% content_for :right do %>
+
+  <%= render :template => "static/transition_guide/right_menu.html.erb" %>
+
+  <div class="exercises">
+    <h2>Exercises:</h2>
+
+    <ul>
+      <li><%= link_to "5a – Resume “Do’s” and “Don’ts” Checklist", "/exercises/Exercise_5a.pdf" %></li>
+      <li>5b – Construct your resume. Use the sample resumes found in Additional Resources below to assist you in writing your resume. The examples represent a broad cross-section of the types of jobs that most transitioning military service members would likely seek. These are Microsoft Word documents that you can upload and modify to suit your needs, or just use as a reference. If you have multiple career interests you will want to develop a resume for each.</li>
+      <li>5c – Write your job search letters. Use the sample letters in Additional Resources below to assist you in writing various types of job search letters.</li>
+    </ul>
+  </div>
+
+  <h2>Additional Resources:</h2>
+  <%= render :template => 'static/resume_samples' %>
+
+  <div style="margin-top: 10px">&nbsp;</div>
+  <%= render :partial => "shared/featured_employer_skyscraper.html.erb" %>
+
+
+<% end %>

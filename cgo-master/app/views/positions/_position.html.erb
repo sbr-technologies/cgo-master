@@ -1,0 +1,26 @@
+<div id='<%="pos_#{position.unique_identifier}" %>' class="position" style="margin-top: 3em; padding-bottom: 0em; clear: both; border-left: 10px solid #4c4c4c;">
+
+  <div class="show">
+    <table width="95%" style="margin-left: 1em;">
+      <tr>
+        <td width="20%" style="vertical-align: top">
+          <span class="position-start-date"><%=position.start_date %></span> - <span class="position-end-date"><%=position.end_date %></span>
+        </td>
+        <td>
+          <div class="position-company" style="font-size: 1.3em"><%= (position.company.titleize rescue "") -%></div>
+          <div class="position-title" style="font-weight: bold; font-style: italic; color: #4c4c4c"><%= position.title %></div>
+          <div class="position-summary" style="margin-top: 1em"><%= position.summary %></div>
+        </td>
+      </tr>
+    </table>
+
+    <div style="height: 40px; text-align: right; padding-top:10px; margin-top:1em; background:whitesmoke; border-top:1px solid #CCC; border-bottom:1px solid #4c4c4c;">
+      <%= link_to "Delete", position_path(:id => position.id), :method => "delete", :class => "btn btn-link" %>
+      <%= link_to "Edit", edit_position_path(:id => position.id), :class => "btn btn-link" %>
+    </div>
+
+  </div>
+
+</div>
+
+

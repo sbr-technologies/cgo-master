@@ -1,0 +1,24 @@
+<% unless (!current_user.nil? && (current_user.has_role?(:employer_admin) || current_user.has_role?(:recruiter))) %>
+
+    <% 
+    if(current_user.nil? && (controller.controller_name == "employer")) || (/employer/i =~ request.env['REQUEST_URI'] || /contact_info/i =~ request.env['REQUEST_URI'])
+      path = guest_search_resumes_path(:format => :html)
+      search_title = "Search Resumes:"
+    else
+      path = search_jobs_path(:format => :html)
+      search_title = "Search Jobs:"
+    end
+    %>
+
+    <div style="width: 280px">
+      <%= form_for :quick_search, :url => path, :html => {:method => :get, :id => "quick-job-search-form"} do |f| %> 
+        <div style="font-size: 1.6em; color:#FFF; margin-bottom: 5px;"><%= search_title -%></div>
+        <%= submit_tag "Go", :style => " float: right;  color:#859900; width:4em; padding:4px 10px; margin-right: 10px; margin-left:0.5em; border:2px solid #268bd2; border-radius:4px; background:#FFF; font-weight:bold;" %>
+        <div style="padding:0;">
+          <input type="text" name="q[keyword]" id="keyword" style="margin:0px; width:11em; border:2px solid #268bd2; border-radius: 4px; padding:5px; font-size:1.2em; font-weight:bold;"/>
+          <div style="font-size: 0.9em; font-style: italic; margin-top: 4px; color:#ccc;">Enter keyword(s)</div>
+        </div>
+      <% end %>
+    </div>
+
+<% end %>

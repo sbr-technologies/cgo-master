@@ -1,0 +1,202 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'bootstrap.min' %>
+<% end %>
+
+<% content_for :page_title do %>
+  <%= @resume.applicant.name.titleize %> Resume
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:applicant => applicants_path}, 
+      :resume
+  ] } %>
+<% end %>
+
+<% if current_user.is_a?(Recruiter) %>
+  <div style="text-align: right; margin-right: 10px">
+    <span class='xbutton' id='send-message' onclick="message_modal.open()">Message to Applicant</span>
+    <span class='xbutton' id='forward-resume' onclick="forward_modal.open()">Forward Resume</span>
+    <% if @resume.attached_resume.path %>
+      <%= link_to "Download Resume", download_resume_path(@resume.id), :id=>"download-link", :class => 'xbutton' -%>
+    <% end %>
+  </div>
+
+  <div id="pForward" style="display:none" class="forward">
+    <div id=close-handle onclick="forward_modal.close()">X</div>
+    <div class="bd">
+      <div style="font-weight:bold;margin-bottom:10px;color:black;cursor:default;font-size:14px">Recipients' Email (separated by comma)</div>
+      <%= form_for :forward, :url => forward_resume_path(@resume.id), :remote => true do |f| %>
+        <%= f.text_field :recipients, :style => "border: 1px solid #CCC; padding: 5px;" %>
+        <div class="actionButton" style="float:right; clear:none;">
+          <div>
+            <button class="xbutton green" type="submit">Send</button>
+          </div>
+        </div>
+      <% end %>
+      <script>
+        $$('#forward_resume_form')[0].on('ajax:complete', function() { forward_modal.close(); } );
+      </script>
+    </div>
+  </div>
+
+
+  <div id="pMessage" style='display:none' class="message">
+    <div id=close-handle onclick="message_modal.close()">X</div>
+    <div class="bd" id="message-panel-id">
+      <%= render :partial => "/messages/send_message_form.html.erb" , :locals => { :recipient => @resume.applicant.id } -%>
+    </div>
+  </div>
+
+  <% content_for :head do %>
+
+    <style>
+      .action {
+        cursor: hand; 
+        cursor: pointer;
+      }
+
+      .action:hover {
+        text-decoration: underline;
+      }
+
+      .message {
+        width:390px; 
+        height:200px; 
+      }
+
+      .forward {
+        width:340px; 
+        height:70px; 
+      }
+    </style>
+
+    <script language="javascript">
+
+      var message_modal, forward_modal;
+
+      document.observe("dom:loaded", function() {
+        message_modal = new Control.Modal($('pMessage'), {
+          overlayOpacity: 0.75, 
+          className: 'modal', 
+          fade: true
+        });
+
+        forward_modal = new Control.Modal($('pForward'), {
+          overlayOpacity: 0.75, 
+          className: 'modal', 
+          fade: true
+        });
+      });
+    </script>
+
+  <% end %>
+
+<% end %>
+
+
+
+<% if current_user.is_a?(Applicant) %>
+
+  <div style="text-align:right; margin-right: 10px">
+    <%= link_to "Upload Resume (MS Word)", edit_resume_path(@resume), :id =>'edit-resume', :class => "flat-button flat-button-red" %>
+    <%= link_to "My Account", edit_applicant_path(@resume.applicant), :class => "flat-button flat-button-blue" %>
+  </div>
+
+  <div style="margin: 40px 10px; line-height: 1.8em; ">
+
+    <% if @resume.attached_resume.path %>
+      <p>You have a resume associated with this account.</p>
+      <p><%= link_to "Click here to download your resume", download_resume_path(@resume)  %>.</p>
+      <br/>
+      <p>If you would like to replace this resume, click the button <b>"Upload Resume in MS Word"</b> above.</p>
+    <% else %>
+      <p>You do not have a resume associated with this account, to upload your resume click the button <b>"Upload Resume in MS Word"</b> above.</p>
+      <br/>
+    <% end %>
+
+    <p>
+    Please make sure your resume is <b>NOT in Microsoft Word’s “Protected View” mode</b> before uploading it. Your resume cannot be searched by 
+      recruiters if it is in “Protected View” and you could miss some interesting job opportunities.
+    </p>
+
+  </div>
+
+  <% content_for :head do %>
+
+    <style>
+      .modal {
+        width:650px; 
+        height:440px; 
+      }
+
+      .auth {
+        width: 300px; 
+        height: 180px;
+      }
+    </style>
+
+    <script>
+      var resume_modal, auth_modal; 
+      document.observe('dom:loaded', function() {
+
+        resume_modal = new Control.Modal($('edit-resume'), {
+          overlayOpacity: 0.75,  
+          className: 'modal',  
+          method: 'get',
+          fade: true  
+        })
+
+        auth_modal = new Control.Modal($('linkedin-resume'), {
+          overlayOpacity: 0.75,  
+          className: 'modal auth',  
+          method: 'get',
+          fade: true  
+        })
+      });
+    </script>
+
+  <% end %>
+
+
+<% end %>
+
+<%= render :partial => "show" -%>
+
+<% content_for :right do %>
+
+  <% if current_user.authentications.blank? && false %>
+    <%= render :partial => "shared/linkedin_well.html.erb" %> 
+  <% end %>
+
+  <div class="testimonial">
+    <i>"I posted my resume on your site and a leading corporation has already contacted me."</i>
+    <div style="text-align: right; margin-top: 0.5em;">
+      -- U.S. Army Transitioner
+    </div>
+  </div>
+
+  <br/>
+
+  <div class="testimonial">
+    <i>"I was able to acquire an excellent government possition from your website. 
+      This was very helpfull in my transition retiring from the U.S. Air Force and 
+      starting my new career with DHS."</i>
+    <div style="text-align: right; margin-top: 0.5em;">
+      -- U.S. Air Force MSgt, Ret.
+    </div>
+  </div>
+
+  <hr/>
+
+  <div style="clear:both; float:none; margin-top: 0px">
+    <%= link_to "Military-to-Civilian Skills Translator", "http://online.onetcenter.org/crosswalk", :style=>"color:#000; text-decoration:underline;font-size: 14px;", :target => '_blank' -%></span>
+  </div>
+
+  <%= render :template => 'static/resume_samples' %>
+  <br/>
+  <%= render :partial => 'shared/featured_employer_skyscraper' %>
+
+<% end %>

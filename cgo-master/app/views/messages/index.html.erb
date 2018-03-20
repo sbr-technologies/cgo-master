@@ -1,0 +1,7 @@
+<% content_for :page_title do %>
+  Message Inbox
+<% end %>
+
+<div class="messages" style="margin-top: 30px;">
+  <%= render :partial => "list", :locals => {:messages => @messages } %>
+</div>

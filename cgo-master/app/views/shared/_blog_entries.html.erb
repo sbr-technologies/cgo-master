@@ -1,0 +1,59 @@
+<div class="feature-title"><%= link_to "Latest Blog Entries", "http://www.corporategrayblog.com/", :target => "_blank",  :style => "color: #FFF; text-decoration: underline" %></div>
+<div id="blog">
+  <div id="posts"></div>
+</div>
+
+<% content_for :head do %>
+  <%= javascript_include_tag "https://www.google.com/jsapi?key=#{GOOGLE_API_KEY[RAILS_ENV]['api_key']}" %>
+<% end %>
+
+<script>
+
+  google.load("feeds", "1");
+
+  document.observe("dom:loaded", function() {
+    var feed = new google.feeds.Feed("http://www.corporategrayblog.com/feed");
+    feed.load(function(result) {
+      if(!result.error) {
+        var container = $('posts'); 
+        for (var i = 0; i < result.feed.entries.length; i++) {
+            var entry = result.feed.entries[i];
+            var div = new Element('div', {'class': 'blogpost'}).update(
+              new Element('a', { 'href': "http://www.corporategrayblog.com/" + entry.link, target: "_blank" }).update(entry.title)
+            );
+            container.insert(div); 
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+
+  #posts .blogpost {
+    padding: 5px 0;
+    border-bottom: 1px solid whiteSmoke; 
+  }
+  
+  #posts .blogpost a:before {
+    content: '\2013\2002'; 
+  }
+
+  #posts .blogpost a {
+    color: #00F;
+    text-decoration: none;
+  }
+
+  #posts .blogpost a:hover {
+    text-decoration: underline; 
+  }
+
+  #blog {
+    height: 172px;
+    min-height: 172px; 
+    border: 1px solid #AAA;
+    border-top: 0px;
+    padding: 4px;
+  }
+
+</style>

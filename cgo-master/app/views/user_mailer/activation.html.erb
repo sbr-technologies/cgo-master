@@ -1,0 +1,9 @@
+<% if @user.has_role?(:employer_admin) || @user.has_role?(:applicant) %>
+				<%= @user.name %>, your account has been activated.  You may now start using corporate gray online services:
+
+				<%= @url %>
+<% else %>
+				<%= @user.name %>, your account has been verified; Please contact your Administrator (<%=@user.employer.administrator.name-%>)
+				to activate your account
+
+<% end %>

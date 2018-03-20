@@ -1,0 +1,8 @@
+<% if !current_user.nil? %>
+<div style="margin-bottom: 25px;margin-top: 5px;"><div class="round-corners light-highlight">
+				<div style="padding: 5px; font-weight: bold; text-align: center;font-size: 115%">
+                  Please give us Feedback. click <%= link_to "here", "mailto:#{UserMailer.admin_email}?subject=New%20Site%20Feedback" %>
+				</div>
+		</div>
+</div>
+<% end %>

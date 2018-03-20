@@ -1,0 +1,67 @@
+<% content_for :page_title do %>
+  <%= @applicant.name -%>
+<% end %>
+
+<% content_for :page_header_links do %>
+    <%= link_to "Edit", edit_admin_applicant_path(@applicant.id) -%> |
+    <%= link_to "View All", admin_applicants_path -%>
+<% end %>
+
+
+<table class="show-model">
+  <% unless @applicant.active? %>
+	<tr>
+        <td class="label">Email Verified?</td>
+        <td>
+          <%= check_box :applicant, :email_verified,
+            :onclick => remote_function(
+                :url => skip_email_verification_admin_user_path(@applicant.id),
+                :method => "get",
+                :with => "'enable=yes'",
+                :loading => "$('indicator').show()",
+                :complete => "$('indicator').innerHTML = '(email verified, confirmation email sent)';"),
+            :style => "width: 0.8em; margin-right: 4px;",
+            :checked => @applicant.active?,
+            :disabled => @applicant.active?
+          %>
+          <span id="indicator" style="display:none; vertical-align: top; color: #bd0000; font-size: 90%"><%= image_tag "/images/dots.gif", :style=> "padding-top: 5px;" -%></span>
+        </td>
+	</tr>
+  <% end %>
+
+  <tr><td class="label">Source:</td><td><%= @applicant.source %></td></tr>
+  <tr><td class="label">Status:</td><td><%= @applicant.status %></td></tr>
+  <tr><td class="label">Resume Posted?:</td><td><%= to_yes_no(!@applicant.resume.blank? && !@applicant.resume.attached_resume.blank?).capitalize %></td></tr>
+  <tr><td class="label">Username:</td><td><%= @applicant.username %></td></tr>
+  <tr><td class="label">Password:</td><td><%= @applicant.password %></td></tr>
+  <tr><td class="label">Email:</td><td><%= @applicant.email %></td></tr>
+<% if !@applicant.addresses[:primary].nil? %>
+  <tr><td class="label">Street Address:</td><td><%= @applicant.addresses[:primary].street_address1 %></td></tr>
+  <tr><td class="label">City:</td><td><%= @applicant.addresses[:primary].city %></td></tr>
+  <tr><td class="label">State:</td><td><%= @applicant.addresses[:primary].state %></td></tr>
+  <tr><td class="label">Zip:</td><td><%= @applicant.addresses[:primary].zip %></td></tr>
+  <tr><td class="label">Country:</td><td><%= @applicant.addresses[:primary].country %></td></tr>
+  <tr><td class="label">Phone:</td><td><%= @applicant.addresses[:primary].phone %></td></tr>
+<% end %>
+  <tr><td class="label">Updated:</td><td><%= @applicant.updated_at.to_s(:human) %></td></tr>
+  <tr><td class="label">Created:</td><td><%= @applicant.created_at.to_s(:human) %></td></tr>
+  <tr><td class="label">Imported:</td><td><%= @applicant.imported_at.to_formatted_s(:short) if !@applicant.imported_at.nil? %></td></tr>
+  <tr><td class="label">Last Login:</td><td><%= @applicant.last_login_at.to_formatted_s(:short) if !@applicant.last_login_at.nil? %></td></tr>
+  <tr><td class="label">Job Title:</td><td><%= @applicant.job_title %></td></tr>
+  <tr><td class="label">Ethnicity:</td><td><%= or_unspecified(@applicant.ethnicity) %></td></tr>
+  <tr><td class="label">Gender:</td><td><%= or_unspecified(@applicant.gender) %></td></tr>
+  <tr><td class="label">Availability Date:</td><td><%= (@applicant.availability_date.to_formatted_s(:short) rescue "Now") %></td></tr>
+  <tr><td class="label">Branch Of Service:</td><td>(<%=@applicant.branch_of_service%>) <%= to_label(@applicant.branch_of_service, Constants::BRANCH_OF_SERVICE) %></td></tr>
+  <tr><td class="label">Education Level:</td><td>(<%=@applicant.education_level%>) <%= to_label(@applicant.education_level, Constants::EDUCATION_LEVEL) %></td></tr>
+  <tr><td class="label">Occupational Preference:</td><td>(<%=@applicant.occupational_preference%>) <%= to_label(@applicant.occupational_preference, Constants::OCCUPATIONAL_PREFERENCE) %></td></tr>
+  <tr><td class="label">Security Clearance:</td><td>(<%=@applicant.security_clearance%>) <%= to_label(@applicant.security_clearance, Constants::SECURITY_CLEARANCE) %></td></tr>
+  <tr><td class="label">Type of Applicant:</td><td>(<%=@applicant.type_of_applicant%>) <%= to_label(@applicant.type_of_applicant, Constants::TYPE_OF_APPLICANT) %></td></tr>
+  <tr><td class="label">U.S. Citizen:</td><td><%= to_yes_no(@applicant.us_citizen).capitalize %></td></tr>
+  <tr><td class="label">Willing To Relocate:</td><td><%= to_yes_no(@applicant.willing_to_relocate).capitalize %></td></tr>
+</table>
+
+
+
+<% content_for :right do %>
+
+<% end %>

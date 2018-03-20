@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	
+<head>
+	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<title><%= "#{controller.controller_name}: #{controller.action_name}" %></title>
+	<%= javascript_include_tag 'prototype', 'rails', 'effects', 'controls', 'dragdrop' -%>
+	<%= javascript_include_tag 'lowpro' %>
+	<%= javascript_include_tag 'curvycorners.js' %>
+	<%= javascript_include_tag 'application' %>
+	
+	<!-- Combo-handled YUI CSS files: -->
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.8.0r4/build/reset-fonts-grids/reset-fonts-grids.css&2.8.0r4/build/autocomplete/assets/skins/sam/autocomplete.css&2.8.0r4/build/container/assets/skins/sam/container.css"/>
+	<%= stylesheet_link_tag 'application' %>
+	<%= stylesheet_link_tag 'admin' %>
+	<%= stylesheet_link_tag 'form' %>
+    <%= stylesheet_link_tag 'buttons' %>
+    <%= stylesheet_link_tag 'custom_tabview' %>
+
+    <!-- Skin CSS file -->
+    <%= stylesheet_link_tag '/yui/assets/skins/sam/skin.css' %>
+    <%= stylesheet_link_tag '/yui/assets/skins/sam/autocomplete.css' %>
+
+	<!--[if IE]><%=stylesheet_link_tag 'ie'%><![endif]-->
+
+    <!-- Combo-handled YUI JS files: -->
+    <script type="text/javascript" src="http://yui.yahooapis.com/combo?2.8.0r4/build/yahoo-dom-event/yahoo-dom-event.js&2.8.0r4/build/animation/animation-min.js&2.8.0r4/build/datasource/datasource-min.js&2.8.0r4/build/autocomplete/autocomplete-min.js&2.8.0r4/build/container/container-min.js&2.8.0r4/build/element/element-min.js"></script>
+
+	<script language="JavaScript">
+		var AUTHENTICITY_TOKEN = '<%= form_authenticity_token -%>';
+	</script>
+	
+	<%= yield :head -%>
+	
+	<%= yield :behaviors -%>
+</head>

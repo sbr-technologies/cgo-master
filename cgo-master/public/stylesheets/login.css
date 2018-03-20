@@ -1,0 +1,109 @@
+
+#flasher {
+  font-size: 0.9em;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#flasher a, #flasher a:visited {
+  color: #FFF;
+}
+
+#login_box {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 25px;
+  padding-bottom: 0px;
+  width: 780px;
+}
+
+#login_box .title {
+  font-family: Arial; 
+  font-size: 1.60em; 
+  line-height: 1.5em;
+}
+
+#login_box a, #login_box p {
+  font-weight: normal;
+  font-size: 0.8em;
+  color: #BD0000;
+  text-decoration: none;
+}
+
+#login_box p {
+  color: #4c4c4c;
+  display: inline;
+}
+
+#login_box a:visited {
+  color: #df0000;
+}
+
+#login_box a#password_reminder:hover {
+  text-decoration: underline;
+}
+
+.login_table {
+  width: 100%;
+  margin-top: 0px;
+  border-collapse: collapse;
+  font-size: 1em;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.foot {
+  padding: 15px;
+  font-size: 120%;
+  font-weight: normal;
+  font-family: Arial; 
+  text-align: center;
+  border-top: 1px solid #CCC;
+}
+
+.login_table tr.foot {
+  border-top: 2px solid #4c4c4c;
+}
+.login_table tr.foot td {
+  padding-top: 20px;
+  font-size: 110%;
+}
+
+
+.login_table td.label {
+  padding-top: 25px;
+  padding-bottom: 5px;
+}
+
+.login_table label {
+  font-size: 110%;
+  color: #2c2c2c;
+}
+
+.login_table input[type=text], .login_table input[type=password] {
+  font-size: 1.4em;
+  width: 98%;
+  border: 1px solid #CCC;
+  margin:0px;
+  padding: 4px;
+}
+
+.login_table input[type=checkbox] {
+  font-size: 1em;
+  width: 1em;
+}
+
+.login_table a, table.login_table a:visited {
+  color: #F1F7E5;
+}
+
+.notice-highlight {
+    background: #117711;
+    color: white;
+}
+
+.error-highlight {
+    background: #991111;
+    color: white;
+}
+

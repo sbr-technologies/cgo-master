@@ -1,0 +1,21 @@
+<% content_for :page_title do %>
+		Resource Center
+<% end %>
+
+<div class="static">
+		<p class="gray-text" style="margin-left:5px;width:95%">We have compiled a list of resources and information that you might find useful. Please review the links below:</p>
+		<br/>
+		<ul style="width:95%">
+				<li><a href="/static/why_hire_military">Why Hire Military</a><div>Top 10 Reasons to Hire Military Personnel</div></li>
+				<li><a href="/static/military_demographics">Military Demographics</a><div>Statistics concerning military servicemen leaving active duty</div></li>
+				<li><a href="http://online.onetcenter.org/crosswalk" target="_blank">Skills Translator</a><div>Enter a code or title from the CIP, MOC, RAPIDS, DOT, or SOC to find matching O*NET-SOC occupations.</div></li>
+				<li><a href="/static/employer_testimonials">Testimonials</a><div>Employer Testimonials</div></li>
+		</ul>
+		<br/>
+</div>
+
+<% content_for :right do %>
+		<div class="round-corners light-highlight">
+				<%= render :partial => "shared/featured_jobfair.html.erb" -%>
+		</div>
+<% end %>

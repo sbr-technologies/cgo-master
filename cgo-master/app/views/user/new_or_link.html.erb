@@ -1,0 +1,125 @@
+
+<div id="login_box" style="font-family: Arial; font-size: 1em; height: 450px; padding: 0;">
+  <div id="message">
+    To enable login to your Corporate Gray account via LinkedIn, please complete the information below.
+  </div>
+  <br/>
+
+  <table id="options">
+    <tr>
+      <td id="login_form">
+        <div style="font-weight: bold">If you have a Corporate Gray account:</div>
+        <br/>
+        <div>
+          <%= form_tag link_authentications_path do %>
+            <%= hidden_field_tag :provider, params[:provider] %>
+
+            <fieldset style="border: 0px solid #FFF; margin-top: 0; padding: 0;">
+              <div>
+                <label>Username</label><br/>
+                <%= text_field_tag :username %>
+              </div>
+
+              <div style="height: 66px">
+                <label>Password</label><br/>
+                <%= password_field_tag :password %>
+              </div>
+              <%= link_to "Forgot your Password?, click here", password_reminder_sessions_path, :class => "action_link" %>
+            </fieldset> 
+
+            <br/>
+            <%= submit_tag "login", :id => "submit_button", :class => "large cyan xbutton" %>
+
+          <% end %>
+        </div>
+      </td>
+      <td><b>I'm a New:</b><br/><%= link_to "Job Seeker", new_applicant_path, :class=>"xbutton red", :style => 'color: #FFF; font-size: 20px; margin-top: 0.5em;' %></td>
+      <td><b>I'm a New:</b><br/><%= link_to "Employer", new_employer_path, :class=>"xbutton red", :style => 'color: #FFF; font-size: 20px; margin-top: 0.5em;' %></td>
+    </tr>
+  </table>
+
+</div>
+<br/>
+<hr/>
+
+<style>
+
+  #message {
+    padding: 1em;
+    margin: 1em;
+    margin-bottom: 0;
+    border: 3px solid #008000;
+    border-radius: 5px;
+    background: #0C0;
+    color: white;
+  }
+  
+  #login_box p {
+    margin: 1em;
+    line-height: 1.7em;
+    color: #4C4C4C;
+  }
+
+  #options {
+    width: 100%;
+  }
+
+  #options td {
+    width: 25%;
+    text-align: center;
+    vertical-align: top;
+  }
+
+  #options td a.xbutton {
+    color: #FFF; 
+    font-weight: bold;
+    padding: 10px 15px;
+  }
+
+  td#login_form {
+    width: 50%;
+    text-align: left; 
+    padding-left: 1em;
+    border-right: 1px solid #CCC;
+  }
+
+  #createAccount {
+    float:left; 
+    width: 400px; 
+    height: 400px; 
+    border-right: 1px dotted #4c4c4c; 
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    padding: 0; 
+    padding-right: 1.5em; 
+    background: url(/images/60degree_gray.gif);
+  }
+  
+  #createAccount td {
+    width: 50%;
+    padding: 0 1em;
+    vertical-align: top;
+    color: #4c4c4c;
+    line-height: 1.5em;
+  }
+    
+  #createAccount td b {
+    color: #BD0000;
+    font-weith: bold;
+  }
+
+  label {
+    font-size: 1.1em; 
+    margin-left: 2px;
+    font-weight: bold; 
+  }
+
+  input[type=text], input[type=password] {
+    font-size: 1.5em;
+    padding: 3px;
+    margin-top: 5px;
+    margin-bottom: 1em;
+    border: 1px solid #ccc;
+  }
+</style>
+

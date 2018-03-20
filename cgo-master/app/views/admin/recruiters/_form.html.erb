@@ -1,0 +1,12 @@
+<%= error_handling_fields_for @recruiter do |user_form| -%> 
+	<%= user_form.check_box "status", {:label => "&nbsp;Status (Check to Activate User)" }, "active", "inactive" -%>
+	<%= render :partial => "user/form.html.erb", :object => user_form %>
+<% end %>
+
+<fieldset>
+	<legend>Contact Information</legend>
+
+	<%= error_handling_fields_for @address do |a_form| -%>
+		<%= render :partial => "/address/address.html.erb" -%>
+	<% end %>
+</fieldset

@@ -1,0 +1,96 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag "blotter", "applicants" %>
+<% end %>
+
+<% content_for :page_title do %>
+		Search Resumes
+<% end %>
+
+<%= content_for :title_tag do %>
+	Corporate Gray Military Resume Search
+<% end %>
+
+<%= content_for :meta_keywords do %>
+	search military resumes, find military candidates, screen candidates, security cleared, military skills, branch of service, military rank, government security clearance, resumes, job applicants, military recruiting, civilian qualifications
+<% end %>
+
+<%= content_for :meta_description do %>
+	Recruiters can search the resume database to find military candidates with skills and experience that meet their needs and requirements.
+<% end %>
+
+
+<div id="message" style="margin: 4px;"></div>
+
+<% unless params[:q].nil? || !flash[:error].nil? %>
+<div id="result_counter" style="margin-left:4px; margin-bottom:10px; color:#1C5379; font-weight: bold;">
+	<%= "Found a total of #{@applicants.total} Job Seeker(s) matching your criteria" %>
+</div>
+<% end %>
+
+<% if !@applicants.nil? && !@applicants.results.empty? %>
+  <% if logged_in? %>
+
+    <%= will_paginate @applicants.hits %>
+
+    <div class="blotter">
+      <ul id="applicants">
+        <%= render :partial => "applicant/list_view", :collection => @applicants.results, :as => :applicant %>
+      </ul>
+    </div>
+
+    <div style="margin-top: 30px">
+      <%= will_paginate @applicants.hits %>
+    </div>
+
+  <% else %>
+    <div class="round-corners dark-highlight" style="margin:3px;">
+      <p>
+        If your company does not have full resume search access and you would like to order, 
+        please send email to <%=link_to "#{UserMailer.sales_email}", "mailto:#{UserMailer.sales_email}?subject=Resume%20Search%20Status", :style=>"color:#E6901A"%>
+      </p>
+    </div>
+  <% end %>
+
+<% else %>
+  <div style="width: 98%; margin: 0 auto;">
+    <div style="margin:px;">
+      <p style="line-height: 2em">
+        Please enter your search criteria using the options on the right. 
+      </p>
+      <ul class="instructions">
+        <li>You need to enter at least one <b>keyword</b> to begin a new search.</li>
+        <li>But you can use multiple keywords and phrases (i.e: windows "Microsoft Office")
+        <li>All keywords are optional (i.e: in the example above, both: windows and "Microsoft Office" are optional)</li>
+        <li>If you need required keywords (similar to AND) you can use the "+" sign (i.e: windows +"Microsoft Office")</li>
+        <li>To exlude terms (similar to NOT) use the "-" sign (i.e: windows +"Microsoft Office" -"data entry")</li>
+        <li>The combination of optional terms, phrases, required terms and excluded terms allows you to perform complex queries</li>
+      </ul>
+
+      <div style="text-align: center; margin-top: 40px;">
+      <h2>How to Search Resumes on Corporate Gray Online</h2>
+      <iframe width="560" height="315" src="http://www.youtube.com/embed/2NWWC_0q5Ek?rel=0" frameborder="0" allowfullscreen></iframe>
+      </div>
+
+    </div>
+  </div>
+<% end %>
+
+<% content_for :right do %>
+  <%= render :partial => "search_form", :locals => {:q => params[:q] || {}, :job_code => params[:job_code] || nil } %>
+<% end %>
+
+<script>
+  document.observe("dom:loaded", function() {
+    $$('.send-message-handler').each(function(handler) {
+      var mdl = new Control.Modal(handler, {
+        className: 'modal',
+        method: 'GET', 
+        overlayOpacity: 0.75,  
+        indicator: $('loading-indicator'),
+        fade: true
+      });
+    });
+  });
+</script>
+
+

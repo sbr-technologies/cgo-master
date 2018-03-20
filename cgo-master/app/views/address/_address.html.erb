@@ -1,0 +1,14 @@
+<%= error_handling_fields_for @address do |a_form| -%> 
+	<%= a_form.hidden_field :label -%>
+	<%= a_form.text_field :street_address1 -%>
+	<%= a_form.text_field :street_address2 -%>
+	<div class="inline">
+		<%= a_form.text_field :city, :class=>"S" -%>
+		<%= a_form.select :state, options_from_hash(Constants::STATE_APO, :include_blank=>true) %>
+		<%= a_form.text_field :zip, :class=>"S"-%>
+	</div>	
+	<%= a_form.select :country, options_from_hash(Constants::COUNTRIES) %>
+	<%= a_form.text_field :phone -%>
+	<%= a_form.text_field :fax -%>
+	<%= a_form.text_field :mobile  -%>
+<% end %>

@@ -1,0 +1,30 @@
+
+<%= @user.name -%> has forwarded this applicant's resume to you: 
+
+<%= @resume.applicant.name %>
+<% if @resume.visibility == "public" %>
+<%= @resume.applicant.address.street_address1.gsub(/\n/, "") %>
+<%= @resume.applicant.address.street_address2 + '\n' unless @resume.applicant.address.street_address2.to_s.blank? -%>
+<%= "#{@resume.applicant.address.city}, #{@resume.applicant.address.state} #{@resume.applicant.address.zip}" %>
+<%= @resume.applicant.address.phone unless @resume.applicant.address.phone.to_s.blank? %>
+<%= @resume.applicant.email %>
+<% else %>
+ Contact Information confidential.
+<% end %>
+
+Employment Information: 
+
+Rank: <%= to_label(@resume.applicant.type_of_applicant, Constants::TYPE_OF_APPLICANT) %>
+Security Clearance: <%= to_label(@resume.applicant.security_clearance, Constants::SECURITY_CLEARANCE) %>
+Occupational Pref: <%= to_label(@resume.applicant.occupational_preference, Constants::OCCUPATIONAL_PREFERENCE) %>
+Education Level: <%= to_label(@resume.applicant.education_level, Constants::EDUCATION_LEVEL) %>
+Branch Of Service: <%= to_label(@resume.applicant.branch_of_service, Constants::BRANCH_OF_SERVICE) %>
+Availability Date: <%= @resume.applicant.availability_date.nil? ? "Now" : relative_date(@resume.applicant.availability_date) %>
+Willing To Relocate: <%= to_yes_no(@resume.applicant.willing_to_relocate).capitalize -%>
+
+<% res_txt, txt_type = @resume.get_body "txt" %>
+<% if res_txt != nil %>
+------------------------------------------------------------------------
+<%= res_txt -%>
+------------------------------------------------------------------------
+<% end %>

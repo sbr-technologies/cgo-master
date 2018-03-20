@@ -1,0 +1,22 @@
+<% content_for :page_title do %>
+  Job Fair Registration For: <%= @registration.attendant.name %>
+  <%= raw "<h2>#{@registration.attendant.employer.name}</h2>" if @registration.attendant.type == "Recruiter" %>
+<% end %>
+
+<table class="show-model">
+  <tr><td class="label">Lunches Required:    </td><td><%=@registration.lunches_required              -%></td></tr>
+  <tr><td class="label">Available Positions: </td><td><%=@registration.available_positions           -%></td></tr>
+  <tr><td class="label">Include In Directory:</td><td><%=to_yes_no(@registration.include_in_employer_directory).capitalize -%></td></tr>
+  <tr><td class="label">Outlet Required:     </td><td><%=to_yes_no(@registration.outlet_required).capitalize    -%></td></tr>
+  <tr><td class="label">Paid:                </td><td><%=to_yes_no(@registration.paid).capitalize               -%></td></tr>
+  <tr><td class="label">Banner Company Name: </td><td><%=@registration.banner_company_name           -%></td></tr>
+  <tr><td class="label">Fax:                 </td><td><%=@registration.fax                           -%></td></tr>
+  <tr><td class="label">Url:                 </td><td><%=link_to @registration.url, "http://"+@registration.url.gsub(/^http:\/\//, ''), :popup=>true -%></td></tr>
+  <tr><td class="label">Security Clearance:  </td><td><%=@registration.security_clearance            -%></td></tr>
+  <tr><td class="label">Attending:           </td><td><%=to_yes_no(@registration.attending).capitalize          -%></td></tr>
+  <tr><td class="label">Enable Search:       </td><td><%=to_yes_no(@registration.enable_search).capitalize      -%></td></tr>
+  <tr><td class="label">Ad Type:             </td><td><%=@registration.ad_type                       -%></td></tr>
+  <tr><td class="label">Created At:          </td><td><%=@registration.created_at.to_s(:human)       -%></td></tr>
+  <tr><td class="label">Updated At:          </td><td><%=@registration.updated_at.to_s(:human)       -%></td></tr>
+</table>
+

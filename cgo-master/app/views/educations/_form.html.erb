@@ -1,0 +1,46 @@
+<div style="margin-left: 1em">
+  <%= f.hidden_field "unique_identifier" %>
+
+  <div class="control-group">
+    <label class="control-label required" for="start_date">From</label>
+    <div class="controls">
+        <%= f.select :start_date, (1940..(Date.today.year)).to_a.collect{|x| [x,x]}.reverse %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label required" for="end_date">To</label>
+    <div class="controls">
+        <%= f.select :end_date, (1940..(Date.today.year)).to_a.collect{|x| [x,x]}.reverse %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label required" for="company">School Name</label>
+    <div class="controls">
+        <%= f.text_field :school_name %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="company">Field Of Study</label>
+    <div class="controls">
+        <%= f.text_field :field_of_study %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="company">Degree</label>
+    <div class="controls">
+        <%= f.text_field :degree %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="company">Notes</label>
+    <div class="controls">
+      <%= f.text_area :notes, :rows => 10, :style => "width: 52em; margin-bottom: 0.5em" %>
+    </div>
+  </div>
+
+</div>

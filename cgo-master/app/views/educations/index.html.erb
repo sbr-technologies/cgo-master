@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  Your Education
+<% end %>
+
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'bootstrap.min' %>
+<% end %>
+
+<% if @educations.empty? %>
+  <div class="hero-unit" style="margin: auto; margin-top: 3em; width: 70%">
+  <p>
+    You get better chances of appearing in an employer's search results if you provide us
+    your education; in addition, this will improve your chances of being considered 
+    when applying to a job.
+  </p>
+  <br/>
+  <p>
+    Press the button below to add to your education; 
+    alternatively you can <u>Add your LinkedIn account</u> and we will retrieve this information automatically. 
+  </p>
+
+  <div style="width: 50%; margin: auto; margin-top: 3em; text-align: center;">
+    <%= link_to "Add a Education", new_education_path, :class => "btn btn-primary btn-block", :style => "text-decoration: none" %>
+    <p>or</p>
+    <%= link_to "Add My LinkedIn Account", "#", :class => "btn btn-block", :style => "text-decoration: none" %>
+  </div>
+</div>
+
+<% else %>
+
+  <%= render  @educations %>
+
+  <div style="margin-top: 20px; text-align: right; padding-right: 20px">
+    <%= link_to "Add Education", new_education_path, :class => "btn btn-primary", :style => "text-decoration: none" %>
+  </div>
+
+<% end %>
+

@@ -1,0 +1,31 @@
+<%= form_tag update_employer_admin_recruiters_path, :id => "recruitersupdate" do %>
+  <%= hidden_field_tag :new_employer_id, nil -%>
+
+  <table class="recruiter-blotter" style="width: 100%; margin-top: 20px; border-bottom: 2px solid #000;">
+    <thead>
+      <tr>
+        <th style="font-weight: bold; border-bottom: 2px solid #000;"><%= link_to_function "All", "$$('#recruiters-items input').each(function(tag, index) {tag.checked=true;})" -%>&nbsp;|&nbsp;<%= link_to_function "None","$$('#recruiters-items input').each(function(tag, index) {tag.checked=false;})" -%></th>
+        <th style="font-weight: bold; border-bottom: 2px solid #000;">Name (username)</th>
+        <th style="font-weight: bold; border-bottom: 2px solid #000;">Current Employer</th>
+      </tr>
+    </thead>
+    <tbody id="recruiters-items">
+    <% @recruiters.each do |recruiter| %>
+      <tr>
+        <td style="padding-top: 4px; padding-bottom: 4px; border-bottom: 1px solid #DDD;" width="12%"><input name="recruiters[]" type="checkbox" value="<%=recruiter.id.to_s-%>" style="width:auto;"/>
+          <td style="padding-top: 4px; padding-bottom: 4px; border-bottom: 1px solid #DDD;<%=recruiter.status == 'inactive' ? 'font-style: italic; color: #6c6c6c;' : '' %>"><%= "#{recruiter.last_name}, #{recruiter.first_name} (#{recruiter.username})" -%></td>
+        <td style="padding-top: 4px; padding-bottom: 4px; border-bottom: 1px solid #DDD;" width="45%"><%= "(#{recruiter.employer.id}) #{recruiter.employer.name}" -%></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <div style="float:none; clear:both; height: 20px;">&nbsp;</div>
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('new_employer_id').value = window.employerId; $('recruitersupdate').submit(); return false;"><span>save</span></a>
+    <div>or <%= link_to "Cancel", edit_employer_admin_recruiters_path, :class=>"cancel"%></div>
+  </div>
+<% end %>
+
+
+

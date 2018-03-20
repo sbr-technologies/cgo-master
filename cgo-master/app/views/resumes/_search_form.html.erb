@@ -1,0 +1,114 @@
+<div class="search-block">
+
+  <% unless current_user.nil? %>
+    <div style="margin-bottom: 1em; background: whitesmoke; border-radius: 3px; padding: 0.5em;">
+        <div style="padding:4px 12px 4px 8px;text-align: justify;">
+          <% if !current_user.employer.resume_search_expire_at.to_s.blank? && current_user.employer.resume_search_privileges? %>
+            You have full resume search privileges until: 
+            <div style='text-align:center'><%= current_user.employer.resume_search_expire_at.to_s(:mmddyyyy) -%></div>
+          <% else %>
+            Resume access is currently limited to the resumes from your previously registered job fairs. 
+            To purchase full resume search access, click here
+            <%= link_to "Carl@CorporateGray.com", "mailto:carl@corporategray.com", :style=> "color:inherit;" %>.</b>
+          <% end %>
+        </div>
+    </div>
+  <% end %>
+
+  <%= form_tag current_user.nil? ? guest_search_resumes_path : search_resumes_path, :id =>"search_form", :method => :get  do %>
+    <% if !current_user.nil? && current_user.employer.is_federal_employer? %>
+      <label style="font-weight:bold; float:left; clear:both; margin-bottom: 15px; color: #BD0000;">
+        Enter your internal requisition # (Job Code)
+        <%= text_field_tag "job_code", job_code, :style=>"width:100%; float:left; clear:both; margin-top: 5px;" %>
+      </label>
+    <% end %>
+          
+    <label style="font-weight:bold; white-space:nowrap;">
+      Search by Keyword
+      <%= text_field_tag "q[keyword]", q[:keyword], :style =>"width: 300px; float: left; clear : both; margin-top: 5px;" %>
+      <div style="clear:both; float:left; padding-top:2px; padding-bottom: 5px; font-weight: normal; font-style: italic; font-size: 0.95em; color:#BD0000;">
+        You can use multiple keywords, "quotes to search <br/>phrases" and +/- for mandatory/excluded terms <br/>(i.e: "program manager" +software -aviation)
+      </div>
+    </label>
+
+    <label style="margin-bottom: 5px; margin-top: 10px; font-weight: bold; float:left; clear:both; white-space:nowrap">
+        Search by Last Name
+        <%= text_field_tag "q[applicant_last_name]", q[:applicant_last_name], :style =>"width: 300px; float: left; clear : both; margin-top: 5px;" %>
+    </label>
+
+    <a class="button" style="float:left; clear:both; margin-top: 3px; margin-left: 0px; margin-bottom: 20px;" onclick="$('search_form').submit(); return false;" href="#"><span>Search</span></a>
+    <hr style="float:none; clear:both; color: #DDD;"/>
+
+    <!-- rank, branch_of_service, security_clearance, education_level, state, availability, posted_by, jobfair attendance -->
+    <div class="filter-block">
+      <h3>Filters:</h3>
+
+      <div id="by-state" class="css-filter">
+        <p>By State</p>
+        <ul>
+          <li><%=select_tag("q[state][]", options_for_select(options_from_hash(Constants::STATE_APO), q[:state] ), :multiple => true, :size => 4) %></li>
+        </ul>
+      </div>
+
+      <div id="by-rank" class="css-filter">
+        <p>By Rank</p>
+        <ul>
+          <li><%=select_tag("q[type_of_applicant][]", options_for_select(options_from_hash(Constants::TYPE_OF_APPLICANT), q[:type_of_applicant] ), :multiple => true, :size => 4)-%></li>
+        </ul>
+      </div>
+
+      <div id="by-branch-of-service" class="css-filter">
+        <p>By Branch Of Service</p>
+        <ul>
+          <li><%=select_tag("q[branch_of_service][]", options_for_select(options_from_hash(Constants::BRANCH_OF_SERVICE), q[:branch_of_service] ), :multiple => true, :size => 4)-%></li>
+        </ul>
+      </div>
+
+      <div id="by-security-clearance" class="css-filter">
+        <p>By Security Clearance</p>
+        <ul>
+          <li><%=check_box_tag 'q[security_clearance][]', 3, (q[:security_clearance].include?("3") rescue true) %>None&nbsp;<span id="security_clearance_3"></span></li>
+          <li><%=check_box_tag 'q[security_clearance][]', 1, (q[:security_clearance].include?("1") rescue true) %>Secret&nbsp;<span id="security_clearance_1"></span></li>
+          <li><%=check_box_tag 'q[security_clearance][]', 2, (q[:security_clearance].include?("2") rescue true) %>Top Secret&nbsp;<span id="security_clearance_2"></span></li>
+          <li><%=check_box_tag 'q[security_clearance][]', 0, (q[:security_clearance].include?("0") rescue true) %>Unspecified&nbsp;<span id="security_clearance_0"></span></li>
+        </ul>
+      </div>
+
+      <div id="by-education" class="css-filter">
+        <p>By Education Level</p>
+        <ul>
+          <li><%=check_box_tag 'q[education_level][]', 1, (q[:education_level].include?("1") rescue true) %>High School / GED&nbsp;<span id="education_level_1"></span></li>
+          <li><%=check_box_tag 'q[education_level][]', 3, (q[:education_level].include?("3") rescue true) %>Associates Degree&nbsp;<span id="education_level_3"></span></li>
+          <li><%=check_box_tag 'q[education_level][]', 4, (q[:education_level].include?("4") rescue true) %>Bachelors Degree or Higher&nbsp;<span id="education_level_4"></span></li>
+          <li><%=check_box_tag 'q[education_level][]', 0, (q[:education_level].include?("0") rescue true) %>Unspecified&nbsp;<span id="education_level_0"></span></li>
+        </ul>
+      </div>
+
+      <div id="by-post-date" class="css-filter">
+        <p>By Post Date</p>
+        <ul>
+          <li><%= select_tag 'q[posted_date]', options_for_select([['All', ''], ['One Month Ago', 'one-month'], ['Three Months Ago', 'three-months'], ['Six Months Ago', 'six-months']], q[:posted_date] ) -%></li>
+        </ul>
+      </div>
+
+      <div id="willing-to-relocate" class="css-filter">
+        <p>By Willingness to Relocate</p>
+        <ul>
+          <li><%= select_tag 'q[willing_to_relocate]', options_for_select([["Don't Care", ''], ['Yes', 'true'], ['No', 'false']], q[:willing_to_relocate]) -%></li>
+        </ul>
+      </div>
+
+      <% if !current_user.nil? && current_user.employer.registrations.any? %>
+        <div id="by-jobfair-attendance" class="css-filter">
+          <p>By Job Fair Attendance</p>
+          <ul>
+            <li><%=  select_tag "q[job_fair_registrations]", options_for_select([["Select All", ""]] + current_user.employer.registrations.collect {|reg| [truncate(reg.jobfair.name, :length => 40), reg.jobfair.id] if reg.enable_search == true || current_user.employer.resume_search_allowed?}.compact, q[:job_fair_registrations]) -%></li>
+          </ul>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <a class="button" style="float:left; clear:both; margin-top: 15px; margin-left: 5px; margin-bottom: 20px;" onclick="$('search_form').submit(); return false;" href="#"><span>Search</span></a>
+
+</div>

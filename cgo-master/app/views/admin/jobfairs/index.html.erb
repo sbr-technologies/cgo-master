@@ -1,0 +1,32 @@
+<% content_for :page_title do %>
+  All Jobs Fairs
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "New", new_admin_jobfair_path -%> | 
+  <%= link_to "Download to Excel", admin_jobfairs_path(:format => :xls) %>
+<% end %>
+
+<div id="jobs_container">
+  
+  <%= will_paginate @jobfairs %>
+
+  <table class="list">
+    <tr>
+      <th width="13%">Date</th>
+      <th width="17%">Category</th>
+      <th width="40%">Location</th>
+      <th width="20%">City / State</th>
+      <th width="10%">Fees</th>
+    </tr>
+    <% @jobfairs.each_with_index do |jobfair, index| %>
+      <tr class="item-row">
+	<td><%= jobfair.date.to_s(:short_with_year) -%></td>
+	<td><%= jobfair.category.titleize -%></td>
+	<td><%= link_to jobfair.location, admin_jobfair_path(jobfair.id), :class=>"action_link" -%></td>
+	<td><%= jobfair.city %></td>
+	<td><%= number_to_currency jobfair.fees %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

@@ -1,0 +1,20 @@
+<% content_for :page_title do %>
+  Edit: <%= @employer.name %>
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "View All", admin_employers_path -%>
+<% end %>
+
+<%= error_messages_for @employer %>
+
+<%= error_handling_form_for @employer, :url => admin_employer_path, :html => {:id => "employerform" } do |f| %>
+
+  <%= render :partial => "form", :object => f -%>
+			
+  <div class="button-bar">
+    <a class="button" href="#" onclick="$('employerform').submit(); return false;"><span>save</span></a>
+    <div>or <%= link_to "Cancel", admin_employers_path, :class=>"cancel"%></div>
+  </div>
+
+<% end %>

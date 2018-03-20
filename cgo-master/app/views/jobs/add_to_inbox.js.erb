@@ -1,0 +1,3 @@
+$('job_<%=@job.id%>').down('.inbox-handler').replace("<span class='xbutton grey disabled'>Already in your Inbox</span>");
+$('job_<%=@job.id%>').down('.indicator').hide();
+showStatus(<%=@job.id%>, "Saved");

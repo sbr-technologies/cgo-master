@@ -1,0 +1,38 @@
+<div style="margin-left: 1em">
+  <%= f.hidden_field "unique_identifier" %>
+
+  <div class="control-group">
+    <label class="control-label" for="start_date">From</label>
+    <div class="controls">
+        <%= f.select :start_date, (1940..(Date.today.year)).to_a.collect{|x| [x,x]}.reverse, {:label => 'From'} , :class => 'position-start-date' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="end_date">To</label>
+    <div class="controls">
+        <%= f.select :end_date, (1940..(Date.today.year)).to_a.collect{|x| [x,x]}.reverse, {:label => 'To'}, :class => 'position-end-date' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label required" for="company">Company</label>
+    <div class="controls">
+        <%= f.text_field :company, :style => "margin-bottom: 0.5em", :class => "position-company"%>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label required" for="title">Title</label>
+    <div class="controls">
+        <%= f.text_field :title,  :style => "margin-bottom: 0.5em", :class => "position-title" %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="summary">Summary</label>
+    <div class="controls">
+      <%= f.text_area  :summary, :rows => "10", :style => "width: 45em" %>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,45 @@
+#tabView ul.tabBar {
+  list-style: none; 
+  margin: 0 0 5px 0;
+  padding: 0;
+  border-bottom: 1px solid #CCC; 
+  height: 21px;
+  clear:both;
+  height: 29px;
+}
+
+#tabView li.tab {
+  float: left;
+  display: block; 
+  margin-right: 10px; 
+  text-align: center; 
+  border: 1px solid #CCC;
+  background: whitesmoke;
+}
+
+#tabView li.tab a, #tabView li.tab a:visited {
+  display: block;
+  height: 22px;
+  padding-top: 6px;
+  padding-left: 1em; 
+  padding-right: 1em;
+  border-bottom-width: 0px;
+  color: #4c4c4c;
+  font-weight: bold; 
+  text-decoration: none;
+}
+
+#tabView li.tab:hover {
+  background: #3b5998;
+}
+#tabView li.tab:hover a {
+  color: #FFF;
+}
+
+
+#tabView li.tab a.active {
+  color: #000; 
+  background: #FFF; 
+  outline: none; 
+  ie-dummy: expression(this.hideFocus=true);
+}

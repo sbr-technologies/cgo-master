@@ -1,0 +1,61 @@
+<%= fields_for address do |a_form| %>
+	<%= a_form.hidden_field :label -%>
+
+    <div class="control-group">
+      <label class="control-label required" for="address_street_address1">Street Address #1</label>
+      <div class="controls">
+        <%= a_form.text_field :street_address1, :class => "input-xlarge" -%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="address_street_address2">Street Address #2</label>
+      <div class="controls">
+        <%= a_form.text_field :street_address2, :class => "input-xlarge" -%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="address_state">City/State</label>
+      <div class="controls">
+        <%= a_form.text_field :city, :class => "input-medium"-%>
+		<%= a_form.select :state, options_from_hash(Constants::STATE_APO, :include_blank=>true) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="address_zip">Zip</label>
+      <div class="controls">
+		<%= a_form.text_field :zip, :class=>"input-small"-%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="address_country">Country</label>
+      <div class="controls">
+	    <%= a_form.select :country, options_from_hash(Constants::COUNTRIES) %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label required" for="address_phone">Phone</label>
+      <div class="controls">
+	    <%= a_form.text_field :phone -%>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="address_fax">Fax</label>
+      <div class="controls">
+	    <%= a_form.text_field :fax -%>
+      </div>
+    </div>
+    <div class="control-group">
+      <label class="control-label" for="address_mobile">Mobile</label>
+      <div class="controls">
+	    <%= a_form.text_field :mobile  -%>
+      </div>
+    </div>
+
+<% end %>
+

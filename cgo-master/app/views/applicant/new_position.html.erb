@@ -1,0 +1,12 @@
+<%= content_for :page_title do %>
+  Do you want to add your previous work positions?
+<% end %>
+
+<ul>
+  <% @positions.each do |pos| %>
+    <li>
+      <h3><%=pos["company"]["name"]%></h3>
+      <p><%=pos["title"]%></p>
+    </li>
+  <% end %>
+</ul>

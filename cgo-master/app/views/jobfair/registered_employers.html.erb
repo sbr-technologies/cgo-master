@@ -1,0 +1,20 @@
+<% content_for :page_title do %>
+		Registered Employers
+<% end %>
+
+<% content_for :title_tag do %>
+		Registered Employers
+<% end %>
+
+
+<% if !@employers.empty? %>
+<ul style="margin-left: 5px; margin-top: 15px;">
+		<% @employers.each do |employer| %>
+				<li style="margin-bottom: 5px;">
+								<%= link_to employer.name, public_profile_employer_path(employer.id) %>
+				</li>
+		<% end %>
+</ul>
+<% else %>
+		<div style="margin-top: 15px;"><div class="round-corners dark-highlight"><div style="padding: 5px">No Employer Registrations for Job Fair: <%= @jobfair.name -%> </div></div></div>
+<% end %>

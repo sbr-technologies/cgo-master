@@ -1,0 +1,53 @@
+<% content_for :page_title do %>
+  All Jobs
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "New Job", new_job_path -%>
+<% end %>
+
+<Style>
+  tr.expired {
+    font-style: italic;
+    color: #4C4C4C;
+  }
+
+</Style>
+
+<%= will_paginate @jobs %>
+
+<% unless @jobs.nil? || @jobs.empty? %>
+<div id="jobs_container">
+
+  <table class="blotter">
+    <thead>
+      <tr>
+	<th width="15%">Code</th>
+	<th width="50%">Title</th>
+	<th width="20%">Location</th>
+	<th width="15%">Expires In</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @jobs.each_with_index do |job, index| %>
+	<tr <%= job.expired? ? "class='expired'" : "" %> style="background:<%=index.remainder(2) == 0 ? '#EEE' : '#FFF' -%>; padding: 2px;">
+	  <td><%= job.code -%></td>
+	  <td><%= link_to job.title, job_path(job.id), :class=>"action_link" -%></td>
+	  <td><%= "#{job.location.city}, #{job.location.state}" -%></td>
+	  <td><%= !job.expired? ? job.expires_at.to_s(:mmddyyyy) : "expired" %></td>
+	</tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<% end %>
+
+<% if @jobs.nil? || @jobs.empty? %>
+  <div class="round-corners dark-highlight" style="margin-right: 8px;">
+    <p style="padding:10px;">
+						No jobs have been posted to date
+		</p>
+  </div>
+<% end %>
+
+

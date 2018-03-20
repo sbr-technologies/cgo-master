@@ -1,0 +1,10 @@
+<div id="breadcrums">
+  <% path.each_with_index do |item, index| %>
+    <% if item.class == Hash %>
+      <%= link_to item.keys.first.to_s.titleize, item[item.keys.first], :class => "breadcrum" %>
+    <% else %>
+      <%= item.to_s.titleize %>
+    <% end %>
+    <%= index < path.length() -1 ? " > " : "" %>
+  <% end %>
+</div>

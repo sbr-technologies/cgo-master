@@ -1,0 +1,91 @@
+<%= content_for :head do %>
+  <%= javascript_include_tag "image-gallery" %>
+  <%= stylesheet_link_tag "welcome_index" %>
+<% end %>
+
+<%= content_for :title_tag do %>
+	Corporate Gray Military to Civilian Career Transition Website
+<% end %>
+
+<%= content_for :meta_keywords do %>
+	military transition assistance, veteran employment, military job fairs, security clearance, retiring, separating, transition guide, government jobs, career advice, military spouse employment, civilian jobs, military resume, military recruitment
+<% end %>
+
+<%= content_for :meta_description do %>
+	Corporate Gray connects military veterans with employers through its career transition books, military job fairs, and military to civilian website.
+<% end %>
+
+
+
+<%= content_for :banner do %>
+  <div id="banner">
+
+    <div id="image_container">
+      <div class="fade-box" id="stock-03"><%= image_tag "stock_photos/stock_03.jpg" %></div>
+    </div>
+
+    <div id="featured_job_fair" style="width: 300px;">
+      <%= render :partial => "/shared/featured_jobfair" -%>
+    </div>
+
+    <% if !current_user %>
+      <div id="banner_actions" style="">
+        <div class="banner-button">
+          <div class="x-large bold blue">Job Seekers</div>
+          <div class="large bold blue">FIND A GREAT JOB</div>
+          <div class="button inverse-blue"><%= link_to "Create a Free Account Now!", new_applicant_path %></div>
+        </div>
+
+        <br/>
+
+        <div class="banner-button">
+          <div class="x-large bold blue">Employers</div>
+          <div class="large bold blue">FIND CANDIDATES</div>
+          <div class="button inverse-red"><%= link_to "Try a Free Resume Search!", guest_search_resumes_path %></div>
+        </div>
+      </div>
+    <% else %>
+      <div id="banner_actions" style="">
+        <div class="banner-button">
+          <div class="large bold blue">Find a Great Job</div>
+          <div class="button inverse-blue"><%= link_to "Search for Jobs!", search_jobs_path %></div>
+        </div>
+
+        <br/>
+        <br/>
+
+        <div class="banner-button">
+          <div class="large bold blue">Let Employers Find You</div>
+          <div class="button inverse-red"><%= link_to "Post your Resume", resumes_path %></div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="action-bar background-blue" style="margin-top: 5px; color: white; padding: 10px 15px;"> 
+
+      <div style="text-align: center; font-weight: bold; font-size: 1.2em; margin-bottom: 10px; color: yellow;">FOR JOB SEEKERS</div>
+
+      <div class="book" style="float:left;">
+        <%=link_to image_tag("book_sponsors.gif", :style => "height: 150px"), "/static/transition_guide/overview" %>
+      </div>
+
+      <div class="actions" style="margin-left: 120px;">
+        <ul >
+          <li><div class="action"><%= link_to image_tag('search_jobs.png', :size => "100x100"), search_jobs_path, :alt => "Search Jobs" %></div></li>
+          <li><div class="action"><%= link_to image_tag('post_resume.png', :size => "100x100"), resumes_path, :alt => "Post your Resume" %></div></li>
+          <li><div class="action"><%= link_to image_tag('attend_job_fairs.png', :size => "100x100"), jobfairs_path, :alt => "Attend Job Fairs" %></div></li>
+          <li><div class="action"><%= link_to image_tag('earn_degree.png', :size => "100x100"), "/static/career_training", :alt => "Earn a Degree" %></div></li>
+          <li><div class="action"><%= link_to image_tag('be_your_own_boss.png', :size => "100x100"), "/static/franchise", :alt => "Be Your Own Boss" %></div></li>
+          <li><div class="action"><%= link_to image_tag('view_newsletter.png', :size => "100x100"), "/CGnewsletter.html", :alt => "View Newsletter" %></div></li>
+          <li><div class="action"><%= link_to image_tag('read_blog.png', :size => "100x100"), "http://blog.corporategray.com", :alt => "Read the Blog" %></div></li>
+      </div>
+    </div>
+    <div style="background: #AAA; color: white; text-align: center; padding: 10px; font-weight: bold; ">CORPORATE GRAY BOOK SPONSORS</div>
+
+  </div>
+<% end %>
+
+
+<div>
+  <%= render :partial => 'shared/military_friendly_sponsors' %>
+</div>

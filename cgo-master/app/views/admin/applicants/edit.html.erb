@@ -1,0 +1,24 @@
+<% content_for :page_title do %>
+  Edit Applicant: <%= @applicant.name.titleize %>
+<% end %>
+
+<% unless @applicant.errors.empty? && @address.errors.empty? %>
+  <div id="errorExplanation" class="errorExplanation">
+    <h2>Errors prevented saving your account modifications</h2>
+    <p>Please correct the errors indicated on each tab and try again<p>
+  </div>
+<% end %>
+
+<br/>
+
+<%= error_handling_form_for @applicant, :url => admin_applicant_path, :html => {:id => "applicantform" } do |f| %>
+  <div style="border: 1px solid #4c4c4c; bacground: whitesmoke;">
+    <fieldset class="no-border" >
+      <%= f.check_box :status, {:label => "Active?"}, "active", "inactive" -%>
+    </fieldset>
+  </div>
+
+  <div style="margin-bottom: 2em"></div>
+
+  <%= render :partial => "applicant/form.html.erb", :locals => {:f => f} -%>
+<% end %>

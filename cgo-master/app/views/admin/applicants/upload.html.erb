@@ -1,0 +1,24 @@
+<% content_for :page_title do %>
+   Resume Import
+   <h3 style="margin-top: -1px">Total Records: <%=@total_records -%> (rejected:<%=@total_rejected -%>)</h3>
+<% end %>
+
+<% content_for :page_header_links do %>
+  <%= link_to "View All Applicants", admin_applicants_path -%> 
+<% end %>
+
+
+<div style="margin-left:10px">
+<% @warnings.each_with_index do |warning, index| %>
+  <div style="width:90%; border-bottom: 1px solid #CCC; margin: 15px 0 5px 0;"><b><%=index+1 -%> -</b> Header File: <%=warning[:filename] -%></div>
+  <div>
+    <% warning[:errors].each do |model| %>
+      <ul>
+	<%  model.each_full do |msg| %>
+	  <li><%= msg %></li>
+	<% end %>
+      </ul>
+    <% end %>
+  </div>
+<% end %>
+</div>

@@ -1,0 +1,6 @@
+production:
+  api_key: ABQIAAAABiMDw6N8jNbKj5HuWufrZhRsh3XLxRcAgV4_6jiYe6SnwCJmeBSaxQNezdtoaw2q17SfVs1OTVfYmg 
+
+development:
+  api_key: ABQIAAAABiMDw6N8jNbKj5HuWufrZhT2yXp_ZAY8_ufC3CFXhHIE1NvwkxSiGRE51M4MjgrY7BHBvKZfd7f47g
+

@@ -1,0 +1,8 @@
+<% content_for :head do %>
+  <%= stylesheet_link_tag 'bootstrap.min'  %>
+<% end %>
+
+<div style="margin:auto; width: 40%">
+  <h2 style="font-family: Arial" ><%= @message.blank? ? "Your Account Has Been Deactivated" : @message %></h2>
+  <a href="/" class="btn btn-primary" style="text-decoration: none !important;">Return To Home</a>
+</div>

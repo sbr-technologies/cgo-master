@@ -1,0 +1,128 @@
+<% content_for :page_title do %>
+  Dashboard
+<% end %>
+
+<%= content_for :title_tag do %>
+Corporate Gray Military Transition and Military Recruiting Dashboard
+<% end %>
+
+<%= content_for :meta_keywords do %>
+military recruiting, military recruitment, veteran recruiting, military job fairs, security clearance, hiring military, interviewing military, government jobs, military spouse employment, civilian jobs, military resume
+<% end %>
+
+<%= content_for :meta_description do %>
+On the Dashboard page, the recruiter views registered job fairs, recent messages to and from military candidates, recent job applications, and saved resumes.
+<% end %>
+
+
+<% content_for :page_header_links do %>
+    <%= link_to "My Account", edit_employer_recruiter_path(:employer_id => current_user.employer.id, :id => current_user.id)%>
+<% end %>
+
+<% if @messages_inbox.empty? && @registrations.empty? && @resumes_inbox.empty? %>
+  <div class="round-corners dark-highlight" style="margin-right: 8px;">
+    <p style="padding:10px;">In this page you will be notified of important events occuring in your account. At the moment there are no notifications to display.</p>
+  </div>
+<% end %>
+
+<div class="messages">
+  <h2 style="margin-left: 5px">Registered Job Fairs</h2>
+	<% unless @registrations.empty? %>
+    <ul style="margin-top: 10px">
+      <% @registrations.each do |registration| %>
+        <li>
+          <span style="float:left" ><%= raw "<b>#{relative_date(registration.jobfair.date)}</b> #{registration.jobfair.location}"-%></span>
+          <span style="float:right"><%= link_to "View Job Fair", jobfair_path(registration.jobfair.id) -%></span>
+        </li>
+      <% end %>
+    </ul>
+    <% else %>
+        <div style="text-align:center; font-style: italic; font-weight: bold; color: #CCC; border-bottom: 1px dashed #CCC;">None</div>
+	<% end %>
+</div>
+
+<div class="messages" style="margin-top:30px">
+  <h2 style=" margin-left: 5px">Recent Messages</h2>
+  <%= render :partial => "/messages/list.html.erb", :locals => {:messages => @messages_inbox }-%>
+</div>
+
+<div class="messages" style="margin-top: 30px;">
+  <h2 style="margin-left: 5px; margin-bottom: 3px;">Saved Resumes <span style="font-size: 9pt;"><%= raw "[&nbsp;#{@applicants.size} (max of #{Constants::MAX_INBOX_SIZE})]" -%></span></h2>
+  <% unless current_user.inbox_entries.empty? || @applicants.to_s.blank?  %>
+
+    <br/>
+    <div class="blotter">
+      <table id="applicants" width="100%">
+        <tr style="border-bottom: 1px solid #CCC; font-weight: bold;">
+          <th width="80px">Saved On</th>
+          <th>Name</th>
+          <th width="120px">Location</th>
+          <th width="120px">Availability</th>
+          <th width="90px">Actions</th>
+        </tr>
+        <tr><td colspan="5">&nbsp;</td></tr>
+        <% @resumes_inbox.each do |entry| %>
+          <% if entry.resource %>
+            <tr id="inbox_entry_<%=entry.id%>" >
+              <td><%= (entry.updated_at || entry.created_at).to_s(:mmddyyyy) %></td>
+              <td><%= entry.resource.applicant.name rescue nil%>
+              <td><%= entry.resource.applicant.addresses[:primary].city rescue nil%></td>
+              <td><%= "Available: " + entry.resource.applicant.availability_date.to_s(:mmddyyyy) rescue "Available Now" %></td>
+              <td>
+                <%= link_to "view", applicant_path(entry.resource.applicant.id) %>
+                &nbsp;
+                <%= link_to "remove", remove_from_inbox_resume_path(entry.resource.id), :class => "inbox-handler", :remote => true %>
+              </td>
+            </tr>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+
+  <% else %>
+    <br/>
+    <div class="round-corners dark-highlight" style="margin:3px;">
+      <p style="padding:15px; line-height: 2em">
+        You can use this area to save interesting resumes for review or analysis. To add a resume to your dashboard, just press the "Save" button on any resume search result; we will keep a maximum of 25 resumes. Resumes already saved to your dashboard will instead show a "Delete" button that will allow you to delete old candidates from this secction. For questions please email us at: <%= link_to "#{UserMailer.admin_email}", "mailto:#{UserMailer.admin_email}?subject=Resume%20Search%20Status", :style=>"color:#E6901A" -%>
+        </p>
+  </div>
+  <% end %>
+</div>
+
+<% content_for :right do %>
+
+  <div style="border: 1px dotted #EFEFEF; background: #CDCDCD; padding: 5px; margin-bottom: 20px;">
+    <h3 style="margin:0; margin-bottom:0.5em">Your Subscription Expires On:</h3>
+    <div>Job Posting expires on: <%=(!current_user.employer.job_postings_expire_at.to_s.blank? ? current_user.employer.job_postings_expire_at.to_date.to_s(:human) : "Not Active") -%></div>
+    <div>Resume Search expires on: <%=(!current_user.employer.resume_search_expire_at.to_s.blank? ? current_user.employer.resume_search_expire_at.to_date.to_s(:human) : "Not Active") -%></div>
+    <div style="text-align:right; margin-top: 1em"><%= mail_to "carl@corporategray.com", "click to renew", :subject => "Renew Subscription - Employer: #{current_user.employer.id}" -%></div>
+  </div>
+
+  <%= render :partial => "/shared/new_site_feedback" %>
+
+  <div style="margin-top: 20px; border: 1px solid #d5d5d5;">
+      <%= render :partial => "/shared/featured_jobfair" %>
+  </div>
+
+  <br/>
+
+  <%= render :partial => "/shared/cgo_book_sponsor" %>
+
+
+<% end %>
+
+
+
+<script>
+
+  // Once the Ajax call is completed. 
+  // Delete the row from the inbox
+  // Called by InboxHandlerBehavior (see resume's _blotter.html.erb)
+  // If the inbox entry is deleted from search results, then the actions
+  // to perform are different. (See Resume#search.html.erb)
+  function deleteFromDashboardComplete(res_id) {
+    $('res_details_' + res_id).hide();
+    Effect.Fade($('resume_'+res_id), {duration: 0.75});
+  }
+
+</script>

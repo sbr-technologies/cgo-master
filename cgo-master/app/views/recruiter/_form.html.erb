@@ -1,0 +1,19 @@
+<%= error_handling_fields_for @recruiter do |user_form| -%> 
+  <%= render :partial => "user/form.html.erb", :locals => {:form => user_form} %>
+<% end %>
+
+<fieldset>
+    <div>
+      <%= form.check_box :is_display_email, :label => "Display Your Email to Applicants?" -%>
+    </div>
+	<div style="margin:8px 0px">
+    <div class="round-corners light-highlight">
+      <div style="padding:0px 5px">By default we will display your email address to potential candidates. You can opt out by unchecking this check box.</div>
+    </div>
+	</div>
+</fieldset>
+
+<fieldset>
+	<legend>Contact Information</legend>
+  <%= render :partial => "address/address.html.erb" %>
+</fieldset>

@@ -1,0 +1,164 @@
+<% content_for :head do %>
+
+  <%= stylesheet_link_tag 'transition_guide' %>
+
+  <script>
+    document.observe("dom:loaded", function() { $$('#conduct_company_research a')[0].addClassName('selected'); });
+  </script>
+
+<% end %>
+
+<% content_for :page_title do %>
+  Conduct Company Research
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      {:transition_guide => "/static/transition_guide/overview" },
+      :conduct_company_research
+  ] } %>
+<% end %>
+
+
+<p>The old adage, knowledge is power, is especially true when conducting a job search. A successful job search campaign requires gathering intelligence data, just as a military operation would. Your research activities should focus on four major targets: alternative jobs and careers, organizations, individuals, and communities.</p>
+
+<h2>Investigate Alternative Jobs and Careers</h2>
+<p>Your initial search should help familiarize you with job and career alternatives. It is essential to investigate occupational alternatives in order to broaden your perspective on the job market.</p> 
+<p>Start by using the Verification of Military Experience and Training (VMET) document (DD Form 2586) provided to all eligible departing service members to verify military experience and training.</p> 
+
+<p>Then you should begin your research by examining several key directories (found at the library or online) that provide information on alternative jobs and careers:</p>
+
+<ul>
+  <li>America’s Career InfoNet – <%= link_to "http://www.acinet.org", "http://www.acinet.org" %></li>
+  <li>Enhanced Guide for Occupational Exploration</li>
+  <li>Guide to Occupational Exploration</li>
+  <li>Occupational Outlook Handbook – <%= link_to "http://www.bls.gov/oco", "http://www.bls.gov/oco" %></li>
+  <li>The O*NET Dictionary of Occupational Titles – <%= link_to "http://online.onetcenter.org", "http://online.onetcenter.org" %></li>
+</ul>
+
+<h2>Target Organizations</h2>
+<p>Next, identify specific organizations that you are interested in learning more about. Compare and evaluate the different companies by compiling information on their goals, structures, functions, problems and projected future opportunities and development.</p> 
+
+<p>The following websites are excellent online databases and tools for company research:</p>
+
+<ul>
+  <li>All Business – <%= link_to "http://www.allbusiness.com", "http://www.allbusiness.com" %></li>
+  <li>Annual Report Service – <%= link_to "http://www.annualreportservice.com", "http://www.annualreportservice.com" %></li>
+  <li>BizTech Network – <%= link_to "http://www.brint.com", "http://www.brint.com" %></li>
+  <li>Business.com – <%= link_to "http://www.business.com", "http://www.business.com" %></li>
+  <li>CEO Express – <%= link_to "http://www.ceoexpress.com", "http://www.ceoexpress.com" %></li>
+  <li>Chamber of Commerce – <%= link_to "http://www.chamberofcommerce.com", "http://www.chamberofcommerce.com" %></li>
+  <li>Corporate Information – <%= link_to "http://www.corporateinformation.com", "http://www.corporateinformation.com" %></li>
+  <li>The Corporate Library – <%= link_to "http://www.thecorporatelibrary.com", "http://www.thecorporatelibrary.com" %></li>
+  <li>D&B’s Million Dollar Database – <%= link_to "http://www.mergentmddi.com", "http://www.mergentmddi.com" %></li>
+  <li>Daily Stocks – <%= link_to "http://www.dailystocks.com", "http://www.dailystocks.com" %></li>
+  <li>Forbes Lists – <%= link_to "http://www.forbes.com/lists", "http://www.forbes.com/lists" %></li>
+  <li>Fortune 500 – <%= link_to "http://www.fortune.com", "http://www.fortune.com" %></li>
+  <li>GlassDoor – <%= link_to "http://www.glassdoor.com", "http://www.glassdoor.com" %></li>
+  <li>Hoover’s Online – <%= link_to "http://www.hoovers.com", "http://www.hoovers.com" %></li>
+  <li>Inc. 5000 – <%= link_to "http://www.inc.com/inc5000", "http://www.inc.com/inc5000" %></li>
+  <li>Manta Small Business Directory - <%= link_to "http://www.manta.com", "http://www.manta.com" %></li>
+  <li>Moody’s – <%= link_to "http://www.moodys.com", "http://www.moodys.com" %></li>
+  <li>NASDAQ – <%= link_to "http://www.nasdaq.com", "http://www.nasdaq.com" %></li>
+  <li>Newspapers.com – <%= link_to "http://www.newspapers.com", "http://www.newspapers.com" %></li>
+  <li>Salary.com – <%= link_to "http://www.salary.com", "http://www.salary.com" %></li>
+  <li>Standard & Poors – <%= link_to "http://www.standardandpoors.com", "http://www.standardandpoors.com" %></li>
+  <li>The Public Register Online <%= link_to "http://www.annualreportservice.com", "http://www.annualreportservice.com" %></li>
+  <li>ThomasNet – <%= link_to "http://www.thomasnet.com", "http://www.thomasnet.com" %></li>
+</ul>
+
+<p>There are also numerous directories that assist in researching organizations. You can find most of these in the reference section of libraries:</p>
+
+<ul>
+  <li>America’s Corporate Families and International Affiliates</li>
+  <li>Consultants and Consulting Organizations Directory</li>
+  <li>Corporate Technology Directory</li>
+  <li>Directory of American Firms Operating in Foreign Countries</li>
+  <li>The Directory of Corporate Affiliations: Who Owns Whom</li>
+  <li>Dun & Bradstreet’s Billion Dollar Directory</li>
+  <li>Dun & Bradstreet’s Middle Market Directory</li>
+  <li>Dun & Bradstreet’s Million Dollar Directory</li>
+  <li>Dun’s Career Guide</li>
+  <li>Encyclopedia of Business Information Sources</li>
+  <li>Encyclopedia of Information Services and Agencies</li>
+  <li>Fitch’s Corporation Reports</li>
+  <li>MacRae’s Blue Book</li>
+  <li>Moody’s Manuals</li>
+  <li>The Multinational Marketing and Employment Directory</li>
+  <li>O’Dwyer’s Directory of Corporate Communications</li>
+  <li>Standard & Poor’s Industrial Index</li>
+  <li>Standard Rate and Data Business Publications Directory</li>
+  <li>Thomas’ Register of American Manufacturers</li>
+  <li>Ward’s Business Directory of U.S. Private & Public Companies</li>
+  <li>World Business Directory</li>
+</ul>
+
+
+<h2>Contact Individuals</h2>
+<p>The best information will come directly from knowledgeable people in your targeted organizations. Your most productive research activity will be communicating with them by phone, fax, or email, and in face-to-face meetings. You especially want to learn more about the people who make the hiring decisions. Use <%= link_to "Exercise 4b", "/exercises/Exercise_4b.pdf" %> to compile a list of contacts’ names, addresses, and phone numbers.</p> 
+
+<p>Contact former military friends or fellow veterans who work in your targeted companies and may be good networking contacts. Use social media sites and veteran search websites to identify them:</p>
+
+<ul>
+  <li>Linkedin – <%= link_to "http://www.linkedin.com", "http://www.linkedin.com" %></li>
+  <li>Facebook – <%= link_to "http://www.facebook.com", "http://www.facebook.com" %></li>
+  <li>Veteran Career Network – <%= link_to "http://benefits.military.com/vcn/search.do", "http://benefits.military.com/vcn/search.do" %></li>
+  <li>GI Search – <%= link_to "http://www.gisearch.com", "http://www.gisearch.com" %></li>
+  <li>Military USA – <%= link_to "http://www.militaryusa.com", "http://www.militaryusa.com" %></li>
+  <li>Vet Friends – <%= link_to "http://www.vetfriends.com", "http://www.vetfriends.com" %></li>
+</ul>
+
+<h2>Identify the Right Community</h2>
+<p>As you separate or retire from the service, identifying the geographical area where you would like to work will be one of your most important career decisions. There are important considerations in choosing the area that best fits you and your family, such as evaluating the educational and employment opportunities, quality of schools, community feel and cultural activities.</p>
+
+<p>To explore various communities, examine several of these gateway community sites:</p>
+
+<ul>
+  <li>areavibes - <%= link_to "http://www.areavibes.com", "http://www.areavibes.com" %></li>
+  <li>Boulevards – <%= link_to "http://www.boulevards.com", "http://www.boulevards.com" %></li>
+  <li>City-Data – <%= link_to "http://www.city-data.com", "http://www.city-data.com" %></li>
+  <li>Tourism Offices Worldwide Directory – <%= link_to "http://www.towd.com", "http://www.towd.com" %></li>
+  <li>USA City Link – <%= link_to "http://www.usacitylink.com", "http://www.usacitylink.com" %></li>
+  <li>Chambers of Commerce - <%= link_to "http://www.chamberofcommerce.com ", "http://www.chamberofcommerce.com " %></li>
+</ul>
+
+
+<% content_for :right do %>
+
+  <%= render :template => "static/transition_guide/right_menu.html.erb" %>
+
+  <h2>Exercises:</h2>
+  <ul class="resources">
+    <li><%= link_to "4a: Research Checklist", "/exercises/Exercise_4a.pdf" %></li>
+    <li><%= link_to "4b: Company Contacts", "/exercises/Exercise_4b.pdf" %></li>
+  </ul>
+
+  <h2>Additional Resources:</h2>
+  <b>Government Sources</b><br/>
+  <ul>
+    <li>Government Sources</li>
+    <li>The Book of States</li>
+    <li>Congressional Directory</li>
+    <li>Congressional Staff Directory</li>
+    <li>Congressional Yellow Book</li>
+    <li>Federal Directory</li>
+    <li>Federal Yellow Book</li>
+    <li>Municipal Yearbook</li>
+    <li>Taylor’s Encyclopedia of Government Officials</li>
+    <li>United Nations Yearbook</li>
+    <li>United States Government Manual</li>
+    <li>Washington Information Directory</li>
+  </ul>
+
+  <h2>Newspapers</h2>
+  <ul>
+    <li><%= link_to "http://www.onlinenewspapers.com",  "http://www.onlinenewspapers.com" %></li>
+    <li><%= link_to "http://www.newspapers.com", "http://www.newspapers.com" %></li>
+    <li>Your targeted city newspaper – the Sunday edition</li>
+  </ul>
+  <div style="margin-top: 10px">&nbsp;</div>
+
+  <%= render :partial => "shared/featured_employer_skyscraper.html.erb" %>
+<% end %>

@@ -1,0 +1,7 @@
+<% # Expects :locals => {:item => <collection to render> } %>
+<% class_name = items[0].class.name.downcase %>
+<ul class="<%=class_name -%>">
+<% for item in items do -%>
+  <li id='<%= "#{class_name}_#{item.id}"%>' class='<%="#{class_name}_item"%>'><%= item.name -%></li>
+<% end -%>
+</ul>

@@ -1,0 +1,19 @@
+unless @jobs.nil?
+  if !@jobs.total.nil? && @jobs.total > 0
+	  page.replace_html :result_counter, "Showing #{@jobs.total} job#{@jobs.total > 1 ? 's':''} matching your query"
+	  page.insert_html :bottom, :jobs, :partial => @jobs.docs
+	  page << '$("loading").hide();'
+	  page << 'ContainerBehavior.instances[0].update()'
+
+	else
+
+    page.insert_html :bottom, :jobs, "<td colspan='4'>No Jobs Found</td>"
+
+	end
+
+	if(@total_pages > @current_page)
+		page << 'endlessPage.checkScroll();'
+	end
+
+end
+

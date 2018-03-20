@@ -1,0 +1,42 @@
+<% content_for :page_title do %>
+    Dashboard
+<% end  %>
+
+
+<% if current_user.has_role?("employer_admin") %>
+
+    <% content_for :right do %>
+        <%= render :partial => "user/listed_users.html.erb", :locals => {:cols => 2 } %>
+    <% end  %>
+
+<%  end %>
+
+
+<%  if current_user.messages.size > 0 %>
+
+  <h2>Notifications</h2>
+      
+  <% current_user.messages.group_by { |msg|
+    case
+    when msg.updated_at.at_beginning_of_day == Time.now.at_beginning_of_day then "today"
+    when msg.updated_at.at_beginning_of_day == (Time.now - 1.day).at_begining_of_day then "yesterday"
+    else "before"
+    end
+  }.each do |key, messages| %>
+	
+    <h3><%= key.capitalize() -%></h3> 
+    <hr/>
+    <% messages.sort {|a, b| b.updated_at <=> a.updated_at}.each do |message| %>
+      <div><%=message.updated_at.to_formatted_s(:short) + " " if key == "before" -%><b><%=message.title -%></b></div>
+    <% end %>
+	
+  <% end %>
+
+<% end  %>
+
+
+
+<h2>Active Jobs</h2>
+<p>Active Jobs (total jobs for the account_owner, limited to their own for everybody else)</p>
+
+<h2>Recent Applicants</h2>

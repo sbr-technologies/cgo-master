@@ -1,0 +1,135 @@
+<% content_for :page_title do %>
+  Corporate Gray Job Fairs
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      :job_fairs, 
+      :calendar
+  ] } %>
+<% end %>
+
+<% if(!current_user.nil? && (current_user.has_role?("recruiter") || current_user.has_role?("employer_admin"))) || controller.controller_name == "employer"%>
+
+  <%= content_for :title_tag do %>
+      Military Job Fairs and Events
+  <% end %>
+
+  <%= content_for :meta_keywords do %>
+      Job fairs, register, employment, military job fairs, security clearance, military officer job fairs, government jobs, military spouse employment, civilian jobs, military recruitment, recruiters, hiring, interviewing
+  <% end %>
+
+  <%= content_for :meta_description do %>
+      Corporate Gray Job Fairs enable recruiters to screen and evaluate military veterans for company employment.
+  <% end %>
+
+<% else %>
+
+  <%= content_for :title_tag do %>
+      Military Job Fairs and Events
+  <% end %>
+  <%= content_for :meta_keywords do %>
+      military transition assistance, veteran employment, military job fairs, security clearance, military officer job fairs, government jobs, military spouse employment, civilian jobs, military recruitment, recruiters, hiring, interviewing
+  <% end %>
+
+  <%= content_for :meta_description do %>
+	Corporate Gray job fairs connect military veterans in career transition with military friendly employers and schools.
+  <% end %>
+
+<% end %>
+
+
+<% if(!current_user.nil? && (current_user.has_role?("recruiter") || current_user.has_role?("employer_admin"))) || controller.controller_name == "employer"%>
+  <div class="instructional-text" style="margin-left: 10px">
+    The Corporate Gray Job Fairs for the Military Community are held in the Washington, D.C. metro area 
+    and Virginia Beach. These events allow companies and schools the opportunity to meet face-to-face with 
+    transitioning/former military personnel and civilians. Register to reserve your booth now! 
+  </div>
+
+<% else %>
+  <div class="instructional-text" style="margin-left: 10px">
+    The Corporate Gray Job Fairs for the Military Community give you the opportunity to meet face-to-face
+    with military friendly employers. You can also participate in our Virtual Military Job Fairs, which are for 
+    veterans nationwide.
+    <br/><br/>
+    Both the in person and virtual events are FREE to all Job Seekers. 
+  </div>
+<% end %>
+
+<br/>
+
+<div style="margin: 10px; padding-bottom: 5px; border: 1px solid #CCC;">
+  <%= render :partial => "/shared/jobfair_calendar.html.erb" %>
+</div>
+
+<% if(!current_user.nil? && (current_user.has_role?("recruiter") || current_user.has_role?("employer_admin"))) || controller.controller_name == "employer"%>
+
+  <div style="margin-top:20px; margin-left: 10px;">
+
+    <%= render :partial => "jobfair/services.html.erb" %>
+
+  </div>
+
+<% end %>
+
+
+
+<% content_for :right do %>
+
+  <% if @display_fees || (!current_user.nil? && current_user.has_role?("recruiter") ) %>
+    <%= render :partial => "/shared/multi_jobfair_discount" %>
+    <br/>
+    <br/>
+  <% end %>
+
+  <% if !current_user || (current_user && current_user.has_role?("applicant")) %>
+
+    <div class="testimonial">
+      <i>"Corporate Gray Job Fairs are THE BEST ones for Military Professionals in my experience."</i>
+      <div style="text-align: right; margin-top: 0.5em;">
+       -- Military Transitioning Specialist 
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="testimonial">
+      <i>"The one and only job fair that I attended was Corporate Gray's, and it was a success for me. I start my second career next week. "</i>
+      <div style="text-align: right; margin-top: 0.5em;">
+       -- Air Force MSgt, Ret.
+      </div>
+    </div>
+
+  <% end %>
+
+  <% if current_user && ( current_user.has_role?(:recruiter) || current_user.has_role?(:employer_admin) ) || controller.controller_name == "employer" %>
+    <div class="testimonial">
+      <div style="margin-bottom: 1em"><i>"This was the best job fair I ever attended."</i></div>
+      <div style="margin-bottom: 1em"><i>"I have made 15 excellent hires from the fair, with the potential for several more in the near future."</i></div>
+      <div style="margin-bottom: 1em"><i>"I was truly amazed at the turn out"</i></div>
+      <div style="margin-bottom: 1em"><i>"It was a great show. I was on my feet for all 3.5 hours talking non-stop."</i></div>
+      <div style="text-align: right; margin-top: 0.5em;">
+       -- Various Defense Contractors
+      </div>
+    </div>
+
+    <br/>
+
+    <div class="testimonial">
+      <i>"This was one of the most organized events I have attended in years. Very professional and well put together."</i>
+      <div style="text-align: right; margin-top: 0.5em;">
+       -- Large Retail Employer
+      </div>
+    </div>
+
+
+  <% end %>
+
+  <% if @display_fees || (!current_user.nil? && current_user.has_role?("recruiter") ) %>
+    <%= render :partial => "/shared/cgo_book_sponsor" %>
+  <% end %>
+
+  <%= render :partial => "/shared/featured_employer_skyscraper" %>
+<% end %>

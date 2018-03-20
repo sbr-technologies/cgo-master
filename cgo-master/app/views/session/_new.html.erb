@@ -1,0 +1,32 @@
+<table class="login_table">
+  <tr>
+    <td colspan="2" class="label"><label for="login">Username</label></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= text_field_tag :username, params[:username] %></td>
+  </tr>
+  <tr>
+    <td colspan="2" class="label"><label for="password">Password</label></td>
+  </tr>
+  <tr>
+    <td colspan="2"><%= password_field_tag :password, params[:password] %></td>
+  </tr>
+  <tr>
+    <td style="padding-top: 6px;">
+      <div class="check_box">
+        <%= check_box_tag 'remember_me', 'true', false, :style => "width: 1em" %>
+        <label for="remember_me" style="font-size:85%; font-weight:normal; font-style:italic;">
+          Remember me 
+        </label>
+      </div>
+    </td>
+    <td style="padding-top: 6px; text-align: right">
+      <%= link_to "Forgot your password? Click Here", password_reminder_sessions_path, :id => "password_reminder", :style => "font-style: italic" %>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" style="text-align:right; padding-top: 25px; padding-bottom: 40px;">
+      <%= submit_tag "Login Now", :class => "flat-button flat-button-cyan flat-button-large", :style => "width: 8em; display: normal" %>
+    </td>
+  </tr>
+</table>

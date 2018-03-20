@@ -1,0 +1,23 @@
+<!-- ############# DEPRECATED ############## -->
+<% 
+ if (!current_user.nil? && (current_user.has_role?(:employer_admin) || current_user.has_role?(:recruiter))) ||
+    (current_user.nil? && (controller.controller_name == "employer")) || 
+    (/employer/i =~ request.env['REQUEST_URI'] || /contact_info/i =~ request.env['REQUEST_URI'])
+
+   path = quick_search_resumes_path(:format => :html)
+   search_title = "Search Resumes:"
+ else
+   path = search_jobs_path(:format => :html)
+   search_title = "Search Jobs:"
+ end
+%>
+<%= form_for :quick_search, :url => path, :html => {:method => :get, :id => "quick-job-search-form"} do |f| %> 
+  <div style="font-size: 1.4em; color:#FFF; margin-top: 17px;"><%= search_title -%></div>
+  <div>
+    <label>Keywords</label>
+    <input type="text" name="q[keyword]" id="keyword" style="padding-left:3px;"/>
+  </div>
+  <div class="button-bar" style="margin-top: 18px">
+    <%= image_submit_tag "/images/buttons/bt_search_green.gif", :style=>"width:auto; border:none; outline: none;" -%>
+  </div>
+<% end %>

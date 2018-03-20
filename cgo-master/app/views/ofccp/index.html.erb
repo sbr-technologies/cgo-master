@@ -1,0 +1,42 @@
+<% content_for :page_title do %>
+		OFCCP Log
+<% end %>
+
+<br/>
+<%= will_paginate %>
+
+<ul>
+  <% @ofccp.each do |log_entry| %>
+    <li style="margin-bottom: 15px; padding-bottom: 5px; border-bottom: 1px solid #CCC;">
+      <div style="font-weight: bold"><%=log_entry.created_at.to_s(:mmddyyyy) -%>&nbsp;&nbsp;<%="#{log_entry.employer_name} (#{log_entry.recruiter_name})" -%></div>
+      <div><b>Job Code:</b>&nbsp;<%=log_entry.job_code -%></div>
+      <div style="width:97%;"><b style="white-space:nowrap">Search String:</b>&nbsp;<span class="HardBreak"><%=(log_entry.query_string.gsub("+", " ") rescue "") -%></span></div>
+    </li>
+  <% end %>
+</ul>
+
+
+<% content_for :right do %>
+
+  <div>
+    <h2 style="margin-top: 0px;">Download To Excel</h2>
+    <%= form_tag download_employer_ofccp_index_path(current_user.employer.id, :format => :txt) , :id => "downloadform" do %>
+
+      <div style="margin-top: 5px; height: 50px; font-size: 0.9em;">
+        <label style="float:left; clear:both; margin-left:5px;font-weight:bold;">Date From:</label>
+        <div style="float:left; clear:both"><%= date_select :search_criteria, :date_from -%></div>
+      </div>
+
+      <div style="margin-top: 5px; height: 50px; font-size: 0.9em;">
+        <label style="float:left; clear:both; margin-left:5px;font-weight:bold;">Date To:</label>
+        <div style="float:left; clear:both;"><%= date_select :search_criteria, :date_to, :style => "float:left; clear:both;"-%></div>
+      </div>
+
+    <% end %>
+  </div>
+
+  <div class="button-bar" style="padding-top: 20px">
+    <a class="button" onclick="$('downloadform').submit(); return false;" href="#"><span>Download</span></a>
+  </div>
+
+<% end %>

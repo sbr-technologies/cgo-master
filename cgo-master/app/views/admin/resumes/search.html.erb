@@ -1,0 +1,65 @@
+
+<% content_for :page_title do %>
+  Search Resumes
+<% end %>
+
+<% content_for :title_tag do %>
+  Corporate Gray Online: Search Resumes and Contact Job Seekers
+<% end %>
+
+<div id="message" style="margin: 4px;"></div>
+
+<% if !@applicants.nil? && !@applicants.results.empty?  %>
+
+  <div id="result_counter" style="margin-left:4px; margin-bottom:10px; color:#1C5379; font-weight: bold;">
+      <%= "Found a total of #{@applicants.total} Resumes matching your criteria" %>
+  </div>
+
+  <%= will_paginate @applicants.hits %>
+
+
+  <table class="blotter">
+    <thead>
+      <tr>
+        <th>Posted Date</th>
+        <th width="50%">Applicant Name</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @applicants.results.each do |applicant| %>
+        <tr>
+          <td><%= applicant.resume.posted_date.to_s(:long) if applicant.resume %></td>
+          <td><%= applicant.name %></td>
+          <td style="text-align: right;"><%= link_to "download", download_admin_resume_path(applicant.resume) if applicant.resume %></td>
+        </tr>
+      <%end %>
+  </table>
+
+<% else %>
+    <div class="round-corners dark-highlight" style="margin:3px;">
+      <p style="padding:15px; line-height: 2em">Please enter your search criteria using the options on the right. You should at least enter one or more 'keywords' to begin a new search. Your resume search status is shown in the orange box to the right.  If your company does not have full resume search access and you would like to order, please send email to <%= link_to "#{UserMailer.admin_email}", "mailto:#{UserMailer.admin_email}?subject=Resume%20Search%20Status", :style=>"color:#E6901A" -%>
+      </p>
+  </div>
+<% end %>
+
+<% content_for :right do %>
+	<%= render :partial => "search_form", :locals => {:q => params[:q] || {}, :job_code => params[:job_code] || nil } %>
+<% end %>
+
+<script>
+    // See also Recruiter#Dashboard.deleteFromDashBoardComplete()
+    // The actions to perform are different. So this function is 
+    // defined twice, one for search results, and one for the 
+    // dashboard's inbox. 
+    // this is called by InboxHandlerBehavior (see _blotter.html.erb)
+    // once the delete Ajax is complete. 
+    function deleteFromDashboardComplete(res_id) {
+      $$('#resume_'+ res_id +' img.indicator')[0].hide(); 
+      $('resHandler_'+res_id).up().innerHTML = '<span>Deleted</span>'; 
+
+      showStatus(res_id, "deleted");
+    }
+</script>
+
+

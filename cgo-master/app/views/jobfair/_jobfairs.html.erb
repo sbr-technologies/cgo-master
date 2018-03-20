@@ -1,0 +1,35 @@
+
+<style>
+  
+  table#jobfairs {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  table#jobfairs tr.heading {
+    border:1px solid #BD0000;
+  }
+  
+  table#jobfairs th {
+    font-weight: bold;
+    padding: 2px 5px; 
+  }
+  
+</style>
+
+
+<table id="jobfairs">
+  <tr class="heading">
+    <th width="18%">Date</th>
+    <th width="40%">City</th>
+    <th>Location</th>
+  </tr>
+  
+  <% @jobfairs.each do |jobfair| %>
+    <tr id="<%='jobfair_' + jobfair.id.to_s %>" >
+      <td><%= jobfair.date.to_s(:long) %></td>
+      <td><%= jobfair.city %></td>
+      <td><%= link_to jobfair.location, jobfair.location_url, :popup => true %></td>
+    </tr>
+  <% end %>
+</table>

@@ -1,0 +1,186 @@
+<% content_for :page_title do %>
+  Overview
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      :transition_guide
+  ] } %>
+<% end %>
+
+
+<style>
+  p { margin-top: 1em; }
+</style>
+
+<% content_for :right do %>
+  <%= render :template => 'static/transition_guide/right_menu.html.erb' %>
+<% end %>
+
+
+<div style="float:right; margin-left: 1em; margin-right: 8px; margin-bottom: 0.5em;"> 
+  <div style="text-align: center">
+    <%= image_tag 'CGS_book_cover_2013.png' , :style => 'width: 120px; border: 1px solid #4c4c4c' %>
+
+    <div style="margin-top: 10px">
+
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_s-xclick">
+        <input type="hidden" name="hosted_button_id" value="LPQFWUT9GTDKG">
+        <table>
+          <tr><td><input type="hidden" name="on0" value="Amount">Amount</td></tr><tr><td><select name="os0">
+              <option value="1 book">1 book $9.95 USD</option>
+              <option value="2 books">2 books $19.90 USD</option>
+              <option value="3 books">3 books $29.85 USD</option>
+              <option value="4 books">4 books $39.80 USD</option>
+              <option value="5 books">5 books $49.75 USD</option>
+              <option value="6 books">6 books $59.70 USD</option>
+              <option value="7 books">7 books $69.65 USD</option>
+              <option value="8 books">8 books $79.60 USD</option>
+              <option value="9 books">9 books $89.55 USD</option>
+          </select> </td></tr>
+        </table>
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" style="width: 150px" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+      </form>
+
+    </div>
+    
+  </div>
+  <div style="margin-top: 40px; text-align: center">
+    <%= image_tag 'social_media_book_cover_2014.jpg' , :style => 'width: 120px; border: 1px solid #4c4c4c' %>
+    <div style="margin-top: 10px;">
+      <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+      <input type="hidden" name="cmd" value="_s-xclick">
+      <input type="hidden" name="hosted_button_id" value="MXGWFXKB4WMMQ">
+      <table>
+      <tr><td><input type="hidden" name="on0" value="Amount">Amount</td></tr><tr><td><select name="os0">
+          <option value="1 book">1 book $5.95 USD</option>
+          <option value="2 books">2 books $11.90 USD</option>
+          <option value="3 books">3 books $17.85 USD</option>
+          <option value="4 books">4 books $23.80 USD</option>
+          <option value="5 books">5 books $29.75 USD</option>
+          <option value="6 books">6 books $35.70 USD</option>
+          <option value="7 books">7 books $41.65 USD</option>
+          <option value="8 books">8 books $47.60 USD</option>
+          <option value="9 books">9 books $53.55 USD</option>
+      </select> </td></tr>
+      </table>
+      <input type="hidden" name="currency_code" value="USD">
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_buynowCC_LG.gif" style="width: 150px" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<p>The essential steps from Corporate Gray’s Military-to-Civilian Transition Guide are online here!</p>
+
+<p>This online version includes the most important concepts from our book to help you make a successful career transition. The print version, now in its fifteenth year with more than 3.3 million copies in distribution, remains the most widely used transition guide for the military services, veterans, and their families.</p>
+
+<p>The guide will help you:</p>
+<ul>
+	<li>Clarify your goals</li>
+	<li>Get you moving in the right direction</li>
+	<li>Save you time and effort</li>
+	<li>Minimize your costs</li>
+	<li>Connect with an excellent first post-service job</li>
+</ul>
+
+<p>The steps of the career transition process outlined here include an informational section, exercises to help you apply the concept, and additional resources to further assist you in the transition process.</p>
+
+<p>Start now on your path to a new and rewarding career!</p>
+
+<h2><%= link_to "Step 1 - Develop Your Transition Plan", "1_develop_your_transition_plan"  %></h2>
+<p>Step One gets you started on your career transition plan. At the end of this chapter you will download the Planning Worksheet and begin tracking your progress through the exercises.</p>
+
+<h2><%= link_to "Step 2 - Obtain Transition Assistance", "2_obtain_transition_assistance" %></h2>
+<p>Step Two describes the military programs as well as federal and state agencies that offer high quality transition services to include many helpful lectures, seminars, and testing services. These services and websites give you a variety of valuable, free assistance in your career transition and job search.</p>
+
+<h2><%= link_to "Step 3 - Assess Your Skills and Interests", "3_assess_your_skills_and_interests" %></h2>
+<p>Step Three helps you assess and translate your skills to the civilian work world. Once your skills and interests are identified and translated, you will have a better understanding of where you've been and where you need to go in your career transition plan.</p>
+
+<h2><%= link_to "Step 4 - Conduct Company Research", "4_conduct_company_research" %></h2>
+<p>Step Four offers resources for gathering information to help you target your job search. The research focuses on targeting alternative jobs and careers, organizations, individuals, and communities.</p>
+
+<h2><%= link_to "Step 5 - Construct Your Resume", "5_construct_your_resume" %></h2>
+<p>Step Five explains the types of resumes, and it guides you on constructing and refining your resume. Job search letters are also included in this chapter.</p>
+
+<h2><%= link_to "Step 6 - Build Your Network", "6_build_your_network" %></h2>
+<p>Step Six contains resources to assist you in identifying and building your network through military colleagues, associations, organizations, and social media sites. Also included are networking etiquette and tips.</p>
+
+<h2><%= link_to "Step 7 - Interview Like a Pro", "7_interview_like_a_pro" %></h2>
+<p>Step Seven covers information interview and job interview preparation. It includes tips to help reduce the stress and make this most important step more successful.</p>
+
+<h2><%= link_to "Step 8 - Gain Federal Employment", "8_gain_federal_employment" %></h2>
+<p>Step Eight identifies various resources for finding government employment and explains the government job application and selection process.</p>
+
+<h2><%= link_to "Step 9 - Negotiate Your Best Salary", "9_negotiate_your_best_salary" %></h2>
+<p>Step Nine helps you compare your total military vs. civilian compensation and determine your value to an employer, so you can negotiate your best salary from a position of knowledge and strength.</p>
+
+
+
+<%= content_for :right do %>
+
+  <h2>Testimonials</h2>
+
+  <div class="testimonial">
+    <i>"Loved the book, it has done wonders for my transition."</i>
+    -- U.S. Army Transitioner
+  </div>
+
+  <div class="testimonial">
+    <i>"Thank you and your staff of committed professionals for developing this absolutely amazing guide."</i>
+    -- U.S. Army Transition Counselor 
+  </div>
+
+  <h2>Book Sponsors</h2>
+
+  <p>The <i>Military to Civilian Transition Guide</i> is made available to you in part through the generous support of these military-friendly sponsors:</p>
+
+  <br/>
+
+  <ul class="sponsors">
+      <li><%= link_to "Alban CAT", public_profile_employer_path(26232) %></li>
+      <li><%= link_to "Amazon", public_profile_employer_path(27699) %></li>
+      <li><%= link_to "AMVETS", public_profile_employer_path(31443) %></li>
+      <li><%= link_to "Averitt Express", public_profile_employer_path(27219) %></li>
+      <li><%= link_to "Camber", public_profile_employer_path(22896) %></li>
+      <li><%= link_to "Canadian Pacific Railway", public_profile_employer_path(31421) %></li>
+      <li><%= link_to "Carter Machinery Company", public_profile_employer_path(27311) %></li>
+      <li><%= link_to "Caterpillar, Inc", public_profile_employer_path(28275) %></li>
+      <li><%= link_to "Chenega", public_profile_employer_path(28579) %></li>
+      <li><%= link_to "Cleveland Brothers Equipment Company", public_profile_employer_path(27900) %></li>
+      <li><%= link_to "Columbia Southern University", public_profile_employer_path(30636) %></li>
+      <li><%= link_to "David Griswold & Associates, Inc.", public_profile_employer_path(31155) %></li>
+      <li><%= link_to "Delaware North Companies", public_profile_employer_path(31361) %></li>
+      <li><%= link_to "Eaton", public_profile_employer_path(31243) %></li>
+      <li><%= link_to "GE Lighting", public_profile_employer_path(31458) %></li>
+      <li><%= link_to "Hewlett-Packard", public_profile_employer_path(29650) %></li>
+      <li><%= link_to "Lockheed Martin", public_profile_employer_path(22758) %></li>
+      <li><%= link_to "McKesson Corporation", public_profile_employer_path(29489) %></li>
+      <li><%= link_to "Military Officers Association of America (MOAA)", public_profile_employer_path(23352) %></li>
+      <li><%= link_to "Milton Hershey School", public_profile_employer_path(24053) %></li>
+      <li><%= link_to "National Security Agency", public_profile_employer_path(29505) %></li>
+      <li><%= link_to "Ransome CAT", public_profile_employer_path(26527) %></li>
+      <li><%= link_to "Ransome International", public_profile_employer_path(26527) %></li>
+      <li><%= link_to "Saint Leo University", public_profile_employer_path(31464) %></li>
+      <li><%= link_to "Snap-On Tools", public_profile_employer_path(30990) %></li>
+      <li><%= link_to "Sodexo", public_profile_employer_path(30327) %></li>
+      <li><%= link_to "State Farm Insurance", public_profile_employer_path(29773) %></li>
+      <li><%= link_to "Strayer University", public_profile_employer_path(24066) %></li>
+      <li><%= link_to "Uniformed Services Benefit Association (USBA)", public_profile_employer_path(30295) %></li>
+      <li><%= link_to "U.S. Nuclear Regulatory Commission", public_profile_employer_path(27275) %></li>
+      <li><%= link_to "Veterans Transition Forum", public_profile_employer_path(31259) %></li>
+      <li><%= link_to "Waste Management", public_profile_employer_path(26534) %></li>
+  </ul>
+
+  <br/>
+
+  <iframe width="300" src="//www.youtube.com/embed/D5febAEYgzo" frameborder="0" allowfullscreen></iframe>
+
+<% end %>

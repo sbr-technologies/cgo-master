@@ -1,0 +1,12 @@
+<table width="95%" style="margin-left: 1em;">
+  <tr>
+    <td width="20%" style="vertical-align: top">
+      <span class="position-start-date"><%=position.start_date %></span> - <span class="position-end-date"><%=position.end_date %></span>
+    </td>
+    <td>
+      <div class="position-company" style="font-size: 1.3em"><%= (position.company.titleize rescue "") -%></div>
+      <div class="position-title" style="font-weight: bold; font-style: italic; color: #4c4c4c"><%= position.title %></div>
+      <div class="position-summary" style="margin-top: 1em"><%= position.summary %></div>
+    </td>
+  </tr>
+</table>

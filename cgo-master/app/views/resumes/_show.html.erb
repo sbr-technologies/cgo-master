@@ -1,0 +1,70 @@
+<div style="background:#FFF; margin: 10px;">
+  <% if current_user.is_a?(Recruiter) %>
+
+    <div style="margin-left: 15px">
+      <% if @resume.attached_resume.path %>
+        <span style="margin-right: 10px;"><%= link_to "Download Resume", download_resume_path(@resume.id), :id=>"download-link"-%></span>
+      <% end %>
+      <span style="margin-right: 10px;">
+        <%= link_to "Message to Applicant", new_message_path(:recipient => @resume.applicant.id), :class => "send-message-handler" %>
+      </span>
+      <span style="margin-right: 10px;"><%= link_to "Send Resume by Email", "#", :onclick => "forward_modal.open();", :id=>"forward-link" -%></span>
+    </div>
+    <br/>
+
+  <% end %>
+
+  <% unless current_user.is_a?(Applicant) || @resume.visibility == "public" %>
+
+    <div id="send-message-container" style="color: #BD0000; font-size: 90%; width: 98%; margin-top: 1em; margin-bottom: 0.5em;">
+      This applicant has chosen to keep his contact information 'confidential'. 
+      To contact this job seeker, use the 
+      <b><%= link_to "Message to Applicant", "#", :onclick => "message_modal.open();", :id=>"message-link"-%></b> 
+      link above. 
+    </div>
+
+  <% end %>
+
+  <% if @resume.visibility == "public" && !@resume.applicant.address.nil? %>
+
+    <div class="contact-info" style="margin-top: 2em; margin-bottom: 1.5em;">
+      <div><b>Contact Information:</b></div>
+      <div><%= @resume.applicant.address.street_address1 %></div>
+      <div><%= "#{@resume.applicant.address.city}, #{@resume.applicant.address.state} #{@resume.applicant.address.zip}" %></div>
+      <div><%= "email: #{@resume.applicant.email} / phone: #{@resume.applicant.address.phone}" %></div>
+      <div>LinkedIn URL: <%= @resume.applicant.linkedin_handler ? link_to("http://" + @resume.applicant.linkedin_handler.gsub("http://", ""), "http://" + @resume.applicant.linkedin_handler.gsub("http://", ""), :class => :external) : "Not Available" %></div>
+    </div>
+
+  <% end %>
+
+  <div id="employment-content" style="margin-top: 1em;">
+    <div style="background:#EEE; border: 1px solid #DDD; padding: 1em">
+      <table class="show-model">
+        <tr><td class="label">Posted Date:</td><td><%= @resume.posted_date.to_s(:mmddyyyy) -%></td></tr>
+        <tr><td class="label">Rank:</td><td><%= to_label(@resume.applicant.type_of_applicant, Constants::TYPE_OF_APPLICANT) -%></td></tr>
+        <tr><td class="label">Security Clearance:</td><td><%= to_label(@resume.applicant.security_clearance, Constants::SECURITY_CLEARANCE) -%></td></tr>
+        <tr><td class="label">Occupational Preference:</td><td><%= to_label(@resume.applicant.occupational_preference, Constants::OCCUPATIONAL_PREFERENCE) -%></td></tr>
+        <tr><td class="label">Education Level:</td><td><%= to_label(@resume.applicant.education_level, Constants::EDUCATION_LEVEL) -%></td></tr>
+        <tr><td class="label">Branch Of Service:</td><td><%= to_label(@resume.applicant.branch_of_service, Constants::BRANCH_OF_SERVICE) -%></td></tr>
+        <tr><td class="label">Availability Date:</td><td><%= @resume.applicant.availability_date.nil? ? "Now" : relative_date(@resume.applicant.availability_date) -%></td></tr>
+        <tr><td class="label">Willing To Relocate:</td><td><%= to_yes_no(@resume.applicant.willing_to_relocate).capitalize -%></td></tr>
+      </table>
+    </div>
+  </div>
+
+<script>
+  document.observe("dom:loaded", function() {
+    $$('.send-message-handler').each(function(handler) {
+      var mdl = new Control.Modal(handler, {
+        className: 'modal',
+        method: 'GET', 
+        overlayOpacity: 0.75,  
+        indicator: $('loading-indicator'),
+        fade: true
+      });
+    });
+  });
+</script>
+
+</div>
+

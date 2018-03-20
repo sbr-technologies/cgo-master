@@ -1,0 +1,95 @@
+<% content_for :page_title do %>
+	Your Profesional Resume & Cover Letter
+<% end %>
+
+<% content_for :head do %>
+
+  <style>
+    .modal {
+      width:650px; 
+      height:460px; 
+    }
+	
+	#resume_samples a {
+		text-decoration: none;
+		color: blue;
+	}
+    #resume_samples a:hover {
+      text-decoration: underline;
+    }
+	#resume_samples li {
+		margin-bottom: 2px;
+	}
+  </style>
+
+  <script language="javascript">
+    var modal;
+    document.observe("dom:loaded", function() {
+      //Modal Window  
+      modal = new Control.Modal($('show-modal'),{  
+          overlayOpacity: 0.75,  
+          className: 'modal',  
+          method: 'get',
+          fade: true  
+      });  
+    });
+  </script>
+<% end %>
+
+
+<div style="line-height: 1.8em; font-size: 16px; color: #4c4c4c; margin-bottom: 10px;">
+  <p> You can review the sample documents below to craft an 
+  effective resume. Once you are ready, use the button below 
+  to upload your resume and cover letter in MS Word format:</p>
+</div>
+
+<div style="text-align:center">
+  <%= link_to "Upload Resume", edit_resume_path(@resume), :id => "show-modal", :class => 'xbutton red large' %>
+</div>
+
+<% content_for :right do %>
+
+  <div style="clear:both; float:none; margin-top: 0px">
+    <%= link_to "Military-to-Civilian Skills Translator", "http://online.onetcenter.org/crosswalk", :style=>"color:#000; text-decoration:underline;font-size: 18px;", :target => '_blank' -%></span>
+  </div>
+
+  <div style="margin-top: 25px">
+    <h2 style="margin-top:0px">Cover &amp; Approach Letters</h2>
+    <ul id="resume_samples">
+      <li><%= link_to "Cover Letter", "/cover_letters/Cover_Letter.pdf", :target => '_blank' -%></li>
+      <li><%= link_to "Approach Letter", "/approach_letters/ApproachLetter.pdf", :target => '_blank' -%></li>
+    </ul>
+    <div style="float:none; clear:both"></div>
+  </div>
+
+  <div style="margin-top: 25px;">
+    <h2 style="margin-top:0px">Sample Resumes </h2>
+    <ul id="resume_samples">
+        <li><%= link_to "Combat Engineer", "/static/download_docx/CombatEngineer.docx", :target => '_blank' -%></li>
+        <li><%= link_to "Electrician", "/static/download_docx/Electrician.docx", :target => '_blank' -%></li>
+        <li><%= link_to "Helicopter Maintenance", "/static/download_docx/HelicopterMaintenanceSupervisor.docx", :target => '_blank' -%></li>
+        <li><%= link_to "Homeland Security", "/static/download_docx/HomelandSecurityManager.docx", :target => '_blank' -%></li>
+        <li><%= link_to "Human Resources", "/static/download_docx/HumanResourcesManager.docx", :target => '_blank' -%></li>
+        <li><%= link_to "Law Enforcement", "/static/download_docx/Law-Enforcement.docx", :target => '_blank' -%></li>
+        <li><%= link_to "Maintenance Technician", "/static/download_docx/MaintenanceTechnician.docx", :target => '_blank' -%></li>
+        <li><%= link_to "Network Administrator", "/static/download_docx/NetworkAdministrator.docx", :target => '_blank' -%></li>
+    </ul>
+  </div>
+
+  <div style="margin-top: 25px;">
+    <h2 style="margin-top:0px">Thank You Letters</h2>
+    <ul id="resume_samples">
+      <li><%= link_to "Job Offer Acceptance.pdf",	"/thankyou_letters/Thank_You_Letter_Job_Offer_Acceptance.pdf", :target => '_blank' -%></li>
+      <li><%= link_to "Post Informational Interview.pdf", "/thankyou_letters/Thank_You_Letter_Post_Informational_Interview.pdf", :target => '_blank' -%></li>
+      <li><%= link_to "Post Job Interview.pdf", "/thankyou_letters/Thank_You_Letter_Post_Job_Interview.pdf", :target => '_blank' -%></li>
+    </ul>
+    <div style="float:none; clear:both"></div>
+  </div>
+
+<% end %>
+
+
+<style>
+
+
+</style>

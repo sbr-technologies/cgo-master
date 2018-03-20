@@ -1,0 +1,195 @@
+<%= content_for :title_tag do %>
+	Featured Military Friendly Schools and Education Programs
+<% end %>
+<%= content_for :meta_keywords do %>
+	education, military friendly schools, universities, career training, post 9-11 gi bill, Montgomery gi bill, veteran education benefits, academic programs, certification, tuition assistance, military transition, chapter 34, yellow ribbon
+<% end %>
+
+<%= content_for :meta_description do %>
+	Corporate Gray Education page has military friendly schools and universities that provide certification training and academic degrees for military veterans.
+<% end %>
+
+<% content_for :breadcrums do %>
+  <%= render :partial => "shared/breadcrums", 
+    :locals => { :path => [ 
+      {:home => welcome_path},
+      :career_training
+  ] } %>
+<% end %>
+
+
+<div class="static">
+
+  <div style="text-align: center; color: #4c4c4c; ">
+    <h2>Featured Schools</h2>
+    <p style="margin: 10px 80px; font-weight: bold;">Your free Corporate Gray series book, <i>The Military-to-Civilian Transition Guide</i>, 
+    is made possible in part by these schools:</p> 
+  </div>
+
+
+  <div style="margin-left: auto; margin-right: auto; margin-top: 50px; margin-bottom: 70px; width: 215px">
+    <ul>
+      <li><%= link_to "Columbia Southern University", "#csu" %></li>
+      <li><%= link_to "Saint Leo University", "#sainleo" %></li>
+      <li><%= link_to "Strayer University", "#strayer" %></li>
+    </ul>
+  </div>
+
+  <div style="margin-top: 2em; border-top: 1px solid #CCC;;" id="csu">
+    <div style="text-align: center; margin-top:20px;">
+      <%= link_to image_tag("/images/logos/homepage/2013/csu_logo.png", :width => "150px"), "http://www.columbiasouthern.edu", :target => "_blank" %>
+    </div>
+
+    <div>
+
+      <h3>Overview</h3>
+      <p>Columbia Southern University is an online university based in Orange Beach, Ala., that strives to 
+      change and improve lives through higher education by enabling students to maximize their professional 
+      and personal potential.</p>
+
+      <h3>Programs</h3>
+      <p>A subsidiary of Columbia Southern Education Group, CSU offers online degree programs at the associate, 
+      bachelor, master and doctoral level in a multitude of areas such as occupational safety and health, 
+      fire science, criminal justice, business administration, information technology, human resource management 
+      and health care administration. CSU also features undergraduate and graduate certificate programs to provide 
+      focused training in specialized areas for adult learners.</p>
+      <p>As one of the nation’s top online universities, CSU continually strives to improve and adapt their degree 
+      curriculums, outstanding customer service and outreach programs.</p>
+
+      <h3>Military</h3>
+      <p>Recognized as one of the top 20 schools for military education by Military Advanced Education, more than 
+      half of the students enrolled at CSU are members of the U.S. military. Online programs, flexible enrollment 
+      and courses and affordable tuition allow those in the military to achieve a quality education while preserving 
+      our nation's freedom.</p>
+      <p>Transfer credit is awarded for military training and prior coursework. Up to 75 percent of undergraduate courses 
+      and 50 percent of graduate courses can be transferred. Dependents of active-duty and veterans receive a 10-percent 
+      tuition discount.</p>
+      <p>CSU is approved to offer DANTES, Tuition Assistance (TA) and Veteran Affairs (VA) benefits. Additional education 
+      funding is available to those approved for TA and eligible for MGIB-Active Duty benefits. In most cases, these benefits 
+      cover the entire cost of the program. Students can complete seven undergraduate courses or six graduate courses annually 
+      without exceeding the DoD annual ceiling of $4,500. The CSU tuition rate for undergraduate and graduate courses is 
+      below the DoD semester hour cap of $250.</p>
+    </div>
+  </div>
+
+
+  <div style="margin-top: 2em; border-top: 1px solid #CCC;;" id="sainleo">
+    <div style="text-align: center;">
+      <%= link_to image_tag("/images/logos/saintleo_logo.jpg", :height => "80px"), "http://www.saintleo.edu", :target => "_blank" %>
+    </div>
+
+    <div>
+
+      <h3 style="margin-top:10px">Overview</h3>
+
+      <p>One of the top-ranked universities in Florida, Saint Leo is a Catholic, liberal arts school serving learners of all faiths. 
+      Established in 1889 by the Order of Saint Benedict of Florida, the university seeks balanced growth in mind, body and spirit for 
+      all members of their community.</p>
+
+      <p>Their Tampa-area campus is strengthened by the global reach of their regionally accredited online 
+      programs and Education Centers in seven states across the U.S., including on many military bases. Named one of the top universities 
+      in the South by U.S. News & World Report, Saint Leo is also one of the nation's 10 leading providers of higher education to the 
+      U.S. military.</p>
+
+      <h3>Programs</h3>
+      <p>Saint Leo enrolls over 15,000 students in undergraduate and graduate degree programs offered by the 
+      <%= link_to "School of Arts & Sciences", "http://www.saintleo.edu/academics/schools/school-of-arts-sciences.aspx" %>, 
+      <%= link_to "School of Education & Social Services", "http://www.saintleo.edu/academics/schools/school-of-education-social-services.aspx" %>, and 
+      <%= link_to "School of Business", "http://www.saintleo.edu/academics/schools/school-of-business.aspx" %>.</p>
+
+      <p>They have satellite learning centers throughout Florida, California, Virginia, Texas, South Carolina, Georgia and Mississippi—mostly 
+      at military bases and community colleges— which offer adult learners evening and weekend classes, as well as distance learning courses.</p>
+      
+      <p>A nationally recognized leader in online education, Saint Leo continues to bring additional courses and degree programs online each 
+      year—with each online course held to the same rigorous academic standards as its campus counterpart. Nearly 3,000 students across the 
+      world are enrolled in Saint Leo's 100% online associate, bachelor's, master's and graduate certificate programs.</p>
+
+      <h3>Military</h3>
+      <p>Today, more than 5,000 men and women of the armed forces are enrolled in Saint Leo University degree programs—that's about 30% of 
+      their university-wide community. Saint Leo’s satellite learning centers offer military students evening and weekend classes, and 
+      distance learning courses.</p>
+
+      <p>To provide affordable, rate-related degree programs designed to fit the mobile lifestyle of military personnel worldwide, 
+      Saint Leo University partners with:</p>
+
+      <ul>
+        <li>Community College of the Air Force »</li>
+        <li>Navy College Program Distance Learning Partnership (NCPDLP) »</li>
+        <li>Navy College Program for Afloat College Education (NCPACE) »</li>
+        <li>U.S. Coast Guard Degree Programs for Maritime Law Enforcement Personnel »</li>
+        <li>GoArmyEd</li>
+        <li>eArmyU</li>
+        <li>Air Force Academic Institution (AI) Portal</li>
+        <li>Air University Associate to Baccalaureate Cooperative Program</li>
+        <li>Marine Corps Lifelong Learning Program's Academic Explorer (AeX)</li>
+      </ul>
+
+      <p>Saint Leo's military students receive tuition assistance through the Montgomery G.I. Bill, Post 9/11 G.I. Bill, and the Yellow 
+      Ribbon Program, which makes additional funds available without an additional charge to a student's G.I. Bill entitlement. A VA 
+      Certifying Official (VCO) at each of their Centers can assist you in utilizing VA education benefits to your best advantage.</p>
+    </div>
+  </div>
+
+  <div style="margin-top: 2em; border-top: 1px solid #CCC;;" id="strayer">
+    <div style="text-align: center; margin-top: 10px;">
+      <%= link_to image_tag("/images/logos/strayer_logo.jpg", :height => "80px"), "http://www.strayer.edu/?MarketingCode=DG164", :target => "_blank" %>
+    </div>
+
+    <div>
+
+      <h3 style="margin-top:10px">Overview</h3>
+      <p>Strayer University has been educating working adults for over 120 years and currently has more than 
+      44,000 students enrolled in IT and Business programs. Their undergraduate and graduate degree programs 
+      in Business, Criminal Justice, Education, Accounting, Public Administration, Health Services Administration 
+      and Information Systems are in high demand, both in the military and in the private sector. In addition, 
+      their classes are available online, on campus or both – providing the utmost flexibility – allowing you 
+      to balance your educational goals with the demands of your military service, career and family.</p>
+
+      <h3>Programs</h3>
+      <p>Strayer University’s student services, on-campus environment, online flexibility, and regional 
+      accreditation have helped over 100,000 students earn their undergraduate and graduate degrees. Find the 
+      program that's right for you among their 27 degree programs and 67 concentrations in Business, Information 
+      Technology, Accounting, Criminal Justice, Education, Human Resources, Health Services, and many other fields.</p>
+
+      <h3>Military</h3>
+
+      <p>Strayer University is a GoArmyEd, Navy College Program Distance Learning Partnership (NCPDLP), and Air University 
+      Associate-to-Baccalaureate Cooperative (AU-ABC) school. It is their goal to make it as easy as possible for our 
+      service members, veterans and military families to reach their educational goals. Here are the many ways they support 
+      military students:</p>
+      <br/>
+
+      <ul>
+        <li>Military enrollment advisors and military life coaches who understand the culture and lingo you’re used to because most have military backgrounds</li> 
+        <li>Special military scholarship for active-duty service members and their spouses</li> 
+        <li>Strayer’s membership in Servicemembers Opportunity Colleges (SOC) enables students to complete an undergraduate degree at participating institutions regardless of where you’re stationed</li> 
+        <li>Credit for your applicable military training and education</li> 
+        <li>A wide range of programs at all levels — from associate through masters</li> 
+        <li>An education that helps prepare you with the skills and knowledge you’ll need for professional life after the military</li> 
+        <li>Career transition resources</li> 
+      </ul>
+      <br/>
+
+      <p>Whether attending a local campus or online, college for the military community is possible no matter where you are.</p>
+
+    </div>
+  </div>
+
+</div>
+
+<% content_for :right do %>
+  <h3>Important Education Resources for Veterans</h3>
+  <ul>
+    <li><%= link_to "Veterans Benefits Administration – Education and Training", "http://www.benefits.va.gov/gibill/", :target => "_blank" %></li>
+    <li><%= link_to "G.I. Bill Comparison Tool", "http://department-of-veterans-affairs.github.io/gi-bill-comparison-tool/", :target => "_blank" %></li>
+    <li><%= link_to "VA State Yellow Ribbon Program Information", "http://www.benefits.va.gov/gibill/yellow_ribbon/2014/states/va.asp", :target => "_blank" %></li>
+  </ul>
+
+  <br/> 
+
+  <iframe width="300" src="http://www.youtube.com/embed/qhYiLQ2gRZk?rel=0" frameborder="0" allowfullscreen></iframe>
+
+  <div style="margin-top: 10px; height: 10px">&nbsp;</div>
+
+  <%= render :partial => "/shared/featured_employer_skyscraper" %>
+<% end %>

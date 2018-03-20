@@ -1,0 +1,30 @@
+.yui-t6 #yui-main .yui-b {
+	background: #FFFFFF url(/images/shadowy.gif) repeat-y top right;
+	margin-right:22.5em;
+	width: 661px;
+}
+
+#content_container {
+	background-color: #FFF;
+}
+
+#menu ul {
+	font: bold 12px Arial;
+}
+
+#hd #quick-job-search input, select {
+	font-size: 1.35em;
+}
+
+div.filter-block select {
+		width: 15em;
+}
+
+#message-panel-container {
+		margin-left: 30px;
+}
+
+#tg_menu ol {
+  padding-left: 5px;
+  margin-left: 0;
+}

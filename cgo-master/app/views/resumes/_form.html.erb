@@ -1,0 +1,24 @@
+<fieldset class="no-border">
+  <div id="choose-file" class="round-corners" style="height: 120px; margin-top: 5px; margin-bottom: 10px; border: 2px solid #CCC; padding: 5px; padding-bottom: 10px; background: #EEE;">
+    <div style="padding: 8px;">
+      <div style="margin-bottom: 20px;  color: #1c5379;">
+        We can accept your resume in <b>any version of Microsoft Word</b>. 
+        Please use the button below to choose a file to upload.
+      </div>
+      <%= form.file_field :attached_resume, :label => false -%>
+    </div>
+    <% if @resume.attached_resume_file_name %>
+      <div style="margin-left: 8px; color: #1c5379;">
+        <i>Your current file: <%= @resume.attached_resume_file_name %></i>
+      </div>
+    <% end %>
+  </div>
+</fieldset>
+
+<!-- Public, Private, and Confidential buttons. The style attribute is to fix look and feel issues in IE6 -->
+<fieldset>
+  <legend>Please Choose Your Resume Visibility</legend>
+  <%= form.radio_button :visibility, :public.to_s, :label => "Public (Resume can be found with contact info)", :checked => true,  :style =>"width:auto;border: 0px solid #FFF;" %>
+  <%= form.radio_button :visibility, :confidential.to_s, :label => "Confidential (Resume can be found, but contact info is not visible)", :style =>"width:auto;border: 0px solid #FFF;" %>
+  <%= form.radio_button :visibility, :private.to_s, :label => "Private (Neither resume nor contact info is searchable, but you can still apply to jobs)",:style =>"width:auto;border: 0px solid #FFF;" %>
+</fieldset>

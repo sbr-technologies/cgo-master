@@ -1,0 +1,34 @@
+<% content_for :page_title do %>
+		Admin Dashboard
+<% end %>
+
+<%= will_paginate @messages_inbox %>
+
+<div class="messages" style="margin-top:30px">
+  <h2 style=" margin-left: 5px">Messages</h2>
+		<% unless @messages_inbox.empty? %>
+				<ul style="margin-top: 10px;">
+						<% @messages_inbox.group_by {|message| message.created_at.to_date}.sort {|a,b| b[0] <=> a[0]}.each do |m| %>
+						<li class="date-group" style="margin-top:20px; color:#A80C1E; font-family: georgia; font-weight: bold;"><%= relative_date(m[0].to_date).capitalize -%></li>
+								<% m[1].each do |message| %>
+										<li style="list-style-type:disc; margin-left: 25px;">
+												<span><%= message.body-%></span>
+												<span><%= link_to(message.action, message.action_url) unless message.action.nil? -%></span>
+										</li>
+								<% end %>
+						<% end %>
+				</ul>
+
+		<% else %>
+				<div style="text-align:center; font-style: italic; font-weight: bold; color: #CCC; border-bottom: 1px dashed #CCC;">None</div>
+		<% end %>
+</div>
+
+
+<% content_for :right do %>
+		<h2 style="margin-top:0">Current Stats:</h2>
+		<div><b>Active Applicants:</b> <%=number_with_delimiter(@total_applicants)-%></div>
+		<div><b>Loaded Resumes:</b> <%=number_with_delimiter(@total_resumes) -%></div>
+		<div><b>Total Employers:</b> <%=number_with_delimiter(@total_employers) -%></div>
+<% end %>
+

@@ -1,0 +1,135 @@
+<% content_for :head do %>
+	<!-- Source file for Rich Text Editor-->
+  <%= javascript_include_tag '/yui/editor/editor-min.js' %>
+<% end %>
+
+
+<fieldset>
+	<legend>Job Information</legend>
+	<%= form.text_field :code, :label => "Job Code (any unique combination of characters)" %>
+	<%= form.text_field :title %>
+
+	<div style="margin-top: 15px">
+	<div class="round-corners light-highlight">
+		<div style="padding:5px;">Please give careful thought to your job title as we will use that text to find candidates that appear to meet your needs. </div>
+	</div>
+	</div>
+</fieldset>
+
+<textarea id="job_description" name="job[description]" cols="85" rows="10">
+	<%=@job.description -%>
+</textarea>
+
+
+<fieldset>
+	<legend>Location</legend>
+	
+  <%= render :partial => "address/job_location.html.erb", :locals => {:job_location => @address} %>
+</fieldset>
+
+<fieldset>
+	<legend>Employment Information</legend>
+	<%= form.select :payrate, options_from_hash(Constants::PAY_RATE), {:include_blank => false}, :class => "XL", :label => "Pay Rate" %>
+	<%= form.select :travel_requirements, options_from_hash(Constants::TRAVEL_REQUIREMENT), {:include_blank => false}, :class => "XL" %>
+	<%= form.select :relocation_cost_paid, Constants::RELOCATION_COST, {:include_blank => false}, :class => "S" %>
+	<%= form.text_field :hr_website_url, :label => "Web Address of Company's Employment Page" -%>
+	<%= form.text_field :online_application_url , :label => "Online Application URL (Optional)"-%>
+</fieldset>
+
+<fieldset>
+	<legend>Additional Requirements</legend>
+	
+	<%= form.select :education_level, options_from_hash(Constants::EDUCATION_LEVEL), {:include_blank => false} %>
+	<%= form.select :security_clearance, options_from_hash(Constants::SECURITY_CLEARANCE), {:include_blank => false} %>
+</fieldset>
+
+
+<script>
+
+	var editor;
+	document.observe("dom:loaded", function() {
+		editor = new YAHOO.widget.Editor('job_description', {
+          height: '300px',
+          width: '622px',
+          dompath: false,
+          toolbar: {
+            collapse: true,
+            titlebar: "Job Description",
+            draggable: false,
+            buttons: [
+              { group: 'fontstyle', label: 'Font Name and Size',
+                buttons: [
+                  { type: 'select', label: 'Arial', value: 'fontname', disabled: true,
+                      menu: [
+                        { text: 'Arial', checked: true },
+                        { text: 'Arial Black' },
+                        { text: 'Comic Sans MS' },
+                        { text: 'Courier New' },
+                        { text: 'Lucida Console' },
+                        { text: 'Tahoma' },
+                        { text: 'Times New Roman' },
+                        { text: 'Trebuchet MS' },
+                        { text: 'Verdana' }
+                      ]
+                  },
+                  { type: 'spin', label: '13', value: 'fontsize', range: [ 9, 75 ], disabled: true }
+                ]
+              },
+              { type: 'separator' },
+              { group: 'textstyle', label: 'Font Style',
+                  buttons: [
+                    { type: 'push', label: 'Bold CTRL + SHIFT + B', value: 'bold' },
+                    { type: 'push', label: 'Italic CTRL + SHIFT + I', value: 'italic' },
+                    { type: 'push', label: 'Underline CTRL + SHIFT + U', value: 'underline' },
+                    { type: 'separator' },
+                    { type: 'color', label: 'Font Color', value: 'forecolor', disabled: true }
+                  ]
+              },
+              { type: 'separator' },
+              { group: 'alignment', label: 'Alignment',
+                  buttons: [
+                    { type: 'push', label: 'Align Left CTRL + SHIFT + [', value: 'justifyleft' },
+                    { type: 'push', label: 'Align Center CTRL + SHIFT + |', value: 'justifycenter' },
+                    { type: 'push', label: 'Align Right CTRL + SHIFT + ]', value: 'justifyright' },
+                    { type: 'push', label: 'Justify', value: 'justifyfull' }
+                  ]
+              },
+              { type: 'separator' },
+              { group: 'indentlist', label: 'Lists',
+                  buttons: [
+                    { type: 'push', label: 'Create an Unordered List', value: 'insertunorderedlist' },
+                    { type: 'push', label: 'Create an Ordered List', value: 'insertorderedlist' }
+                  ]
+              },
+              { type: 'separator' },
+              { group: 'indent', label: 'Indent',
+                  buttons: [
+                    { type: 'push', label: 'Indent', value: 'indent', disabled: true },
+                    { type: 'push', label: 'Outdent', value: 'outdent', disabled: true }
+                  ]
+              },
+              { type: 'separator' },
+              { group: 'parastyle', label: 'Paragraph Style',
+                  buttons: [
+                    { type: 'select', label: 'Normal', value: 'heading', disabled: true,
+                        menu: [
+                            { text: 'Normal', value: 'none', checked: true },
+                            { text: 'Header 1', value: 'h1' },
+                            { text: 'Header 2', value: 'h2' },
+                            { text: 'Header 3', value: 'h3' },
+                            { text: 'Header 4', value: 'h4' },
+                            { text: 'Header 5', value: 'h5' },
+                            { text: 'Header 6', value: 'h6' }
+                        ]
+                    }
+                  ]
+                }
+            ]
+          }
+		});
+
+		editor.render();
+
+	});
+
+</script>

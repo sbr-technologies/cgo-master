@@ -1,0 +1,13 @@
+<% 
+  # Jobfairs: Preclude applicants from printing a registration form for 
+  # jobfairs where the External Registration URL starts with www.moaacareerfair.org
+%>
+
+Dear <%="#{@registration.attendant.first_name} #{@registration.attendant.last_name}" -%>,
+
+You have registered to: <%=@registration.jobfair.name-%> Job Fair. 
+
+Thank You, 
+
+The CGO Team
+

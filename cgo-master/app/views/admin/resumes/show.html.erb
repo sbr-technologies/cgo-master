@@ -1,0 +1,81 @@
+<% content_for :page_title do %>
+  View Resume
+<% end %>
+
+<div id="pForward">
+  <div class="hd"></div>
+  <div class="bd">
+    <%= render :partial => "/resumes/resume_forward_form.html.erb", :locals => {:resume => @resume} %>
+  </div>
+</div>
+
+
+<div id="pMessage">
+   <div class="hd"></div>
+  <div class="bd" id="message-panel-id">
+    <%= render :partial => "/messages/send_message_form.html.erb" , :locals => { :recipient => @resume.applicant.id } -%>
+  </div>
+</div>
+
+
+
+<%= render :partial => "show" -%>
+
+
+
+<% content_for :head do %>
+
+        <script language="javascript">
+
+                // Initialize resumePanel (used to display Resume details)
+                var forwardPanel, messagePanel;
+                document.observe("dom:loaded", function() {
+
+
+                        forwardPanel = new YAHOO.widget.Panel("pForward", {
+                                visible: false,
+                                width: "300px",
+                                height:"100px",
+                                x: 430,
+                                y: 80,
+                                zindex: 16000,
+                                close: true,
+                                draggable: false,
+                                modal: true,
+                                underlay: "none",
+                                constraintoviewport: true
+                                
+                        }); // Rendered at a later time
+
+                        forwardPanel.showEvent.subscribe(function() {
+                            messagePanel.hide();
+                        });
+                        
+                        messagePanel = new YAHOO.widget.Panel("pMessage", {
+                                visible: false,
+                                width: "320px",
+                                height:"180px",
+                                x: 430,
+                                y: 80,
+                                zindex: 16000,
+                                close: true,
+                                draggable: false,
+                                modal: true,
+                                underlay: "none",
+                                constraintoviewport: true
+                        }); // Rendered at a later time
+
+                        messagePanel.showEvent.subscribe(function() {
+                            forwardPanel.hide();
+                        });
+
+
+forwardPanel.render(document.body);
+messagePanel.render(document.body);
+                        
+                });
+
+        </script>
+
+
+<% end %>

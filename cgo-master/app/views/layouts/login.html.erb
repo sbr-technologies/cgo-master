@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Corporate Gray Online Login</title>
+    <%= stylesheet_link_tag 'login', "buttons" %>
+    <%= javascript_include_tag 'prototype', 'effects', :cache => true %>
+    <%= yield :head %>
+  </head>
+
+  <body>
+    <div style="background:#FFF; height:95px; margin-bottom:0px; height: 110px">
+      <%= link_to(image_tag("logos/logo.jpg", :style=>"margin-bottom: 10px; border-style:none;"), welcome_path) -%>
+    </div>
+
+    <div style="margin-left:auto; margin-right:auto; padding:0; width: 812px; ">
+      <%= raw flashers %>
+    </div>
+
+    <%= yield %>
+
+  </body>
+</html>

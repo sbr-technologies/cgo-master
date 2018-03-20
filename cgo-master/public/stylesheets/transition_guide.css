@@ -1,0 +1,36 @@
+p {
+  margin-top: 1em;
+}
+
+ul.resources { 
+  margin-left: 18px;
+}
+
+ul.resources li {
+  margin-top: 1em; 
+  list-style-type: disc;
+}
+
+.exercises li {
+  margin-top: 1em;
+}
+
+ol.decimal, ol.alpha {
+  font-weight: bold; 
+}
+
+ol.decimal span, ol.alpha span {
+  font-weight: normal;
+}
+
+ol.decimal li, ol.alpya li {
+  list-style-position: outside !important;
+}
+
+ol.decimal li {
+  list-style-type: decimal !important;
+}
+
+ol.alpha li {
+  list-style-type: lower-alpha !important; 
+}

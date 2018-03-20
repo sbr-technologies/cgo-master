@@ -1,0 +1,21 @@
+<% content_for :page_title do %>
+	Edit <%= @recruiter.name -%>
+<% end %>
+
+<% content_for :page_header_links do %>
+	<%= link_to "Cancel", admin_employer_path(@employer.id) %>
+<% end %>
+
+<%= error_messages_for @recruiter, @address %>
+
+<% error_handling_form_for @recruiter, 
+			   :url => admin_employer_recruiter_path(@employer.id, @recruiter.id),
+			   :html => {:id => "recruiterform"} do |f| %>
+
+	<%= render :partial => "form", :object => f -%>
+	
+	<div class="button-bar">
+		<a class="button" href="#" onclick="$('recruiterform').submit(); return false;"><span>save</span></a>
+		<div>or <%= link_to "Cancel", admin_employer_path(:id => @employer.id), :class=>"cancel"%></div>
+	</div>
+<% end %>

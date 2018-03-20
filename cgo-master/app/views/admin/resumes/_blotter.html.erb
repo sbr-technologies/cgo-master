@@ -1,0 +1,275 @@
+<% content_for :head do %>
+
+				<script language="javascript">
+
+        function toggleDetails(res_id) {
+          if( $('res_details_'+res_id).visible() == true ) {
+
+            $$('#resume_' + res_id + ' .handle img')[0].src = '/images/right_triangle.png';        
+
+            $('resume_'+res_id).setStyle({
+                background: $('resume_'+res_id).hasClassName('odd')== true ? '#FFF' : '#EEF6FE'
+            });
+
+          } else {
+
+            $$('#resume_' + res_id + ' .handle')[0].setStyle({
+                color: '#BD0000'
+            });
+
+            $$('#resume_' + res_id + ' .handle img')[0].src = '/images/down_triangle.png';        
+            $('resume_'+res_id).setStyle({
+              background: '#DAEAFA'
+            });
+
+          }
+
+          Effect.toggle('res_details_' + res_id, 'appear', {duration:0.25});
+        }
+
+
+        function showResume(url) {
+
+          resumePanel.setHeader("Applicant Resume"); 
+          resumePanel.setBody("<iframe id='resume-iframe' name='resume-iframe' style='width: 830px; height: 485px; border: 1px solid #ccc; margin-top: 1em; padding: 1em;' src='/admin/resumes/" + url + "'></iframe>");
+
+          resumePanel.show();
+        }
+
+        function saveToDashboardComplete(res_id) {
+          $$('#resume_'+res_id+' img.indicator')[0].hide(); 
+          $('inbox_handle_'+res_id).up().innerHTML = '<span>Saved</span>'; 
+
+          showStatus(res_id, "saved");
+        }
+
+
+
+        // Defines behavior for the "Unsave" button
+        // in Resume Details.  
+        var inboxHandlerBehavior = Behavior.create(); 
+        Object.extend(inboxHandlerBehavior.prototype, {
+            onclick: function() {
+              var res_id = get_model_id(this.element); 
+              new Ajax.Request(this.element.readAttribute('url'), {
+                    method: 'GET',
+                    onLoading: function() { $$('#resume_' + res_id + ' img.indicator')[0].show(); }, 
+                    onComplete: function() { deleteFromDashboardComplete(res_id); }
+              });
+
+              return false; 
+            }
+        });
+
+        document.observe("dom:loaded", function() {
+
+          //Event.addBehavior({
+            //'.inbox-handler': inboxHandlerBehavior
+          //});
+
+        });
+
+
+
+        function forwardResumeComplete(res_id) {
+          $$('#resume_'+res_id+' img.indicator')[0].hide(); 
+          Effect.toggle($('forward_resume_'+res_id), 'appear', {duration:0.25}); 
+          $('forward_resume_emails_'+res_id).value = null;
+
+          showStatus(res_id, "forwarded");
+        }
+
+        function messageToApplicantComplete(res_id) {
+          $$('#resume_'+res_id+' img.indicator')[0].hide(); 
+          Effect.toggle($('message_for_' + res_id), 'appear', {duration:0.25}); 
+          $('message_to_' + res_id).value = null;
+
+          showStatus(res_id, "sent");
+        }
+
+        function showStatus(res_id, msg) {
+          var el = $$('#resume_'+res_id+' .actionStatus')[0];
+          el.innerHTML = msg;
+          el.show();
+          Effect.Fade(el, {duration:8.0});
+        }
+
+								// Initialize resumePanel (used to display Resume details)
+								var resumePanel, forwardPanel, messagePanel;
+								Event.onReady(function() {
+
+												resumePanel = new YAHOO.widget.Panel("pRes", {
+																visible: false,
+																width: "880px",
+																zindex: 4,
+																close: true,
+																draggable: false,
+																modal: true,
+																underlay: "shadow",
+																constraintoviewport: true,
+																effect:{effect:YAHOO.widget.ContainerEffect.FADE,duration:0.15}
+												});
+
+												/* Hide All panels when main resume panel is closed */
+												resumePanel.hideEvent.subscribe(function() {
+														forwardPanel.hide();
+														messagePanel.hide();
+												});
+
+            resumePanel.render(document.body);
+												
+								});
+
+				</script>
+
+    <style>
+
+      div.autosize {
+        display: table; 
+        width: 50%;
+        white-space: nowrap;
+      }
+
+      div.autosize > div {
+        display: table-cell; 
+      }
+
+      div.centered {
+        margin-left: auto; 
+        margin-right: auto;
+      }
+
+
+      .itemDetail {
+        font-size: 11px; 
+      }
+
+      .itemDetail > td {
+        border-bottom: 2px solid #4c4c4c;
+      }
+
+      table.resDetails {
+        width: 99%; 
+      }
+
+      table.resDetails td {
+        padding: 0; 
+        padding-bottom: 0.25em;
+        border: 0px;
+        vertical-align: top;
+      }
+
+      table.resDetails td.label {
+        font-weight: bold; 
+      }
+
+      div.resumeActions {
+        margin-top: 2em; 
+        margin-bottom: 0.5em;
+        font-size: 10px; 
+        height: 16px;
+      }
+
+      div.resumeActions div.actionButton {
+        float: left; 
+        clear: none;
+      }
+
+      div.actionButton {
+        overflow: visible;
+        margin: 0px;
+        margin-right: 10px;  
+        padding: 0px;
+        background: #64992C;
+        border-color: #64992C;
+        border-width: 1px 0px; 
+        border-style: solid; 
+
+        cursor: pointer;
+      }
+
+       div.actionButton > div {
+        background: #64992C; 
+        margin: 0px -1px;
+        border-color: #64992C;
+        border-style: solid; 
+        border-width: 0px 1px;
+        padding: 1px 0px;
+      }
+
+      div.actionButton > div >  a {
+        color: #F9FFEF; 
+        padding: 0 5px;
+        display: block;
+      }
+
+      div.actionButton > div > a:visited {
+        color: #F9FFEF; 
+      }
+
+      div.actionButton > div > a:hover  {
+        color: #FFE0A1; 
+      }
+
+      div.actionButton > div > span {
+        color: #DEDEDE;
+        font-style: italic;
+        padding: 0 5px; 
+        display:block; 
+      }
+
+      tr.itemDetail div.actionBox {
+        padding: 10px 5px;
+        margin-right: 5px;
+        margin-top: 5px;
+        margin-bottom: 5px;
+        background: #FBFDF8;
+        border: 1px solid #F1F7E7;
+      }
+
+      tr.itemDetail div.actionBox span {
+        vertical-align: top; 
+        color: #4C4C4C;
+        font-weight: bold; 
+        margin-right: 5px;
+      }
+
+
+      #resumes .even {
+       background: #EEF6FF; 
+      }
+
+    </style>
+
+<% end %>
+
+
+<div id="pRes">
+		<div class="hd"></div>
+		<div class="bd"></div>
+		<div class="ft"></div>
+</div>
+
+
+<%= will_paginate @resumes %>
+
+<table class="blotter">
+    <thead>
+        <tr>
+            <th width="12%">Posted</th>
+            <th width="34%">Name</th>
+            <th width="28%">Location</th>
+            <th width="14%">Availability</th>
+            <th width="6%">Download</th>
+        </tr>
+    </thead>
+
+    <tbody id="resumes">
+       <%= render :partial => @resumes -%>
+    </tbody>
+
+</table>
+
+<div style="margin-top: 30px">
+	  <%= will_paginate @resumes %>
+</div>
